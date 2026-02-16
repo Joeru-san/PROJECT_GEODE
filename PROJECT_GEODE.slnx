@@ -1,2 +1,4 @@
 ﻿<Solution>
+  <Project Path="Unity.Cinemachine.Editor.csproj" />
+  <Project Path="Unity.Cinemachine.csproj" />
 </Solution>
