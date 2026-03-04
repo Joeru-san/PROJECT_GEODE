@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
     Enabled: 1
-    m_Value: 20
+    m_Value: 10
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -357,7 +357,7 @@ GameObject:
   m_Layer: 0
   m_Name: groundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 465689278}
   m_Layer: 0
   m_Name: playerCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -936,7 +936,7 @@ MonoBehaviour:
   walkSpeed: 5
   rotateSpeed: 5
   groundCheck: {fileID: 152137839}
-  groundCheckExtension: {x: 0, y: 0, z: 0}
+  groundCheckRadius: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
     Enabled: 1
-    m_Value: 9999
+    m_Value: 20
   OutputChannel: 1
   StandbyUpdate: 1
   m_StreamingVersion: 20241001

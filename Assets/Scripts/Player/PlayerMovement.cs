@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Variables")]
     public static bool isDead = false;
     public static bool changeCameraWasPressedThisFrame {get; private set;} = false;
-    
-    
 
     void OnEnable()
     {
@@ -100,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, 0.5f, groundMask);
+        return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
     }
 
     IEnumerator Death(float animationDuration)
@@ -128,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         if(groundCheck != null)
         {
             Gizmos.color = Color.gray;
-            Gizmos.DrawSphere(groundCheck.position, groundCheckRadius);
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
 }
