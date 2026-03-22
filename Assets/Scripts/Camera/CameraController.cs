@@ -3,12 +3,26 @@ using Unity.Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    CinemachineVirtualCameraBase _activeCamera;
     int _activeCameraPriorityModifier = 69420;
 
+    [HideInInspector] public CinemachineVirtualCameraBase activeCamera; 
     public Camera MainCamera;
     public CinemachineVirtualCameraBase firstPersonCamera;
     public CinemachineVirtualCameraBase thirdPersonCamera;
+
+    public static CameraController inst {get; private set;}
+    public static bool isFirstPerson = false;
+
+    void Awake()
+    {
+        if (inst != null && inst != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        inst = this;
+        DontDestroyOnLoad(gameObject);
+    }
     
 
     void Start()
@@ -16,26 +30,20 @@ public class CameraController : MonoBehaviour
         ChangeCamera();
     }
 
-    void Update()
+    public void ChangeCamera()
     {
-        if(PlayerMovement.changeCameraWasPressedThisFrame)
-        {
-            ChangeCamera();
-        }
-    }
-
-    void ChangeCamera()
-    {
-        if(thirdPersonCamera == _activeCamera)
+        if(thirdPersonCamera == activeCamera)
         {
             SetCameraPriorities(thirdPersonCamera, firstPersonCamera);
-        } else if(firstPersonCamera == _activeCamera)
+            isFirstPerson = true;
+        } else if(firstPersonCamera == activeCamera)
         {
             SetCameraPriorities(firstPersonCamera, thirdPersonCamera);
-        } else // Parte solo allo start o con un errore degli altri if
+            isFirstPerson = false;
+        } else 
         {
             thirdPersonCamera.Priority += _activeCameraPriorityModifier; 
-            _activeCamera = thirdPersonCamera;
+            activeCamera = thirdPersonCamera;
         }
     }
 
@@ -43,6 +51,7 @@ public class CameraController : MonoBehaviour
     {
         currentCameraMode.Priority -= _activeCameraPriorityModifier;
         newCameraMode.Priority += _activeCameraPriorityModifier;
-        _activeCamera = newCameraMode;
+        activeCamera = newCameraMode;
+
     }
 }

@@ -65,7 +65,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.27",
+      "version": "2.0.26",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -247,11 +247,10 @@
       "url": "https://packages.unity.com"
     },
     "com.wooshii.hierarchydecorator": {
-      "version": "https://github.com/WooshiiDev/HierarchyDecorator.git",
+      "version": "file:/home/joeru/Unity/Packages/HierarchyDecorator-master",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "b69cf0d6a1b3441f828a94c78f85b2d42edc9418"
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
