@@ -18,6 +18,9 @@ public class BaseItem : ScriptableObject
     public int minSpawnAmount;
     public int maxSpawnAmount;
     
+    public Mesh itemMesh;
+    public Material itemMaterial;
+
     [TextArea(15,20)]
     public string description;
 

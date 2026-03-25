@@ -2,9 +2,9 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IPoolable
 {
-    public BaseItem itemType;
+    public BaseItem scriptableObjectType;
     public TextMeshPro toolTip;
     public int amount {get; private set;} = 0;
 
@@ -14,9 +14,19 @@ public class Item : MonoBehaviour
 
     void Awake()
     {
-        this.amount = Random.Range(itemType.minSpawnAmount, itemType.maxSpawnAmount);
+        this.amount = Random.Range(scriptableObjectType.minSpawnAmount, scriptableObjectType.maxSpawnAmount);
 
-        toolTip.text = "x" + this.amount + " " + itemType.name;
+        if (scriptableObjectType.itemMesh != null)
+        {
+            GetComponent<MeshFilter>().sharedMesh = scriptableObjectType.itemMesh;
+        }
+        
+        if (scriptableObjectType.itemMaterial != null)
+        {
+            GetComponent<Renderer>().material = scriptableObjectType.itemMaterial;
+        }
+
+        toolTip.text = "x" + this.amount + " " + scriptableObjectType.name;
 
         if (toolTip != null)
         {
@@ -40,7 +50,6 @@ public class Item : MonoBehaviour
             mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialScale.y / 4, 0.2f));
             mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialScale.y * 2, 0.2f));
             mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialScale.y, 0.5f));    
-
         }
     }
 
@@ -53,11 +62,15 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void DestroySelf()
+    public void OnObjectDestroy()
     {
+        if (gameObject.layer == 0) return; 
         gameObject.layer = 0;
-        gameObject.transform.DOScale(0, 0.2f);
-        this.DOKill();
-        Destroy(gameObject, 0.7f);
+        gameObject.transform.DOScale(Vector3.zero, 0.2f)
+            .SetEase(Ease.InBack) 
+            .OnComplete(() => 
+            {
+                ObjectPooler.inst.ReAddToPool(scriptableObjectType.name, this.gameObject);
+            });
     }
 }

@@ -49,10 +49,10 @@ public class PlayerInteraction : MonoBehaviour
 
             if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame())
             {
-                if(_playerInventory.AddItem(hitItem.itemType, hitItem.amount))
+                if(_playerInventory.AddItem(hitItem.scriptableObjectType, hitItem.amount))
                 {
                     Debug.Log("OGGETTO AGGIUNTO");
-                    hitItem.DestroySelf();
+                    hitItem.OnObjectDestroy();
                 }
                 else
                 {
