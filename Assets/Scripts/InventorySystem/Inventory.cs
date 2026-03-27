@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
         return false; // Full inventory
     }
     
-    public bool DropItem(BaseItem item, int amount)
+    public bool DropItem(BaseItem item, int amount, bool worldDrop = false)
     {
         foreach(InventorySlot slot in inventorySlots)
         {
@@ -57,14 +57,17 @@ public class Inventory : MonoBehaviour
                 slot.RemoveAmount(amount);
                 slot.item = null;
 
-                GameObject spawnedObject = ObjectPooler.inst.SpawnFromPool(item.name, new Vector3(transform.position.x, transform.position.y+1, transform.position.z+1) + Vector3.forward, transform.rotation, ObjectPooler.inst.transform);
-                
-                // Assign the inventory amount to the spawned item instead of using the random value from Awake.
-                if (spawnedObject != null)
+                if(worldDrop)
                 {
-                    Item itemComponent = spawnedObject.GetComponent<Item>();
-                    if (itemComponent != null)
-                        itemComponent.Initialize(amount);
+                    GameObject spawnedObject = ObjectPooler.inst.SpawnFromPool(item.name, new Vector3(transform.position.x, transform.position.y+1, transform.position.z+1) + Vector3.forward, transform.rotation, ObjectPooler.inst.transform);
+                    
+                    // Assign the inventory amount to the spawned item instead of using the random value from Awake.
+                    if (spawnedObject != null)
+                    {
+                        Item itemComponent = spawnedObject.GetComponent<Item>();
+                        if (itemComponent != null)
+                            itemComponent.Initialize(amount);
+                    }
                 }
 
                 OnInventoryChanged?.Invoke();
