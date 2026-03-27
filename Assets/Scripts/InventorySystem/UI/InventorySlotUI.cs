@@ -13,6 +13,6 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerInteraction.playerInventory.DropItem(itemReference, int.Parse(amountText.text));
+        PlayerInteraction.playerInventory.DropItem(itemReference, int.Parse(amountText.text), true);
     }
 }
