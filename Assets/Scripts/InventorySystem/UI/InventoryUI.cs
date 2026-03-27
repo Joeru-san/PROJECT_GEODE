@@ -1,4 +1,3 @@
-// Create a new C# script named "InventoryUI.cs"
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,6 +39,7 @@ public class InventoryUI : MonoBehaviour
                 _uiSlots[i].inventoryIcon.enabled = true;
                 _uiSlots[i].amountText.text = inventory.inventorySlots[i].amount.ToString();
                 _uiSlots[i].isShown = true;
+                _uiSlots[i].itemReference = inventory.inventorySlots[i].item;
             }
             else // If the slot is null we don't display it
             {

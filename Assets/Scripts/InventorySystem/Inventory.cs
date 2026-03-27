@@ -54,15 +54,19 @@ public class Inventory : MonoBehaviour
         {
             if(slot.item == item)
             {
-                if(slot.amount <= amount)
+                slot.RemoveAmount(amount);
+                slot.item = null;
+
+                GameObject spawnedObject = ObjectPooler.inst.SpawnFromPool(item.name, new Vector3(transform.position.x, transform.position.y+1, transform.position.z+1) + Vector3.forward, transform.rotation, ObjectPooler.inst.transform);
+                
+                // Assign the inventory amount to the spawned item instead of using the random value from Awake.
+                if (spawnedObject != null)
                 {
-                    slot.item = null;
-                    slot.amount = 0;
+                    Item itemComponent = spawnedObject.GetComponent<Item>();
+                    if (itemComponent != null)
+                        itemComponent.Initialize(amount);
                 }
-                else
-                {
-                    slot.amount -= amount;
-                }
+
                 OnInventoryChanged?.Invoke();
                 return true;
             }

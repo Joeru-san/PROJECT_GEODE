@@ -9,11 +9,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private Item _currentTargetedItem;
 
-    private Inventory _playerInventory;
+    public static Inventory playerInventory;
 
     void Awake()
     {
-        _playerInventory = GetComponent<Inventory>();
+        playerInventory = GetComponent<Inventory>();
     }
 
     void Update()   
@@ -49,7 +49,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame())
             {
-                if(_playerInventory.AddItem(hitItem.scriptableObjectType, hitItem.amount))
+                if(playerInventory.AddItem(hitItem.scriptableObjectType, hitItem.amount))
                 {
                     Debug.Log("OGGETTO AGGIUNTO");
                     hitItem.OnObjectDestroy();

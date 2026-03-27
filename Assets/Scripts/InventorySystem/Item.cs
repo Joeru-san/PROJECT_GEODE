@@ -14,7 +14,9 @@ public class Item : MonoBehaviour, IPoolable
 
     void Awake()
     {
-        this.amount = Random.Range(scriptableObjectType.minSpawnAmount, scriptableObjectType.maxSpawnAmount);
+        // Amount is no longer randomly assigned here — it must be set via Initialize().
+        // A random fallback is used only when spawned outside of a drop context (e.g. world spawners).
+        this.amount = Random.Range(scriptableObjectType.minSpawnAmount, scriptableObjectType.maxSpawnAmount + 1);
 
         if (scriptableObjectType.itemMesh != null)
         {
@@ -28,6 +30,7 @@ public class Item : MonoBehaviour, IPoolable
 
         toolTip.text = "x" + this.amount + " " + scriptableObjectType.name;
 
+
         if (toolTip != null)
         {
             toolTip.gameObject.SetActive(false);
@@ -37,6 +40,14 @@ public class Item : MonoBehaviour, IPoolable
     void Start()
     {
         _initialScale = toolTip.gameObject.transform.localScale;
+    }
+
+    // Call this after SpawnFromPool to override the random amount with a known value.
+    public void Initialize(int assignedAmount)
+    {
+        this.amount = assignedAmount;
+        if (toolTip != null)
+            toolTip.text = "x" + this.amount + " " + scriptableObjectType.name;
     }
 
     public void ShowTooltip()

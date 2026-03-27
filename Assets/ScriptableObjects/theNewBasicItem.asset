@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: theNewBasicItem
   m_EditorClassIdentifier: Assembly-CSharp::item1
   name: theNewBasicItem
-  itemType: 1
-  inventoryIcon: {fileID: 21300000, guid: f385532895b4713cbba4c80f3ddc8fb9, type: 3}
+  itemType: 0
+  inventoryIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   minSpawnAmount: 3
   maxSpawnAmount: 10
   itemMesh: {fileID: 0}

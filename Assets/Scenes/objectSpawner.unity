@@ -391,7 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c2702ac7639b5429031e18e7df5372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
-  objectsPools: []
 --- !u!4 &712769936
 Transform:
   m_ObjectHideFlags: 0
@@ -910,7 +909,7 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 300, y: 300}
   m_Spacing: {x: 100, y: 100}
-  m_Constraint: 1
+  m_Constraint: 0
   m_ConstraintCount: 5
 --- !u!1 &1762784052
 GameObject:

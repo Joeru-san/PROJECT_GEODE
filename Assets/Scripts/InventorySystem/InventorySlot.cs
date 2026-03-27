@@ -25,4 +25,19 @@ public class InventorySlot
         }
         return -1;
     }
+
+    public int RemoveAmount(int amountToRemove)
+    {
+        if(amountToRemove > amount)
+        {
+            int amountLacking = amountToRemove - amount;
+            amount = 0;
+            return amountLacking;
+        }
+        else
+        {
+            amount -= amountToRemove;
+            return 0;
+        }
+    }
 }
