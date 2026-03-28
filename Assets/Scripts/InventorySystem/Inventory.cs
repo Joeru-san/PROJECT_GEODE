@@ -48,31 +48,27 @@ public class Inventory : MonoBehaviour
         return false; // Full inventory
     }
     
-    public bool DropItem(BaseItem item, int amount, bool worldDrop = false)
+    public bool DropItem(BaseItem item, int amount, int inventoryIndex, bool worldDrop = false)
     {
-        foreach(InventorySlot slot in inventorySlots)
+        if(inventorySlots[inventoryIndex].item != null)
         {
-            if(slot.item == item)
+            inventorySlots[inventoryIndex].RemoveAmount(amount);
+            inventorySlots[inventoryIndex].item = null;
+
+            if(worldDrop)
             {
-                slot.RemoveAmount(amount);
-                slot.item = null;
-
-                if(worldDrop)
+                GameObject spawnedObject = ObjectPooler.inst.SpawnFromPool(item.name, new Vector3(transform.position.x, transform.position.y+1, transform.position.z) + Vector3.forward, transform.rotation);
+                
+                if (spawnedObject != null)
                 {
-                    GameObject spawnedObject = ObjectPooler.inst.SpawnFromPool(item.name, new Vector3(transform.position.x, transform.position.y+1, transform.position.z+1) + Vector3.forward, transform.rotation, ObjectPooler.inst.transform);
-                    
-                    // Assign the inventory amount to the spawned item instead of using the random value from Awake.
-                    if (spawnedObject != null)
-                    {
-                        Item itemComponent = spawnedObject.GetComponent<Item>();
-                        if (itemComponent != null)
-                            itemComponent.Initialize(amount);
-                    }
+                    Item itemComponent = spawnedObject.GetComponent<Item>();
+                    if (itemComponent != null)
+                        itemComponent.Initialize(amount);
                 }
-
-                OnInventoryChanged?.Invoke();
-                return true;
             }
+
+            OnInventoryChanged?.Invoke();
+            return true;
         }
         return false;
     }

@@ -10,13 +10,15 @@ public class Item : MonoBehaviour, IPoolable
 
     private bool _isTooltipVisible = false;
 
-    Vector3 _initialScale = Vector3.zero;
+    Vector3 _initialToolTipScale = Vector3.zero;
+    Vector3 _initialObjectScale = Vector3.zero;
 
     void Awake()
     {
-        // Amount is no longer randomly assigned here — it must be set via Initialize().
-        // A random fallback is used only when spawned outside of a drop context (e.g. world spawners).
         this.amount = Random.Range(scriptableObjectType.minSpawnAmount, scriptableObjectType.maxSpawnAmount + 1);
+
+        _initialToolTipScale = toolTip.gameObject.transform.localScale;
+        _initialObjectScale = gameObject.transform.localScale;
 
         if (scriptableObjectType.itemMesh != null)
         {
@@ -37,14 +39,11 @@ public class Item : MonoBehaviour, IPoolable
         }
     }
 
-    void Start()
-    {
-        _initialScale = toolTip.gameObject.transform.localScale;
-    }
-
     // Call this after SpawnFromPool to override the random amount with a known value.
     public void Initialize(int assignedAmount)
     {
+        gameObject.layer = LayerMask.NameToLayer("ObjectLayer");
+        gameObject.transform.DOScale(_initialObjectScale, 0.2f);
         this.amount = assignedAmount;
         if (toolTip != null)
             toolTip.text = "x" + this.amount + " " + scriptableObjectType.name;
@@ -58,9 +57,9 @@ public class Item : MonoBehaviour, IPoolable
             toolTip.gameObject.SetActive(true);
 
             Sequence mySequence = DOTween.Sequence();
-            mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialScale.y / 4, 0.2f));
-            mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialScale.y * 2, 0.2f));
-            mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialScale.y, 0.5f));    
+            mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialToolTipScale.y / 4, 0.2f));
+            mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialToolTipScale.y * 2, 0.2f));
+            mySequence.Append(toolTip.gameObject.transform.DOScaleY(_initialToolTipScale.y, 0.5f));    
         }
     }
 

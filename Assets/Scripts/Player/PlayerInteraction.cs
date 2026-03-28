@@ -51,7 +51,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if(playerInventory.AddItem(hitItem.scriptableObjectType, hitItem.amount))
                 {
-                    Debug.Log("OGGETTO AGGIUNTO");
                     hitItem.OnObjectDestroy();
                 }
                 else

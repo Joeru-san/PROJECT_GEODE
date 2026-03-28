@@ -40,6 +40,7 @@ public class InventoryUI : MonoBehaviour
                 _uiSlots[i].amountText.text = inventory.inventorySlots[i].amount.ToString();
                 _uiSlots[i].isShown = true;
                 _uiSlots[i].itemReference = inventory.inventorySlots[i].item;
+                _uiSlots[i].slotNumber = i;
             }
             else // If the slot is null we don't display it
             {

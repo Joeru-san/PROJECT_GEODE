@@ -69,7 +69,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             if (TryGetFreePosition(out Vector3 position))
             {
-                ObjectPooler.inst.SpawnFromPool(_nameOfSpawnedObject, position, Quaternion.identity, transform);
+                ObjectPooler.inst.SpawnFromPool(_nameOfSpawnedObject, position, Quaternion.identity);
                 _spawnedCount++;
             }
 
@@ -100,7 +100,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         Vector3 local = new Vector3(
             Random.Range(_localMin.x, _localMax.x),
-            _localMin.y, 
+            1f, 
             Random.Range(_localMin.z, _localMax.z)
         );
         return transform.TransformPoint(local);

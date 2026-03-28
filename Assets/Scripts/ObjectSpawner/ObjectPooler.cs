@@ -59,7 +59,7 @@ public class ObjectPooler : MonoBehaviour
         Debug.Log($"Pool {pool.tag} initialized with {pool.numberOfObjectsInPool} objects.");
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, Transform parent)
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -72,13 +72,10 @@ public class ObjectPooler : MonoBehaviour
         // Safety check: if object was destroyed externally
         if (objectToSpawn == null) return null;
 
-        objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-        objectToSpawn.transform.SetParent(parent);
+        objectToSpawn.SetActive(true);
         
-        poolDictionary[tag].Enqueue(objectToSpawn);
-
         return objectToSpawn;
     }
 
@@ -89,8 +86,8 @@ public class ObjectPooler : MonoBehaviour
             if (poolDictionary.ContainsKey(tag))
             {
                 obj.SetActive(false);
-                obj.transform.SetParent(transform);
                 poolDictionary[tag].Enqueue(obj);
+                obj.transform.SetParent(transform);
             }
         }
     }
