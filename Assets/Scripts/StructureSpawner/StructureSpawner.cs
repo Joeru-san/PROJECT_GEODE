@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider))]
 public class StructureSpawner : MonoBehaviour
 {
+    public static Action<PlayerInput> OnShowShop;
     [SerializeField] GameObject structureToSpawn;
     [SerializeField] Transform spawnPoint;
     [SerializeField] float heightRaycastDistance = 100f;
@@ -14,8 +16,8 @@ public class StructureSpawner : MonoBehaviour
         {
             if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame())
             {
-                GameObject spawnedObject = Instantiate(structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
-                
+                // GameObject spawnedObject = Instantiate(structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
+                OnShowShop?.Invoke(GetComponent<PlayerInput>());
             }
         }
     }
