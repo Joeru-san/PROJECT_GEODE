@@ -5,10 +5,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BoxCollider))]
 public class StructureSpawner : MonoBehaviour
 {
-    public static Action<PlayerInput> OnShowShop;
-    [SerializeField] GameObject structureToSpawn;
+    public static Action<PlayerInput, GameObject> OnShowShop;
     [SerializeField] Transform spawnPoint;
     [SerializeField] float heightRaycastDistance = 100f;
+
+    PlayerInput playerInputReference;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInputReference = other.transform.parent.GetComponent<PlayerInput>();
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -16,27 +25,38 @@ public class StructureSpawner : MonoBehaviour
         {
             if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame() || InputSystem.actions.FindAction("Cancel").WasPressedThisFrame())
             {
-                // GameObject spawnedObject = Instantiate(structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
-                OnShowShop?.Invoke(other.transform.parent.GetComponent<PlayerInput>());
+                OnShowShop?.Invoke(playerInputReference, this.gameObject);
             }
         }
     }
 
-    void SnapToGround(GameObject obj)
+    void OnTriggerExit(Collider other)
     {
-        Collider _objCollider = obj.GetComponent<Collider>();
+        playerInputReference = null;
+        Destroy(playerInputReference);
+    }
+
+    public void SpawnAndSnapToGround(GameObject structureToSpawn)
+    {
+        GameObject spawnedObject = Instantiate(structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
+
+        Collider _objCollider = spawnedObject.GetComponent<Collider>();
         float _halfHeight = _objCollider != null ? _objCollider.bounds.extents.y : 0f;
 
-        Ray ray = new Ray(obj.transform.position + Vector3.up * 0.5f, Vector3.down);
+        Ray ray = new Ray(spawnedObject.transform.position + Vector3.up * 0.5f, Vector3.down);
 
         if (Physics.Raycast(ray, out RaycastHit _hit, heightRaycastDistance))
         {
-            obj.transform.position = _hit.point + Vector3.up * _halfHeight;
+            spawnedObject.transform.position = _hit.point + Vector3.up * _halfHeight;
         }
         else
         {
             Debug.LogWarning("SnapToGround: No ground found below the spawn point.");
         }
+        OnShowShop?.Invoke(playerInputReference, null);
+        playerInputReference = null;
+        Destroy(playerInputReference);
+        enabled = false;
     }
 
     void OnDrawGizmos()

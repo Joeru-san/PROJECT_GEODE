@@ -9,11 +9,15 @@ public class ShopUI : MonoBehaviour
     public Transform itemDisplayPanel;
     public Transform shopPanel;
     public Image selectedItemImage;
+    public Image itemRequiredImage;
     public TextMeshProUGUI buyButtonText;
     public GameObject slotPrefab;
+    
+    BasicShopItem _selectedItem;
     public BasicShopItem[] listOfShopItems;
-    public BasicShopItem selectedItem;
     ShopSlotUI[] _uiSlots;
+
+    GameObject _shopPlaceReference;
 
     void Start()
     {
@@ -41,32 +45,40 @@ public class ShopUI : MonoBehaviour
             _uiSlots[i] = slotInstance.GetComponent<ShopSlotUI>();
             
             _uiSlots[i].shopItem = listOfShopItems[i];
-            _uiSlots[i].shopSlotImage.sprite =listOfShopItems[i].shopIcon;
+            _uiSlots[i].shopSlotImage.sprite = listOfShopItems[i].shopIcon;
             _uiSlots[i].shopText.text = listOfShopItems[i].shopItemName;
         }
     }
 
     public void UpdateUI(BasicShopItem clickedItem)
     {
-        selectedItem = clickedItem;
+        _selectedItem = clickedItem;
         selectedItemImage.sprite = clickedItem.shopIcon;
+        itemRequiredImage.sprite = clickedItem.typeOfItemRequired.inventoryIcon;
         buyButtonText.text = " x" + clickedItem.shopItemCost.ToString();
     }
 
     public void BuyItem()
     {
-        if(selectedItem.shopItemCost > PlayerInteraction.playerInventory.FindTotalItemAmount(selectedItem.typeOfItemRequired))
+        if(_selectedItem.shopItemCost > PlayerInteraction.playerInventory.FindTotalItemAmount(_selectedItem.typeOfItemRequired.itemType))
         {
             buyButtonText.text = "Not enogh items";
             return;
         }
 
-        PlayerInteraction.playerInventory.RemoveItem(selectedItem.typeOfItemRequired, selectedItem.shopItemCost);
+        PlayerInteraction.playerInventory.RemoveItem(_selectedItem.typeOfItemRequired.itemType, _selectedItem.shopItemCost);
         buyButtonText.text = "Item buyed!";
+        
+        if(_selectedItem is StructureShopItem structureShopItem)
+        {
+            _shopPlaceReference.GetComponent<StructureSpawner>().SpawnAndSnapToGround(structureShopItem.structureToSpawn);
+        }
     }
 
-    void ShowPanel(PlayerInput playerInput) // We have PlayerInput as an argument so we can switch the ActionMap
+    void ShowPanel(PlayerInput playerInput, GameObject shopPlaceReference = null) // We have PlayerInput as an argument so we can switch the ActionMap
     {
+        if(shopPlaceReference != null) this._shopPlaceReference = shopPlaceReference;
+        
         if(shopPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it
         {
             shopPanel.gameObject.SetActive(false);  // Hide the inventoryPanel
@@ -74,6 +86,8 @@ public class ShopUI : MonoBehaviour
             Cursor.visible = false; // Hide the cursor
             playerInput.SwitchCurrentActionMap("Player");   // Load the Player Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;   // Enable the axis controller for the active camera
+            buyButtonText.text = "Select an item to buy";
+            selectedItemImage.sprite = null;
         }else
         {
             shopPanel.gameObject.SetActive(true);   // Show the inventoryPanel

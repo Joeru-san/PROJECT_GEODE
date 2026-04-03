@@ -7,7 +7,7 @@ public class BasicShopItem : ScriptableObject
     public Sprite shopIcon;
 
     public int shopItemCost;
-    public ItemType typeOfItemRequired;
+    public BaseItem typeOfItemRequired;
 
     [TextArea(15,20)]
     public string shopItemDescription;
