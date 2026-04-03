@@ -12,11 +12,12 @@ public class ShopUI : MonoBehaviour
     public TextMeshProUGUI buyButtonText;
     public GameObject slotPrefab;
     public BasicShopItem[] listOfShopItems;
+    public BasicShopItem selectedItem;
     ShopSlotUI[] _uiSlots;
 
     void Start()
     {
-        StructureSpawner.OnShowShop += ShowInventory;
+        StructureSpawner.OnShowShop += ShowPanel;
         InitializeUI();
     }
 
@@ -47,11 +48,24 @@ public class ShopUI : MonoBehaviour
 
     public void UpdateUI(BasicShopItem clickedItem)
     {
+        selectedItem = clickedItem;
         selectedItemImage.sprite = clickedItem.shopIcon;
         buyButtonText.text = " x" + clickedItem.shopItemCost.ToString();
     }
 
-    void ShowInventory(PlayerInput playerInput) // We have PlayerInput as an argument so we can switch the ActionMap
+    public void BuyItem()
+    {
+        if(selectedItem.shopItemCost > PlayerInteraction.playerInventory.FindTotalItemAmount(selectedItem.typeOfItemRequired))
+        {
+            buyButtonText.text = "Not enogh items";
+            return;
+        }
+
+        PlayerInteraction.playerInventory.RemoveItem(selectedItem.typeOfItemRequired, selectedItem.shopItemCost);
+        buyButtonText.text = "Item buyed!";
+    }
+
+    void ShowPanel(PlayerInput playerInput) // We have PlayerInput as an argument so we can switch the ActionMap
     {
         if(shopPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it
         {

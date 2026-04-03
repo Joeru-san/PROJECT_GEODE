@@ -14,10 +14,10 @@ public class StructureSpawner : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame())
+            if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame() || InputSystem.actions.FindAction("Cancel").WasPressedThisFrame())
             {
                 // GameObject spawnedObject = Instantiate(structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
-                OnShowShop?.Invoke(GetComponent<PlayerInput>());
+                OnShowShop?.Invoke(other.transform.parent.GetComponent<PlayerInput>());
             }
         }
     }

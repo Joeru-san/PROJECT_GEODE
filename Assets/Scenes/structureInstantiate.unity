@@ -354,7 +354,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 304354548}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 708106805}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: BuyItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &304354548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,6 +877,7 @@ MonoBehaviour:
   listOfShopItems:
   - {fileID: 11400000, guid: d919ce7372fa98e1abf66693acc1fafd, type: 2}
   - {fileID: 11400000, guid: feceb1451b36198a493c45558c7af204, type: 2}
+  selectedItem: {fileID: 0}
 --- !u!1 &712769934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,9 +1566,9 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 300}
+  m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 100, y: 100}
-  m_Constraint: 0
+  m_Constraint: 1
   m_ConstraintCount: 5
 --- !u!1 &1731540435
 GameObject:

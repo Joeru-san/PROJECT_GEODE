@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopItem
   shopItemName: testItem1
   shopIcon: {fileID: 21300000, guid: b5cf5ce951fe31cc79209831daca4788, type: 3}
-  shopItemCost: 100
-  typeOfItemRequired: 0
+  shopItemCost: 10
+  typeOfItemRequired: 1
   shopItemDescription: 

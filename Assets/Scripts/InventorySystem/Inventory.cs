@@ -72,4 +72,37 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public int FindTotalItemAmount(ItemType item)
+    {
+        int totalAmount = 0;
+        foreach(InventorySlot slot in inventorySlots)
+        {
+            if(slot.item != null && slot.item.itemType == item)
+            {
+                totalAmount += slot.amount;        
+            }
+        }
+
+        return totalAmount;
+    }
+
+    public bool RemoveItem(ItemType item, int amount)
+    {
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            if (amount <= 0) break;
+
+            if (slot.item != null && slot.item.itemType == item)
+            {
+                amount = slot.RemoveAmount(amount);
+
+                if (slot.amount <= 0)
+                    slot.item = null;
+            }
+        }
+
+        OnInventoryChanged?.Invoke();
+        return amount <= 0;
+    }
 }
