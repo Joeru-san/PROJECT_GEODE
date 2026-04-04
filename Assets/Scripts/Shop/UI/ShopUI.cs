@@ -3,6 +3,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class ShopUI : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ShopUI : MonoBehaviour
     public Image selectedItemImage;
     public Image itemRequiredImage;
     public TextMeshProUGUI buyButtonText;
+    public TextMeshProUGUI feedbackText;
     public GameObject slotPrefab;
     
     BasicShopItem _selectedItem;
@@ -62,7 +64,7 @@ public class ShopUI : MonoBehaviour
     {
         if(_selectedItem.shopItemCost > PlayerInteraction.playerInventory.FindTotalItemAmount(_selectedItem.typeOfItemRequired.itemType))
         {
-            buyButtonText.text = "Not enogh items";
+            StartCoroutine(FeedbackTextChange("Not enough items"));
             return;
         }
 
@@ -73,6 +75,18 @@ public class ShopUI : MonoBehaviour
         {
             _shopPlaceReference.GetComponent<StructureSpawner>().SpawnAndSnapToGround(structureShopItem.structureToSpawn);
         }
+    }
+
+    IEnumerator FeedbackTextChange(string text)
+    {
+        if(text == null) yield return null;
+
+        feedbackText.text = text;
+        buyButtonText.text = "Select an item to buy";
+        
+        feedbackText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        feedbackText.gameObject.SetActive(false);
     }
 
     void ShowPanel(PlayerInput playerInput, GameObject shopPlaceReference = null) // We have PlayerInput as an argument so we can switch the ActionMap
