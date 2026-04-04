@@ -73,7 +73,7 @@ public class ShopUI : MonoBehaviour
         
         if(_selectedItem is StructureShopItem structureShopItem)
         {
-            _shopPlaceReference.GetComponent<StructureSpawner>().SpawnAndSnapToGround(structureShopItem.structureToSpawn);
+            _shopPlaceReference.GetComponent<StructureSpawner>().SpawnAndSnapToGround(structureShopItem);
         }
     }
 

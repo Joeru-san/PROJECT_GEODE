@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdb3f066e66e8c7488bf85d8b3f5339, type: 3}
-  m_Name: basicItem
-  m_EditorClassIdentifier: Assembly-CSharp::item1
-  name: basicItemName
-  itemType: 0
-  inventoryIcon: {fileID: 21300000, guid: b5cf5ce951fe31cc79209831daca4788, type: 3}
-  minSpawnAmount: 3
-  maxSpawnAmount: 10
+  m_Script: {fileID: 11500000, guid: 58e1a055e9311a3158ebc1ddbf0738dd, type: 3}
+  m_Name: SyntetizedItem2
+  m_EditorClassIdentifier: Assembly-CSharp::SyntetizedItem
+  name: Syntetized Item 2
+  itemType: 1
+  inventoryIcon: {fileID: 0}
+  minSpawnAmount: 1
+  maxSpawnAmount: 1
   itemMesh: {fileID: 0}
   itemMaterial: {fileID: 0}
-  description: basicItemDescription
+  description: 
   isStackable: 1
   maxStackSize: 32

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewShopItem", menuName = "Shop/ShopItem")]
+[CreateAssetMenu(fileName = "NewStructureItem", menuName = "Shop/StrctureShopItem")]
 public class StructureShopItem : BasicShopItem
 {
     public GameObject structureToSpawn;

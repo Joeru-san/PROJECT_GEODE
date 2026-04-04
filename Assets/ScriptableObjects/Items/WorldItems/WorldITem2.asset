@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfdb3f066e66e8c7488bf85d8b3f5339, type: 3}
-  m_Name: theNewBasicItem
+  m_Name: WorldITem2
   m_EditorClassIdentifier: Assembly-CSharp::item1
   name: theNewBasicItem
   itemType: 1

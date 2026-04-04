@@ -32,13 +32,16 @@ public class StructureSpawner : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        playerInputReference = null;
-        Destroy(playerInputReference);
+        if(other.gameObject.CompareTag("Player"))
+        {
+            playerInputReference = null;
+            Destroy(playerInputReference);
+        }
     }
 
-    public void SpawnAndSnapToGround(GameObject structureToSpawn)
+    public void SpawnAndSnapToGround(StructureShopItem itemToSpawn)
     {
-        GameObject spawnedObject = Instantiate(structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
+        GameObject spawnedObject = Instantiate(itemToSpawn.structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
 
         Collider _objCollider = spawnedObject.GetComponent<Collider>();
         float _halfHeight = _objCollider != null ? _objCollider.bounds.extents.y : 0f;
