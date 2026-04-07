@@ -1016,8 +1016,9 @@ MonoBehaviour:
   feedbackText: {fileID: 84669741}
   slotPrefab: {fileID: 8737558730569813224, guid: e7d3498cbd764b7f7a23b4ca14d2b377, type: 3}
   listOfShopItems:
-  - {fileID: 11400000, guid: d919ce7372fa98e1abf66693acc1fafd, type: 2}
-  - {fileID: 11400000, guid: feceb1451b36198a493c45558c7af204, type: 2}
+  - {fileID: 11400000, guid: d60d91f1e9b8051ab9ef16c787b1ac45, type: 2}
+  - {fileID: 11400000, guid: b93eba80cef0ff53290ca86861238c45, type: 2}
+  - {fileID: 11400000, guid: 2209d414444c49ccb995159545bc8795, type: 2}
 --- !u!1 &712769934
 GameObject:
   m_ObjectHideFlags: 0

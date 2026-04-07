@@ -10,19 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3263215287461966451, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
       propertyPath: m_Name
-      value: HomeObjectSpawner Variant
+      value: Syntetizer2
       objectReference: {fileID: 0}
+    - target: {fileID: 5407923288765654686, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
+      propertyPath: itemToSpawn
+      value: 
+      objectReference: {fileID: 5847341445542061052, guid: e597d8558c600ec31ad3cb755db9f5bb, type: 3}
     - target: {fileID: 5407923288765654686, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
       propertyPath: minSpawnDelay
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5407923288765654686, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
       propertyPath: maxNumberOfObjects
-      value: 32
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5407923288765654686, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
       propertyPath: minNumberOfObjects
-      value: 32
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6553307266836228681, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
       propertyPath: m_LocalPosition.x

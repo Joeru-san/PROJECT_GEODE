@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbbc50106742f21289e81541845019c, type: 3}
-  m_Name: SpawnerStructure
-  m_EditorClassIdentifier: Assembly-CSharp::ShopItem
-  shopItemName: Item Type 1 Spawner
-  shopIcon: {fileID: 21300000, guid: b5cf5ce951fe31cc79209831daca4788, type: 3}
+  m_Name: Syntetizer1
+  m_EditorClassIdentifier: Assembly-CSharp::StructureShopItem
+  shopItemName: Syntetizer1
+  shopIcon: {fileID: 0}
   shopItemCost: 10
   typeOfItemRequired: {fileID: 11400000, guid: 8743d5f1991fe220896e511344f3a71b, type: 2}
   shopItemDescription: 
-  structureToSpawn: {fileID: 3263215287461966451, guid: b1887a10356b31a52a3a8187daf0fcb8, type: 3}
+  structureToSpawn: {fileID: 1921837796138076844, guid: 4e31368197cdc825897cb76fbef95b31, type: 3}

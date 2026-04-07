@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdb3f066e66e8c7488bf85d8b3f5339, type: 3}
   m_Name: WorldItem1
   m_EditorClassIdentifier: Assembly-CSharp::item1
-  name: basicItemName
+  name: WorldItem1
   itemType: 0
   inventoryIcon: {fileID: 21300000, guid: b5cf5ce951fe31cc79209831daca4788, type: 3}
   minSpawnAmount: 3
   maxSpawnAmount: 10
   itemMesh: {fileID: 0}
   itemMaterial: {fileID: 0}
-  description: basicItemDescription
+  description: WorldItem2Description
   isStackable: 1
   maxStackSize: 32

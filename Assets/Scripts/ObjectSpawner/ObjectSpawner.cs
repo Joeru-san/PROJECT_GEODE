@@ -8,7 +8,7 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] int minNumberOfObjects = 8;
     [SerializeField] int maxNumberOfObjects = 32;
     [SerializeField] LayerMask objectLayer;
-    [SerializeField] GameObject itemToSpawn;
+    public GameObject itemToSpawn;
     [SerializeField] float overlapCheckRadius = 0.5f; // tunable in Inspector
 
     [Header("Delay Settings")]

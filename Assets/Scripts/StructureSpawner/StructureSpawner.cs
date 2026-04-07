@@ -56,6 +56,7 @@ public class StructureSpawner : MonoBehaviour
         {
             Debug.LogWarning("SnapToGround: No ground found below the spawn point.");
         }
+
         OnShowShop?.Invoke(playerInputReference, null);
         playerInputReference = null;
         Destroy(playerInputReference);

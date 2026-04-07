@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfdb3f066e66e8c7488bf85d8b3f5339, type: 3}
-  m_Name: WorldITem2
-  m_EditorClassIdentifier: Assembly-CSharp::item1
-  name: WorldItem2
-  itemType: 1
-  inventoryIcon: {fileID: 21300000, guid: cdeb2e932b59ada648dbe113ece622c1, type: 3}
+  m_Name: WorldItem3
+  m_EditorClassIdentifier: Assembly-CSharp::WorldItem
+  name: WorldItem3
+  itemType: 2
+  inventoryIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   minSpawnAmount: 3
   maxSpawnAmount: 10
   itemMesh: {fileID: 0}
-  itemMaterial: {fileID: 2100000, guid: 740da67e189d3c546bf530f6bb3fc14c, type: 2}
-  description: WorldItem2Description
+  itemMaterial: {fileID: 0}
+  description: WorldItem3Description
   isStackable: 1
-  maxStackSize: 16
+  maxStackSize: 64
