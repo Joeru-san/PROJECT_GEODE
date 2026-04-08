@@ -60,6 +60,7 @@ public class StructureSpawner : MonoBehaviour
         OnShowShop?.Invoke(playerInputReference, null);
         playerInputReference = null;
         Destroy(playerInputReference);
+        gameObject.GetComponent<Collider>().enabled = false;
         enabled = false;
     }
 
