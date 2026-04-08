@@ -374,6 +374,7 @@ MonoBehaviour:
   overlapCheckRadius: 0.5
   minSpawnDelay: 1.5
   maxSpawnDelay: 5
+  spawnCycleDelay: 10
 --- !u!65 &241793266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1449,8 +1450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c9fac991cbb4a98ba34e08a0ca9741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
-  minNumberOfObjects: 8
-  maxNumberOfObjects: 16
+  minNumberOfObjects: 4
+  maxNumberOfObjects: 8
   objectLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1458,6 +1459,7 @@ MonoBehaviour:
   overlapCheckRadius: 0.5
   minSpawnDelay: 1.5
   maxSpawnDelay: 5
+  spawnCycleDelay: 10
 --- !u!65 &1183150857
 BoxCollider:
   m_ObjectHideFlags: 0

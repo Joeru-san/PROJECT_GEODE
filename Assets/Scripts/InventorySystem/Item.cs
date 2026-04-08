@@ -40,11 +40,11 @@ public class Item : MonoBehaviour, IPoolable
     }
 
     // Call this after SpawnFromPool to override the random amount with a known value.
-    public void Initialize(int assignedAmount)
+    public void Initialize(int assignedAmount = 0)
     {
         gameObject.layer = LayerMask.NameToLayer("ObjectLayer");
         gameObject.transform.DOScale(_initialObjectScale, 0.2f);
-        this.amount = assignedAmount;
+        if(assignedAmount > 0) this.amount = assignedAmount;
         if (toolTip != null)
             toolTip.text = "x" + this.amount + " " + scriptableObjectType.name;
     }

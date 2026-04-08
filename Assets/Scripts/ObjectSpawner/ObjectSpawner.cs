@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(BoxCollider))]
 public class ObjectSpawner : MonoBehaviour
@@ -14,6 +15,7 @@ public class ObjectSpawner : MonoBehaviour
     [Header("Delay Settings")]
     [SerializeField] float minSpawnDelay = 0.5f;
     [SerializeField] float maxSpawnDelay = 2f;
+    [SerializeField] float spawnCycleDelay = 10f;
 
     const int MaxAttempts = 200;
 
@@ -44,15 +46,6 @@ public class ObjectSpawner : MonoBehaviour
 
     void RegisterAndSpawn()
     {
-        _box = GetComponent<BoxCollider>();
-        _localMin = _box.center - _box.size * 0.5f;
-        _localMax = _box.center + _box.size * 0.5f;
-
-        _targetCount = Random.Range(minNumberOfObjects, maxNumberOfObjects + 1);
-        
-        // Get the tag name (assuming Item script exists)
-        _nameOfSpawnedObject = itemToSpawn.GetComponent<Item>().scriptableObjectType.name;
-
         // TELL the pooler to create the pool right now
         Pool newPool = new Pool(_nameOfSpawnedObject, itemToSpawn, _targetCount);
         ObjectPooler.inst.AddPool(newPool);
@@ -69,13 +62,18 @@ public class ObjectSpawner : MonoBehaviour
         {
             if (TryGetFreePosition(out Vector3 position))
             {
-                ObjectPooler.inst.SpawnFromPool(_nameOfSpawnedObject, position, Quaternion.identity);
+                GameObject reference = ObjectPooler.inst.SpawnFromPool(_nameOfSpawnedObject, position, Quaternion.identity, transform);
                 _spawnedCount++;
             }
 
             float delay = Random.Range(minSpawnDelay, maxSpawnDelay);
             yield return new WaitForSeconds(delay);
         }
+        yield return new WaitForSeconds(spawnCycleDelay);
+        yield return new WaitUntil(() => transform.childCount == 0);
+        _spawnedCount = 0;
+        Debug.Log($"Object spawner: {gameObject.name} is restarting the spawn cycle");
+        StartCoroutine(SpawnLoop());
     }
 
     bool TryGetFreePosition(out Vector3 result)
