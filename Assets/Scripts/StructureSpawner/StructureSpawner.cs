@@ -10,23 +10,22 @@ public class StructureSpawner : MonoBehaviour
     [SerializeField] float heightRaycastDistance = 100f;
 
     PlayerInput playerInputReference;
+    bool _inShop = false;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _inShop = true;
             playerInputReference = other.transform.parent.GetComponent<PlayerInput>();
         }
     }
 
-    void OnTriggerStay(Collider other)
+    void Update()
     {
-        if(other.gameObject.CompareTag("Player"))
+        if((InputSystem.actions.FindAction("Interact").WasPressedThisFrame() || InputSystem.actions.FindAction("Cancel").WasPressedThisFrame()) && _inShop)
         {
-            if(InputSystem.actions.FindAction("Interact").WasPressedThisFrame() || InputSystem.actions.FindAction("Cancel").WasPressedThisFrame())
-            {
-                OnShowShop?.Invoke(playerInputReference, this.gameObject);
-            }
+            OnShowShop?.Invoke(playerInputReference, this.gameObject);
         }
     }
 
@@ -34,6 +33,7 @@ public class StructureSpawner : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            _inShop = false;
             playerInputReference = null;
             Destroy(playerInputReference);
         }

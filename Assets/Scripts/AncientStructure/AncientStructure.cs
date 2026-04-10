@@ -20,6 +20,7 @@ public class AncientStructure : MonoBehaviour
     void Start()
     {
         amountText.text = _numberOfItemsLoaded + " / " + numberOfItemsToLoad; // Set the amount text to display the basic informations
+        AncientStructureManager.ancientStructureReferences.Add(this, false);
     }
 
     void OnTriggerStay(Collider other)
@@ -57,7 +58,7 @@ public class AncientStructure : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;   // Disabling collider to avoid retrigger the function
             hintText.text = "AncientStructure complete"; // Inform the player that the structure is completed
-            // TODO Register in the AncientStructureManager that the structures is completed
+            AncientStructureManager.ancientStructureReferences[this] = true;
         }
     }
 
