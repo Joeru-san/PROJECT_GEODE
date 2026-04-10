@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-// TODO Make the AncientStructures register into a manager, in this way there is a reference for future implementations
 public class AncientStructure : MonoBehaviour
 {
     public static Action<AncientStructure> OnStructureComplete; // Event that is fired when the structure is completed

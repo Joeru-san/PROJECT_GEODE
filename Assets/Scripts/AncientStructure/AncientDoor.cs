@@ -4,7 +4,7 @@ using UnityEngine;
 // In the Script Exection Order this goes after the AncientStructureManager
 public class AncientDoor : MonoBehaviour
 {
-    public int numberOfStructuresNeeded = 0;
+    public int numberOfStructuresNeeded = 0;    // Number of completed ancient structures needed to make the door open
     [SerializeField] GameObject doorMesh;
 
     void Start()
