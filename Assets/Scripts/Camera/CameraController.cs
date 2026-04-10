@@ -3,7 +3,7 @@ using Unity.Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    int _activeCameraPriorityModifier = 69420;
+    int _activeCameraPriorityModifier = 69420; // Modifier offset to change the camera priority
 
     [HideInInspector] public CinemachineVirtualCameraBase activeCamera; 
     public Camera MainCamera;
@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCameraBase thirdPersonCamera;
 
     public static CameraController inst {get; private set;}
-    public static bool isFirstPerson = false;
+    public static bool isFirstPerson = false; 
 
     void Awake()
     {
@@ -23,35 +23,41 @@ public class CameraController : MonoBehaviour
         inst = this;
         DontDestroyOnLoad(gameObject);
     }
-    
 
     void Start()
     {
-        ChangeCamera();
+        ChangeCamera(); // Calling it the first time so we can already se the priorities
     }
 
+    /// <summary>
+    /// Change the active camera between First Person and Third Person
+    /// </summary>
     public void ChangeCamera()
     {
-        if(thirdPersonCamera == activeCamera)
+        if(thirdPersonCamera == activeCamera) // If in third person
         {
             SetCameraPriorities(thirdPersonCamera, firstPersonCamera);
             isFirstPerson = true;
-        } else if(firstPersonCamera == activeCamera)
+        } else if(firstPersonCamera == activeCamera)    // If in first person person
         {
             SetCameraPriorities(firstPersonCamera, thirdPersonCamera);
             isFirstPerson = false;
-        } else 
+        } else // Fallback case
         {
             thirdPersonCamera.Priority += _activeCameraPriorityModifier; 
             activeCamera = thirdPersonCamera;
         }
     }
 
+    /// <summary>
+    /// Set priorities of the cameras
+    /// </summary>
+    /// <param name="currentCameraMode"></param>
+    /// <param name="newCameraMode"></param>
     void SetCameraPriorities(CinemachineVirtualCameraBase currentCameraMode, CinemachineVirtualCameraBase newCameraMode)
     {
         currentCameraMode.Priority -= _activeCameraPriorityModifier;
         newCameraMode.Priority += _activeCameraPriorityModifier;
         activeCamera = newCameraMode;
-
     }
 }
