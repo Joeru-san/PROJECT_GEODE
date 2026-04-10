@@ -1,16 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// In the Script Exection Order this goes before the AncientStructure related scripts
 public class AncientStructureManager : MonoBehaviour
 {
     public static Dictionary<AncientStructure, bool> ancientStructureReferences = new Dictionary<AncientStructure, bool>();
+    public static int completedStructures = 0;
 
-    public void printDictionary()
+    void Start()
     {
-        foreach(AncientStructure index in ancientStructureReferences.Keys)
-        {
-            if(ancientStructureReferences[index])
-                Debug.Log(index.name + ancientStructureReferences[index]);
-        }
+        AncientStructure.OnStructureComplete += RegisterStructureStatus;
+    }
+
+    public void RegisterStructureStatus(AncientStructure structureReference)
+    {
+        ancientStructureReferences[structureReference] = true;
+        completedStructures++;
+        print(completedStructures);
     }
 }

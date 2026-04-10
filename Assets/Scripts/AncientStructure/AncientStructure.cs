@@ -3,10 +3,13 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 // TODO Make the AncientStructures register into a manager, in this way there is a reference for future implementations
 public class AncientStructure : MonoBehaviour
 {
+    public static Action<AncientStructure> OnStructureComplete; // Event that is fired when the structure is completed
+
     public ItemType itemTypeNeeded; // The ItemType needed by the structure to be activated
 
     int _numberOfItemsLoaded = 0;   // How much items we loaded into the ancient structure
@@ -58,7 +61,7 @@ public class AncientStructure : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;   // Disabling collider to avoid retrigger the function
             hintText.text = "AncientStructure complete"; // Inform the player that the structure is completed
-            AncientStructureManager.ancientStructureReferences[this] = true;
+            OnStructureComplete?.Invoke(this);
         }
     }
 
