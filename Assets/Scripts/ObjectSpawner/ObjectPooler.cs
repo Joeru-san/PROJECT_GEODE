@@ -18,7 +18,6 @@ public class Pool
 
 public class ObjectPooler : MonoBehaviour
 {
-    // Dictionary is now initialized immediately to avoid null refs
     public Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     public static ObjectPooler inst;
@@ -38,15 +37,21 @@ public class ObjectPooler : MonoBehaviour
     }
 
     // This method allows Spawners to register pools dynamically
+    /// <summary>
+    /// Function that allow the spawners to dynamically create a pool of the objects they need to spawn
+    /// </summary>
+    /// <param name="pool"></param>
     public void AddPool(Pool pool)
     {
-        // If the pool already exists, we might want to expand it or skip
+        // If the pool already exists, we skip this
+        // TODO, expand the pool size of this pool
         if (poolDictionary.ContainsKey(pool.tag))
         {
             Debug.Log($"Pool with tag {pool.tag} already exists. Skipping registration.");
             return;
         }
 
+        // Create the new pool of objects
         Queue<GameObject> currentObjectPool = new Queue<GameObject>();
         for (int i = 0; i < pool.numberOfObjectsInPool; i++)
         {
@@ -55,10 +60,20 @@ public class ObjectPooler : MonoBehaviour
             currentObjectPool.Enqueue(obj);
         }
 
+        // Add the new pool to the dictionary
         poolDictionary.Add(pool.tag, currentObjectPool);
         Debug.Log($"Pool {pool.tag} initialized with {pool.numberOfObjectsInPool} objects.");
     }
 
+
+    /// <summary>
+    /// Spawn from a pool an object
+    /// </summary>
+    /// <param name="tag"> The tag of the object we want to spawn </param>
+    /// <param name="position"> The position where we want to spawn the object </param>
+    /// <param name="rotation"> The rotation at we want to spawn the object </param>
+    /// <param name="parent"> The parent we want to set for the object, default is null, so in world hierarchy</param>
+    /// <returns></returns>
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, Transform parent = null)
     {
         if (!poolDictionary.ContainsKey(tag))
@@ -86,6 +101,11 @@ public class ObjectPooler : MonoBehaviour
         return objectToSpawn;
     }
 
+    /// <summary>
+    /// Readd an object to the pool to be reused
+    /// </summary>
+    /// <param name="tag"> To which pool i want to re-add it</param>
+    /// <param name="obj"> Which object i wanto to re-add </param>
     public void ReAddToPool(string tag, GameObject obj)
     {
         if (obj.activeSelf)

@@ -44,6 +44,9 @@ public class ObjectSpawner : MonoBehaviour
         RegisterAndSpawn();
     }
 
+    /// <summary>
+    /// Register the object that we want to spawn in the pool
+    /// </summary>
     void RegisterAndSpawn()
     {
         // TELL the pooler to create the pool right now
@@ -53,6 +56,13 @@ public class ObjectSpawner : MonoBehaviour
         StartCoroutine(SpawnLoop());
     }
 
+    /// <summary>
+    /// Spawn an object from the pool at a random delay
+    /// A coroutine that manages a repeating object spawn cycle.
+    /// Spawns objects one by one up to a target count using an object pool,
+    /// then waits for all spawned objects to be collected before restarting.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SpawnLoop()
     {
         // Wait one frame to ensure initialization is fully finished
@@ -76,6 +86,12 @@ public class ObjectSpawner : MonoBehaviour
         StartCoroutine(SpawnLoop());
     }
 
+    /// <summary>
+    /// Attempts to find a free spawn position by repeatedly sampling random positions
+    /// and checking for overlapping colliders.
+    /// </summary>
+    /// <param name="result"></param>
+    /// <returns></returns>
     bool TryGetFreePosition(out Vector3 result)
     {
         for (int i = 0; i < MaxAttempts; i++)
@@ -94,6 +110,10 @@ public class ObjectSpawner : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Take a random position in the box collider
+    /// </summary>
+    /// <returns></returns>
     Vector3 GetRandomSpawnPosition()
     {
         Vector3 local = new Vector3(
