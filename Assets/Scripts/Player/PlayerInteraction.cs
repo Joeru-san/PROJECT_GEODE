@@ -18,29 +18,30 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()   
     {
-        float interactionDistance = CameraController.isFirstPerson ? firstPersonInteractionDistance : thirdPersonInteractionDistance;
-        Ray raycastFromCamera = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        float interactionDistance = CameraController.isFirstPerson ? firstPersonInteractionDistance : thirdPersonInteractionDistance;   // Check which interactiond distance to use
+        Ray raycastFromCamera = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); 
         RaycastHit outHit;
 
         if (Physics.Raycast(raycastFromCamera, out outHit, interactionDistance, layerToHit))
         {
             Debug.DrawRay(raycastFromCamera.origin, raycastFromCamera.direction * outHit.distance, Color.green);
 
-            Item hitItem = outHit.transform.GetComponent<Item>();
+            Item hitItem = outHit.transform.GetComponent<Item>(); // Get the reference of the item component
 
             if (hitItem != null)
             {
                 if (_currentTargetedItem != null && _currentTargetedItem != hitItem)
-                    _currentTargetedItem.HideTooltip();
+                    _currentTargetedItem.HideTooltip(); // Hide the tooltip of the previous targeted item
 
-                _currentTargetedItem = hitItem;
-                _currentTargetedItem.ShowTooltip();
+                _currentTargetedItem = hitItem; // Change to the current targeted item
+                _currentTargetedItem.ShowTooltip(); // Show the tooltip of the currently targeted item
             }
             else
             {
-                ClearCurrentTarget();
+                ClearCurrentTarget(); 
             }
 
+            // Where the camera need to face toward
             Vector3 targetPoint = new Vector3(Camera.main.transform.position.x, hitItem.toolTip.transform.position.y, Camera.main.transform.position.z);
         
             hitItem.toolTip.transform.LookAt(targetPoint);
@@ -66,6 +67,9 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hide the tooltip and dereference the current targeted item
+    /// </summary>
     void ClearCurrentTarget()
     {
         if (_currentTargetedItem != null)
