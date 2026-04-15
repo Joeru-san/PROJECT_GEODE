@@ -12,6 +12,7 @@ public class StructureSpawner : MonoBehaviour
     PlayerInput playerInputReference;
     bool _inShop = false;
 
+    // Take the reference to the player input to see if the player interacts with the structure
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -29,6 +30,7 @@ public class StructureSpawner : MonoBehaviour
         }
     }
 
+    // Remove the reference to the player input to avoid complications
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -39,6 +41,10 @@ public class StructureSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawn and snap to ground a structure
+    /// </summary>
+    /// <param name="itemToSpawn"> The Structure item we want to spawn</param>
     public void SpawnAndSnapToGround(StructureShopItem itemToSpawn)
     {
         GameObject spawnedObject = Instantiate(itemToSpawn.structureToSpawn, spawnPoint.position, spawnPoint.rotation, transform);
@@ -60,7 +66,7 @@ public class StructureSpawner : MonoBehaviour
         OnShowShop?.Invoke(playerInputReference, null);
         playerInputReference = null;
         Destroy(playerInputReference);
-        gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false; // Disabling to avoid complications
         enabled = false;
     }
 
