@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
+// This script sends to the player inventory the informations of the item that is going to be dropped
 public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 {
     public Image inventoryIcon;

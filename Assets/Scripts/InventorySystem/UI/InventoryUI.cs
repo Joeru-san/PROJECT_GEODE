@@ -17,6 +17,9 @@ public class InventoryUI : MonoBehaviour
         InitializeUI();
     }
     
+    /// <summary>
+    /// Create all the UI Slots based on the inventory size
+    /// </summary>
     void InitializeUI()
     {
         _uiSlots = new InventorySlotUI[inventory.inventorySize]; // Create as many _uiSlots as the size of the inventory
@@ -28,7 +31,9 @@ public class InventoryUI : MonoBehaviour
         UpdateUI(); // This method (InitializeUI) is called only in the Start, so the UI has to be updated so it can be displayed
     }
 
-    // This method is called automatically whenever the inventory changes.
+    /// <summary>
+    /// This method is called automatically whenever the inventory changes.
+    /// </summary>
     void UpdateUI()
     {
         for (int i = 0; i < _uiSlots.Length; i++) // Loop through the slots
@@ -51,8 +56,11 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    // When the inventory key is pressed we call this method, we treat this as a toggle
-    void ShowInventory(PlayerInput playerInput) // We have PlayerInput as an argument so we can switch the ActionMap
+    /// <summary>
+    /// When the inventory key is pressed we call this method, we treat this as a toggle
+    /// </summary>
+    /// <param name="playerInput">We have PlayerInput as an argument so we can switch the ActionMap</param>
+    void ShowInventory(PlayerInput playerInput) 
     {
         if(slotPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it
         {

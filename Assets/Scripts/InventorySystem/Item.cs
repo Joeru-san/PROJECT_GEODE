@@ -39,7 +39,10 @@ public class Item : MonoBehaviour, IPoolable
         }
     }
 
-    // Call this after SpawnFromPool to override the random amount with a known value.
+    /// <summary>
+    /// Initialize an object with a fixed amount
+    /// </summary>
+    /// <param name="assignedAmount"></param>
     public void Initialize(int assignedAmount = 0)
     {
         gameObject.layer = LayerMask.NameToLayer("ObjectLayer");
@@ -49,6 +52,9 @@ public class Item : MonoBehaviour, IPoolable
             toolTip.text = "x" + this.amount + " " + scriptableObjectType.name;
     }
 
+    /// <summary>
+    /// Show the overworld tooltip
+    /// </summary>
     public void ShowTooltip()
     {
         if (toolTip != null && !_isTooltipVisible)
@@ -63,6 +69,9 @@ public class Item : MonoBehaviour, IPoolable
         }
     }
 
+    /// <summary>
+    /// Hide the overworld tooltip
+    /// </summary>
     public void HideTooltip()
     {
         if (toolTip != null && _isTooltipVisible)
@@ -72,6 +81,9 @@ public class Item : MonoBehaviour, IPoolable
         }
     }
 
+    /// <summary>
+    /// Make the object disappear and re add it to the pool
+    /// </summary>
     public void OnObjectDestroy()
     {
         if (gameObject.layer == 0) return; 
