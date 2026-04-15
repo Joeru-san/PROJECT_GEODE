@@ -59,7 +59,7 @@ public class InventoryUI : MonoBehaviour
     /// <summary>
     /// When the inventory key is pressed we call this method, we treat this as a toggle
     /// </summary>
-    /// <param name="playerInput">We have PlayerInput as an argument so we can switch the ActionMap</param>
+    /// <param name="playerInput"> We have PlayerInput as an argument so we can switch the ActionMap </param>
     void ShowInventory(PlayerInput playerInput) 
     {
         if(slotPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it

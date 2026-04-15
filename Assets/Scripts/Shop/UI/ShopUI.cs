@@ -37,6 +37,9 @@ public class ShopUI : MonoBehaviour
         ShopSlotUI.shopSlotClicked.RemoveListener(UpdateUI);
     }
 
+    /// <summary>
+    /// Create all the slots in the shop based on the size of the listOfShopItems
+    /// </summary>
     void InitializeUI()
     {
         int numberOfItems = listOfShopItems.Length;
@@ -52,6 +55,10 @@ public class ShopUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Change the sprites and the cost based on the clicked item
+    /// </summary>
+    /// <param name="clickedItem"></param>
     public void UpdateUI(BasicShopItem clickedItem)
     {
         _selectedItem = clickedItem;
@@ -60,6 +67,10 @@ public class ShopUI : MonoBehaviour
         buyButtonText.text = " x" + clickedItem.shopItemCost.ToString();
     }
 
+    /// <summary>
+    /// Buy an item from the shop
+    /// If it's a structure spawn it
+    /// </summary>
     public void BuyItem()
     {
         if(_selectedItem.shopItemCost > PlayerInteraction.playerInventory.FindTotalItemAmount(_selectedItem.typeOfItemRequired.itemType))
@@ -77,6 +88,11 @@ public class ShopUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Change the Feedback text of the shop
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     IEnumerator FeedbackTextChange(string text)
     {
         if(text == null) yield return null;
@@ -89,7 +105,13 @@ public class ShopUI : MonoBehaviour
         feedbackText.gameObject.SetActive(false);
     }
 
-    void ShowPanel(PlayerInput playerInput, GameObject shopPlaceReference = null) // We have PlayerInput as an argument so we can switch the ActionMap
+
+    /// <summary>
+    /// When the inventory key is pressed we call this method, we treat this as a toggle
+    /// </summary>
+    /// <param name="playerInput"> We have PlayerInput as an argument so we can switch the ActionMap </param>
+    /// <param name="shopPlaceReference"> Reference to the shop position, in case the player wants to spawn a structure </param>
+    void ShowPanel(PlayerInput playerInput, GameObject shopPlaceReference = null)
     {
         if(shopPlaceReference != null) this._shopPlaceReference = shopPlaceReference;
         
