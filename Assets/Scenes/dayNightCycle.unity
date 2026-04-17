@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightController
   sun: {fileID: 379505614}
-  dayDurationSeconds: 240
+  dayDurationSeconds: 1
   ambientColor:
     serializedVersion: 2
     key0: {r: 0.9056604, g: 0.09825563, b: 0.09825563, a: 1}
