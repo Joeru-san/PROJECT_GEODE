@@ -1,8 +1,16 @@
-using UnityEngine;
-
-public abstract class EnemyBaseState
+public class EnemyBaseState
 {
-    public abstract void EnterState(EnemyStateManager enemy);
+    protected Enemy enemy;
+    protected EnemyStateMachine enemyStateMachine;
 
-    public abstract void UpdateState(EnemyStateManager enemy);
+    public EnemyBaseState(Enemy enemy, EnemyStateMachine enemyStateMachine)
+    {
+        this.enemy = enemy;
+        this.enemyStateMachine = enemyStateMachine;
+    }
+
+    public virtual void EnterState() {}
+    public virtual void ExitState() {}
+    public virtual void FrameUpdate() {}
+    public virtual void PhysicsUpdate() {}
 }
