@@ -1368,38 +1368,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 438346031045812599, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[1].Input.InputAction
-      value: 
-      objectReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 2901008024826963424, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 831628869}
-    - target: {fileID: 4089303728517514725, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.057996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4089303728517514725, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.71743
-      objectReference: {fileID: 0}
-    - target: {fileID: 4089303728517514725, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.806122
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784372454784054495, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.057996
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784372454784054495, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5384426
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784372454784054495, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.0897665
-      objectReference: {fileID: 0}
     - target: {fileID: 6311907401829401324, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
       propertyPath: playerComponent
       value: 
@@ -1448,34 +1420,10 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 831628869}
-    - target: {fileID: 8729719785330024609, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.057996
-      objectReference: {fileID: 0}
-    - target: {fileID: 8729719785330024609, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.71743
-      objectReference: {fileID: 0}
-    - target: {fileID: 8729719785330024609, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.806122
-      objectReference: {fileID: 0}
     - target: {fileID: 8945247679825312316, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
       propertyPath: m_Name
       value: CameraController1st3rd
       objectReference: {fileID: 0}
-    - target: {fileID: 9166691185608802531, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[2].Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9166691185608802531, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[0].Input.InputAction
-      value: 
-      objectReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    - target: {fileID: 9166691185608802531, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[1].Input.InputAction
-      value: 
-      objectReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3363,14 +3311,6 @@ PrefabInstance:
     - target: {fileID: 4857095248495618290, guid: e4faa1c782afdc7a1950763300c4e970, type: 3}
       propertyPath: m_Name
       value: basicPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8498311696968283734, guid: e4faa1c782afdc7a1950763300c4e970, type: 3}
-      propertyPath: inventorySize
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8498311696968283734, guid: e4faa1c782afdc7a1950763300c4e970, type: 3}
-      propertyPath: inventorySlots.Array.size
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
