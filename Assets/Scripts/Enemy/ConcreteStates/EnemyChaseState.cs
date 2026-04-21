@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyBaseState
 {
-    public EnemyChaseState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
-    {
-        
-    }
+    public EnemyChaseState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine) { }
 
     public override void EnterState()
     {
         base.EnterState();
 
         Debug.Log($"{enemy.transform.name} entered in chase state");
+
+        if(enemy.currentTarget != null) enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
     }
 
     public override void ExitState()
@@ -24,6 +23,8 @@ public class EnemyChaseState : EnemyBaseState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+
+        if(enemy.currentTarget != null) enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
 
         if(enemy.isInStrikingDistance)
         {

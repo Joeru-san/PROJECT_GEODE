@@ -2,13 +2,7 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
-    private float _exitTimer;
-    private float _timeTillExit = 3f;
-
-    public EnemyAttackState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine)
-    {
-        
-    }
+    public EnemyAttackState(Enemy enemy, EnemyStateMachine enemyStateMachine) : base(enemy, enemyStateMachine) { }
 
     public override void EnterState()
     {
@@ -30,14 +24,7 @@ public class EnemyAttackState : EnemyBaseState
 
         if (!enemy.isInStrikingDistance)
         {
-            _exitTimer += Time.deltaTime;
-            if(_exitTimer >= _timeTillExit)
-            {
-                enemy.stateMachine.ChangeState(enemy.chaseState);
-            }
-        }else
-        {
-            _exitTimer = 0f;
+            enemy.stateMachine.ChangeState(enemy.chaseState);
         }
     }
 }

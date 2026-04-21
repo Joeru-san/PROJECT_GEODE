@@ -1,6 +1,7 @@
-using System;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 {
     [field:SerializeField] public float MaxHealth {get; set;}
@@ -10,8 +11,12 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     public EnemyAttackState attackState {get; set;}
     public EnemyIdleState idleState {get; set;}
     public EnemyChaseState chaseState {get; set;}
+
+    public GameObject currentTarget;
     public bool isAggroed {get; set;}
     public bool isInStrikingDistance {get; set;}
+
+    [HideInInspector] public NavMeshAgent navMeshAgent;
 
     void Awake()
     {
@@ -20,6 +25,8 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
         attackState = new EnemyAttackState(this, stateMachine);
         idleState = new EnemyIdleState(this, stateMachine);
         chaseState = new EnemyChaseState(this, stateMachine);
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Start()
