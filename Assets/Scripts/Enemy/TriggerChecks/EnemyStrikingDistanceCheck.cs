@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyStrikingDistanceCheck : MonoBehaviour
@@ -14,6 +15,7 @@ public class EnemyStrikingDistanceCheck : MonoBehaviour
         if(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("DefenseTurret"))
         {
             _enemy.currentTarget = other.gameObject;
+            _enemy.transform.DODynamicLookAt(other.transform.position, 2f, AxisConstraint.Y);
             _enemy.SetStrikingDistanceBool(true);
         }
     }

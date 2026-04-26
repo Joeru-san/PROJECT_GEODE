@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
@@ -12,13 +13,24 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     public EnemyIdleState idleState {get; set;}
     public EnemyChaseState chaseState {get; set;}
 
+    [Header("Triggers")]
     public GameObject currentTarget;
     public bool isAggroed {get; set;}
+    public BoxCollider aggroTrigger;
+    
     public bool isInStrikingDistance {get; set;}
+    public BoxCollider strikingTrigger;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
-    void Awake()
+    public Dictionary<string, Vector3> triggerSizes = new Dictionary<string, Vector3>() 
+    {
+        {"basicSize", new Vector3(10f, 1f, 10f)},
+        {"scoutSize", new Vector3(12f, 1f, 12f)},
+        {"chaseSize", new Vector3(14f, 1f, 14f)},
+    };
+
+    protected virtual void Awake()
     {
         stateMachine = new EnemyStateMachine();
 

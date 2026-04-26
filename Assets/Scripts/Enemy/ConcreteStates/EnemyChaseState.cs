@@ -10,6 +10,8 @@ public class EnemyChaseState : EnemyBaseState
 
         Debug.Log($"{enemy.transform.name} entered in chase state");
 
+        enemy.aggroTrigger.size = enemy.triggerSizes["chaseSize"];
+
         if(enemy.currentTarget != null) enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
     }
 
