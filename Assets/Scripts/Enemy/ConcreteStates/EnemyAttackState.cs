@@ -8,6 +8,7 @@ public class EnemyAttackState : EnemyBaseState
     {
         base.EnterState();
 
+        enemy.aggroTrigger.enabled = false;
         Debug.Log($"{enemy.transform.name} entered in attack state");
     }
 
@@ -15,6 +16,7 @@ public class EnemyAttackState : EnemyBaseState
     {
         base.ExitState();
 
+        enemy.aggroTrigger.enabled = true;
         Debug.Log($"{enemy.transform.name} exit from attack state");
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnedEnemy : Enemy
+public class SpawnerEnemy : Enemy
 {
     public EnemySpawnedState spawnedState {get; set;}
 
