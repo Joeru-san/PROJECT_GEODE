@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamageable
 {
     private Rigidbody _playerRB;
     private Vector2 _moveAmt;
@@ -13,17 +13,39 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 5;
     public float rotateSpeed = 5;
 
+    public static bool isDead = false;
+
+    #region IDamageable
+    [field: Header("IDamageable")]
+    [field: SerializeField] public float MaxHealth { get; set; }
+    [field: SerializeField] public float currentHealth { get; set; }
+    [field: SerializeField] public float attackCoolDown { get; set; }
+    [field: SerializeField] public float attackDamage { get; set; }
+
+    public void Die()
+    {
+        isDead = true;
+        StartCoroutine(Death(1f)); 
+    }
+    public void TakeDamage(float damageAmount)
+    {
+        currentHealth -= damageAmount;
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+    #endregion
+
     [Header("Ground Check")]
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius;
     [SerializeField] LayerMask groundMask;
 
-    [Header("Player Variables")]
-    public static bool isDead = false;
-
     void Awake()
     {
         _playerRB = gameObject.GetComponent<Rigidbody>();
+        currentHealth = MaxHealth;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -106,4 +128,6 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+
 }
