@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   inventorySlots: []
-  inventorySize: 20
+  inventorySize: 15
 --- !u!1 &5676777676974647048
 GameObject:
   m_ObjectHideFlags: 0

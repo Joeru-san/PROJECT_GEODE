@@ -43,11 +43,17 @@ public class ObjectPooler : MonoBehaviour
     /// <param name="pool"></param>
     public void AddPool(Pool pool)
     {
-        // If the pool already exists, we skip this
-        // TODO, expand the pool size of this pool
+        // If the pool already exists, we expand it
         if (poolDictionary.ContainsKey(pool.tag))
         {
-            Debug.Log($"Pool with tag {pool.tag} already exists. Skipping registration.");
+            Debug.Log($"Pool with tag {pool.tag} already exists. Expanding existing pool.");
+
+            for(int i = 0; i < pool.numberOfObjectsInPool; i++)
+            {
+                GameObject obj = Instantiate(pool.prefab, transform);
+                obj.SetActive(false);
+                poolDictionary[pool.tag].Enqueue(obj);
+            }
             return;
         }
 
