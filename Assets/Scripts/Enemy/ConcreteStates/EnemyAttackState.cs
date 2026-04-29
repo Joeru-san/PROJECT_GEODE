@@ -48,11 +48,11 @@ public class EnemyAttackState : EnemyBaseState
             IDamageable damageable = enemy.currentTarget.GetComponentInParent<IDamageable>();
             if(damageable != null)
             {
-                Debug.Log($"[EnemyAttackState] Enemy {enemy.name} hit {damageable} for {enemy.attackDamage} damage");
+                Debug.Log($"[{GetType().Name}] Enemy {enemy.name} hit {damageable} for {enemy.attackDamage} damage");
                 damageable.TakeDamage(enemy.attackDamage);
             }else
             {
-                Debug.Log($"[EnemyAttackState] Enemy {enemy.name} didn't get IDamageable component");
+                Debug.Log($"[{GetType().Name}] Enemy {enemy.name} didn't get IDamageable component");
             }
         }
 

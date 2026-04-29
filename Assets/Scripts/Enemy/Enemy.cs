@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     public void Die()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     public void TakeDamage(float damageAmount)
