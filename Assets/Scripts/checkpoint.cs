@@ -5,7 +5,7 @@ public class checkpoint : MonoBehaviour
     public bool activated = false;  
     public static GameObject[] checkPointList;
 
-    public static Vector3 defaultRespawnPoint = new Vector3(0f, 0f, 0f);    
+    public static Vector3 defaultRespawnPoint = new Vector3(0f, 1f, 0f);    
 
     public static Vector3 GetActiveCheckPointPosition()
     {

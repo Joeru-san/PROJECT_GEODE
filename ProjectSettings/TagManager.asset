@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SnappingPivot
   - DefenseTurret
+  - Enemy
   layers:
   - Default
   - TransparentFX

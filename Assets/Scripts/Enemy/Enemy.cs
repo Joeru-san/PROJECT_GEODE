@@ -5,13 +5,17 @@ using System.Collections.Generic;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 {
-    [field:SerializeField] public float MaxHealth {get; set;}
-    public float currentHealth {get; set;}
 
     public EnemyStateMachine stateMachine {get; set;}
     public EnemyAttackState attackState {get; set;}
     public EnemyIdleState idleState {get; set;}
     public EnemyChaseState chaseState {get; set;}
+
+    [field: Header("IDamageable")]
+    [field: SerializeField] public float MaxHealth { get; set; }
+    [field: SerializeField] public float currentHealth { get; set; }
+    [field: SerializeField] public float attackCoolDown { get; set; }
+    [field: SerializeField] public float attackDamage { get; set; }
 
     [Header("Triggers")]
     public GameObject currentTarget;
@@ -19,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     public BoxCollider aggroTrigger;
     
     public bool isInStrikingDistance {get; set;}
+
     public BoxCollider strikingTrigger;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
@@ -60,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     public void Die()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     public void TakeDamage(float damageAmount)
