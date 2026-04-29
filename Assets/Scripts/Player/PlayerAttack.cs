@@ -52,7 +52,6 @@ public class PlayerAttack : MonoBehaviour
         if(Physics.Raycast(rayOrigin, _mainCamera.transform.forward, out outHit, gunRange, layerToHit))
         {
             lineRend.SetPosition(1, outHit.point);
-            Debug.Log($"{outHit.transform.name} hitted!");
             IDamageable damageable = outHit.transform.gameObject.GetComponentInChildren<IDamageable>();
             if(damageable != null)
             {

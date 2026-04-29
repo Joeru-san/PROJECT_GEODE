@@ -27,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
     int _targetCount;
     int _spawnedCount;
     string _nameOfSpawnedEnemy;
+    bool _isSpawning = false;
 
     void Awake()
     {
@@ -64,6 +65,8 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     IEnumerator SpawnLoop()
     {
+        _isSpawning = true;
+
         // Wait one frame to ensure initialization is fully finished
         yield return null;
 
@@ -94,6 +97,7 @@ public class EnemySpawner : MonoBehaviour
         if (_actualWaveNumber >= numberOfWaves)
         {
             Debug.Log($"[EnemySpawner] {name} has completed all {numberOfWaves} wave(s). Stopping.");
+            _isSpawning = false;
             yield break;
         }
 
@@ -104,15 +108,19 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Resets and restarts the spawn cycle from wave 1.
-    /// Re-registers the pool so capacity is refreshed for the new cycle.
+    /// Starts the spawn cycle from wave 1, triggered by OnDayStateChange.
+    /// If a SpawnLoop is already running, the event is ignored for this spawner.
     /// </summary>
     public void RestartWaves()
     {
-        StopAllCoroutines();
+        if (_isSpawning)
+        {
+            Debug.Log($"[EnemySpawner] {name} is still spawning — ignoring OnDayStateChange.");
+            return;
+        }
+
         _actualWaveNumber = 1;
         _spawnedCount = 0;
-        RegisterInObjectPooler();
         StartCoroutine(SpawnLoop());
     }
 

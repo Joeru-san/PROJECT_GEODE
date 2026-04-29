@@ -89,7 +89,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning($"[{GetType().Name}] Pool with tag '{tag}' doesn't exist.");
+            Debug.LogWarning($"[{GetType().Name}] Pool with tag {tag} doesn't exist.");
             return null;
         }
 
@@ -98,7 +98,7 @@ public class ObjectPooler : MonoBehaviour
         {
             if (!_prefabRegistry.TryGetValue(tag, out GameObject prefab))
             {
-                Debug.LogError($"[{GetType().Name}] Pool '{tag}' is empty and no prefab is registered. Cannot auto-expand.");
+                Debug.LogError($"[{GetType().Name}] Pool {tag} is empty and no prefab is registered. Cannot auto-expand.");
                 return null;
             }
 
@@ -106,7 +106,7 @@ public class ObjectPooler : MonoBehaviour
             int activeCount = transform.childCount; // rough estimate: all pooler children
             int expandAmount = Mathf.Max(1, Mathf.CeilToInt(activeCount / 3f));
 
-            Debug.LogWarning($"[{GetType().Name}] Pool '{tag}' is empty. Auto-expanding by {expandAmount} objects.");
+            Debug.LogWarning($"[{GetType().Name}] Pool {tag} is empty. Auto-expanding by {expandAmount} objects.");
 
             for (int i = 0; i < expandAmount; i++)
             {
@@ -121,7 +121,7 @@ public class ObjectPooler : MonoBehaviour
         // Safety check: object may have been destroyed externally
         if (objectToSpawn == null)
         {
-            Debug.LogWarning($"[{GetType().Name}] Dequeued object for tag '{tag}' was null (destroyed externally). Skipping.");
+            Debug.LogWarning($"[{GetType().Name}] Dequeued object for tag {tag} was null (destroyed externally). Skipping.");
             return null;
         }
 
