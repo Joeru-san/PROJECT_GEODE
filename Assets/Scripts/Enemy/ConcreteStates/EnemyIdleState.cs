@@ -41,7 +41,7 @@ public class EnemyIdleState : EnemyBaseState
                 Vector3 destination = SampleWanderDestination();
                 if (destination != enemy.transform.position)
                 {
-                    Debug.Log("Wander timer countdown finished, moving to random position");
+                    // Debug.Log("Wander timer countdown finished, moving to random position");
                     enemy.navMeshAgent.SetDestination(destination);
                     enemy.aggroTrigger.size = enemy.triggerSizes["scoutSize"];
                 }

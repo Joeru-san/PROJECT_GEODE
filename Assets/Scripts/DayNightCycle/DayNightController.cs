@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class DayNightController : MonoBehaviour
 {
+    public static Action OnDayStateChange;
     public Light sun;
     public float dayDurationSeconds = 240f;
 
@@ -15,7 +17,7 @@ public class DayNightController : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("SetState", 10f, 10f);
+        InvokeRepeating("ChangeDayState", dayDurationSeconds / 2, dayDurationSeconds / 2);
     }
 
     void Update()
@@ -51,8 +53,10 @@ public class DayNightController : MonoBehaviour
         DynamicGI.UpdateEnvironment();
     }
 
-    void SetState()
+    void ChangeDayState()
     {
         isNight = !isNight;
+        if(isNight) OnDayStateChange?.Invoke();
+        Debug.Log($"[{GetType().Name}] Changed day state in: " + (isNight ? "night" : "dat"));
     }
 }

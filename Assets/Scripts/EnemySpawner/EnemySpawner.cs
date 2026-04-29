@@ -30,6 +30,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Awake()
     {
+        DayNightController.OnDayStateChange += RestartWaves;
         _box = GetComponent<BoxCollider>();
 
         _localMin = _box.center - _box.size * 0.5f;
