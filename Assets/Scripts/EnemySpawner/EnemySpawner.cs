@@ -8,14 +8,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int minNumberOfEnemies = 8;
     [SerializeField] int maxNumberOfEnemies = 32;
     public GameObject enemyToSpawn;
-    [SerializeField] float overlapCheckRadius = 0.5f; // tunable in Inspector
-    [SerializeField] [Range(1,6)] int numberOfWaves = 1; 
+    [SerializeField] float overlapCheckRadius = 0.5f;
+    [SerializeField] [Range(1,6)] int numberOfWaves = 1;
     int _actualWaveNumber = 1;
 
     [Header("Delay Settings")]
     [SerializeField] float minSpawnDelay = 0.5f;
     [SerializeField] float maxSpawnDelay = 2f;
-    
+
     [Header("Enemy Targets")]
     public GameObject[] enemyTargets;
 
@@ -48,34 +48,41 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Register the object that we want to spawn in the pool
+    /// Register the object that we want to spawn in the pool.
+    /// The ObjectPooler will apply a 33% buffer on top of the requested size.
     /// </summary>
     void RegisterInObjectPooler()
     {
-        // TELL the pooler to create the pool right now
         Pool newPool = new Pool(_nameOfSpawnedEnemy, enemyToSpawn, _targetCount);
         ObjectPooler.inst.AddPool(newPool);
     }
 
     /// <summary>
-    /// Spawn an object from the pool at a random delay
-    /// A coroutine that manages a repeating object spawn cycle.
+    /// Coroutine that manages a repeating object spawn cycle.
     /// Spawns objects one by one up to a target count using an object pool,
     /// then waits for all spawned objects to be collected before restarting.
     /// </summary>
-    /// <returns></returns>
     IEnumerator SpawnLoop()
     {
         // Wait one frame to ensure initialization is fully finished
-        yield return null; 
+        yield return null;
 
         while (_spawnedCount < _targetCount)
         {
             if (TryGetFreePosition(out Vector3 position))
             {
                 GameObject reference = ObjectPooler.inst.SpawnFromPool(_nameOfSpawnedEnemy, position, Quaternion.identity, transform);
-                reference.GetComponent<Enemy>().currentTarget = enemyTargets[Random.Range(0, enemyTargets.Length)];
-                _spawnedCount++;
+
+                // Guard: SpawnFromPool can return null if the pool is empty and auto-expansion failed
+                if (reference == null)
+                {
+                    Debug.LogWarning($"[EnemySpawner] SpawnFromPool returned null for '{_nameOfSpawnedEnemy}'. Skipping this spawn.");
+                }
+                else
+                {
+                    reference.GetComponent<Enemy>().currentTarget = enemyTargets[Random.Range(0, enemyTargets.Length)];
+                    _spawnedCount++;
+                }
             }
 
             float delay = Random.Range(minSpawnDelay, maxSpawnDelay);
@@ -98,14 +105,14 @@ public class EnemySpawner : MonoBehaviour
 
     /// <summary>
     /// Resets and restarts the spawn cycle from wave 1.
-    /// Can be called from any external script to restart the spawner.
-    /// Stops any currently running spawn coroutine to avoid overlap.
+    /// Re-registers the pool so capacity is refreshed for the new cycle.
     /// </summary>
     public void RestartWaves()
     {
         StopAllCoroutines();
         _actualWaveNumber = 1;
         _spawnedCount = 0;
+        RegisterInObjectPooler();
         StartCoroutine(SpawnLoop());
     }
 
@@ -113,8 +120,6 @@ public class EnemySpawner : MonoBehaviour
     /// Attempts to find a free spawn position by repeatedly sampling random positions
     /// and checking for overlapping colliders.
     /// </summary>
-    /// <param name="result"></param>
-    /// <returns></returns>
     bool TryGetFreePosition(out Vector3 result)
     {
         for (int i = 0; i < MaxAttempts; i++)
@@ -134,14 +139,13 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Take a random position in the box collider
+    /// Returns a random position within the box collider bounds.
     /// </summary>
-    /// <returns></returns>
     Vector3 GetRandomSpawnPosition()
     {
         Vector3 local = new Vector3(
             Random.Range(_localMin.x, _localMax.x),
-            1f, 
+            1f,
             Random.Range(_localMin.z, _localMax.z)
         );
         return transform.TransformPoint(local);
