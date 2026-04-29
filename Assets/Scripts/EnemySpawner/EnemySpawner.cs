@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int maxNumberOfEnemies = 32;
     public GameObject enemyToSpawn;
     [SerializeField] float overlapCheckRadius = 0.5f; // tunable in Inspector
+    [SerializeField] [Range(1,6)] int numberOfWaves = 1; 
+    int _actualWaveNumber = 1;
 
     [Header("Delay Settings")]
     [SerializeField] float minSpawnDelay = 0.5f;
@@ -41,19 +43,17 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        RegisterAndSpawn();
+        RegisterInObjectPooler();
     }
 
     /// <summary>
     /// Register the object that we want to spawn in the pool
     /// </summary>
-    void RegisterAndSpawn()
+    void RegisterInObjectPooler()
     {
         // TELL the pooler to create the pool right now
         Pool newPool = new Pool(_nameOfSpawnedEnemy, enemyToSpawn, _targetCount);
         ObjectPooler.inst.AddPool(newPool);
-
-        StartCoroutine(SpawnLoop());
     }
 
     /// <summary>
@@ -80,6 +80,31 @@ public class EnemySpawner : MonoBehaviour
             float delay = Random.Range(minSpawnDelay, maxSpawnDelay);
             yield return new WaitForSeconds(delay);
         }
+
+        yield return new WaitUntil(() => transform.childCount == 0);
+
+        if (_actualWaveNumber >= numberOfWaves)
+        {
+            Debug.Log($"[EnemySpawner] {name} has completed all {numberOfWaves} wave(s). Stopping.");
+            yield break;
+        }
+
+        _actualWaveNumber++;
+        _spawnedCount = 0;
+        Debug.Log($"[EnemySpawner] {name} is starting wave {_actualWaveNumber} of {numberOfWaves}.");
+        StartCoroutine(SpawnLoop());
+    }
+
+    /// <summary>
+    /// Resets and restarts the spawn cycle from wave 1.
+    /// Can be called from any external script to restart the spawner.
+    /// Stops any currently running spawn coroutine to avoid overlap.
+    /// </summary>
+    public void RestartWaves()
+    {
+        StopAllCoroutines();
+        _actualWaveNumber = 1;
+        _spawnedCount = 0;
         StartCoroutine(SpawnLoop());
     }
 

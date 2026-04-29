@@ -11,10 +11,9 @@ public class SpawnerEnemy : Enemy
         spawnedState = new EnemySpawnedState(this, stateMachine);
     }
 
-    void Start()
+    void OnEnable()
     {
         currentHealth = MaxHealth;
-
         stateMachine.Initialize(spawnedState);
     }
 }

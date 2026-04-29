@@ -46,10 +46,9 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    void Start()
+    void OnEnable()
     {
         currentHealth = MaxHealth;
-
         stateMachine.Initialize(idleState);
     }
 

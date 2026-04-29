@@ -17,7 +17,7 @@ public class EnemySpawnedState : EnemyBaseState
         base.ExitState();
 
         enemy.aggroTrigger.enabled = true;
-        Debug.Log($"{enemy.transform.name} exit from spoawned state");
+        Debug.Log($"{enemy.transform.name} exit from spawned state");
     }
 
     public override void FrameUpdate()

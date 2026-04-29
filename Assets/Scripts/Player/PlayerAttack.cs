@@ -39,10 +39,6 @@ public class PlayerAttack : MonoBehaviour
             StartCoroutine(AttackCoroutine());
         }
     }
-    void Update()
-    {
-        print(_isAiming);
-    }
 
     IEnumerator AttackCoroutine()
     {
