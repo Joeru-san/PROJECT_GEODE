@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if(!_isAttacking && _isAiming)
+        if(!_isAttacking && (_isAiming || CameraController.inst.activeCamera == CameraController.inst.firstPersonCamera))
         {
             StartCoroutine(AttackCoroutine());
         }
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
 
         lineRend.SetPosition(0, shootPosition.position);
         
-        Vector3 rayOrigin = _mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+        Vector3 rayOrigin = _mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 1f, 0f));
         RaycastHit outHit;
 
         if(Physics.Raycast(rayOrigin, _mainCamera.transform.forward, out outHit, gunRange, layerToHit))
