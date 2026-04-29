@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInteraction))]
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] float thirdPersonInteractionDistance;

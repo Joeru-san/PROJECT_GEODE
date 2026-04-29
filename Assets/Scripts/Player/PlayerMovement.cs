@@ -128,6 +128,4 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
-
-
 }

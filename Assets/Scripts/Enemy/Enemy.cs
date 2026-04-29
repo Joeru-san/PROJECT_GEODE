@@ -65,7 +65,14 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     public void Die()
     {
-        Destroy(this.gameObject);
+        if(ObjectPooler.inst.poolDictionary.ContainsKey(GetType().Name))
+        {
+            ObjectPooler.inst.ReAddToPool(GetType().Name, this.gameObject);
+        }else
+        {
+            Destroy(this.gameObject);
+        }
+        Debug.Log($"{name} È MOTTO");
     }
 
     public void TakeDamage(float damageAmount)
