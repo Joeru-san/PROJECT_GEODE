@@ -9,7 +9,7 @@ public class EnemySpawnedState : EnemyBaseState
         base.EnterState();
 
         enemy.aggroTrigger.enabled = false;
-        Debug.Log($"{enemy.transform.name} entered in spawned state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} entered in spawned state");
     }
 
     public override void ExitState()
@@ -17,7 +17,7 @@ public class EnemySpawnedState : EnemyBaseState
         base.ExitState();
 
         enemy.aggroTrigger.enabled = true;
-        Debug.Log($"{enemy.transform.name} exit from spawned state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} exit from spawned state");
     }
 
     public override void FrameUpdate()

@@ -8,7 +8,7 @@ public class EnemyChaseState : EnemyBaseState
     {
         base.EnterState();
 
-        Debug.Log($"{enemy.transform.name} entered in chase state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} entered in chase state");
 
         enemy.aggroTrigger.size = enemy.triggerSizes["chaseSize"];
 
@@ -19,7 +19,7 @@ public class EnemyChaseState : EnemyBaseState
     {
         base.ExitState();
 
-        Debug.Log($"{enemy.transform.name} exit from chase state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} exit from chase state");
     }
 
     public override void FrameUpdate()

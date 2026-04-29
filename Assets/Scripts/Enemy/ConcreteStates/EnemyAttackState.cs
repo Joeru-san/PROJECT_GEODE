@@ -12,7 +12,7 @@ public class EnemyAttackState : EnemyBaseState
         base.EnterState();
 
         enemy.aggroTrigger.enabled = false;
-        Debug.Log($"{enemy.transform.name} entered in attack state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} entered in attack state");
     }
 
     public override void ExitState()
@@ -20,7 +20,7 @@ public class EnemyAttackState : EnemyBaseState
         base.ExitState();
 
         enemy.aggroTrigger.enabled = true;
-        Debug.Log($"{enemy.transform.name} exit from attack state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} exit from attack state");
     }
 
     public override void FrameUpdate()
@@ -48,11 +48,11 @@ public class EnemyAttackState : EnemyBaseState
             IDamageable damageable = enemy.currentTarget.GetComponentInParent<IDamageable>();
             if(damageable != null)
             {
-                Debug.Log($"[{GetType().Name}] Enemy {enemy.name} hit {damageable} for {enemy.attackDamage} damage");
+                if(enemy.printDebug) Debug.Log($"[{GetType().Name}] Enemy {enemy.name} hit {damageable} for {enemy.attackDamage} damage");
                 damageable.TakeDamage(enemy.attackDamage);
             }else
             {
-                Debug.Log($"[{GetType().Name}] Enemy {enemy.name} didn't get IDamageable component");
+                if(enemy.printDebug) Debug.Log($"[{GetType().Name}] Enemy {enemy.name} didn't get IDamageable component");
             }
         }
 

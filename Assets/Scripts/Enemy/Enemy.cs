@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
+    public bool printDebug = false;
+
     public Dictionary<string, Vector3> triggerSizes = new Dictionary<string, Vector3>() 
     {
         {"basicSize", new Vector3(10f, 1f, 10f)},

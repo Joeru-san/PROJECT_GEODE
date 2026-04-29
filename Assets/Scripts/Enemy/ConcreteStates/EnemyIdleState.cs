@@ -15,7 +15,7 @@ public class EnemyIdleState : EnemyBaseState
     public override void EnterState()
     {
         base.EnterState();
-        Debug.Log($"{enemy.transform.name} entered in idle state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} entered in idle state");
         _timer = _wanderTimer;
         _roamOrigin = enemy.transform.position;
     }
@@ -23,7 +23,7 @@ public class EnemyIdleState : EnemyBaseState
     public override void ExitState()
     {
         base.ExitState();
-        Debug.Log($"{enemy.transform.name} exit from idle state");
+        if(enemy.printDebug) Debug.Log($"{enemy.transform.name} exit from idle state");
     }
 
     public override void FrameUpdate()
@@ -41,7 +41,7 @@ public class EnemyIdleState : EnemyBaseState
                 Vector3 destination = SampleWanderDestination();
                 if (destination != enemy.transform.position)
                 {
-                    // Debug.Log("Wander timer countdown finished, moving to random position");
+                    if(enemy.printDebug) Debug.Log("Wander timer countdown finished, moving to random position");
                     enemy.navMeshAgent.SetDestination(destination);
                     enemy.aggroTrigger.size = enemy.triggerSizes["scoutSize"];
                 }
