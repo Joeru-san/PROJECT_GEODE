@@ -12,6 +12,8 @@ public class DefenseTurret : MonoBehaviour, IDamageable
     [field: SerializeField] public float attackDamage { get; set; }
     #endregion
 
+    public bool printDebug = false;
+
     TurretEnemyDetect _relatedCollider;
     bool _isAttacking = false;
     IDamageable _currentTarget = null;
@@ -78,7 +80,9 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
         if (_currentTarget != null && _currentTarget.currentHealth > 0)
         {
-            Debug.Log($"[{GetType().Name}] DefenseTurret {name} hit {_currentTarget} for {attackDamage} damage");
+            #if UNITY_EDITOR
+            if(printDebug) Debug.Log($"[{GetType().Name}] DefenseTurret {name} hit {_currentTarget} for {attackDamage} damage");
+            #endif
             _currentTarget.TakeDamage(attackDamage);
         }
         else
