@@ -1,5 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -8,6 +8,7 @@ public class PlayerAttack : MonoBehaviour
 {
     PlayerMovement _relatedPlayer;
     bool _isAttacking = false;
+    bool _isAiming = false;
 
     public Camera _mainCamera;
     public float gunRange = 5f;
@@ -25,12 +26,22 @@ public class PlayerAttack : MonoBehaviour
         lineRend.enabled = false;
     }
 
+    void OnAim(InputValue value)
+    {
+        _isAiming = value.isPressed;
+        CameraController.inst.ChangeCamera();
+    }
+
     void OnAttack()
     {
-        if(!_isAttacking)
+        if(!_isAttacking && _isAiming)
         {
             StartCoroutine(AttackCoroutine());
         }
+    }
+    void Update()
+    {
+        print(_isAiming);
     }
 
     IEnumerator AttackCoroutine()

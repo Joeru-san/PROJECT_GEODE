@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
         {
             Destroy(this.gameObject);
         }
-        Debug.Log($"{name} È MOTTO");
+        Debug.Log($"{name} is destroyed");
     }
 
     public void TakeDamage(float damageAmount)
