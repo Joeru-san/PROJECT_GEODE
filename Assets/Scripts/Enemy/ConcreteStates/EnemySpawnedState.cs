@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemySpawnedState : EnemyBaseState
 {
@@ -24,11 +25,27 @@ public class EnemySpawnedState : EnemyBaseState
     {
         base.FrameUpdate();
 
-        if(enemy.currentTarget != null) enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
+        if(enemy.currentTarget == null && enemy.mainTarget != null)
+        {
+            enemy.SetStrikingDistanceBool(false); 
+            
+            if(enemy.printDebug) Debug.Log($"[{enemy.transform.name}] set destination to {enemy.mainTarget.name}");
+
+            enemy.currentTarget = enemy.mainTarget;
+            enemy.navMeshAgent.SetDestination(enemy.mainTarget.transform.position);
+
+            enemy.stateMachine.ChangeState(enemy.chaseState);
+        }
+
+        if(enemy.currentTarget != null)
+        {
+            enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
+        }
 
         if (enemy.isInStrikingDistance)
         {
             enemy.stateMachine.ChangeState(enemy.attackState);
         }
     }
+
 }

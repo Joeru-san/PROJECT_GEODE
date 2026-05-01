@@ -26,7 +26,11 @@ public class EnemyChaseState : EnemyBaseState
     {
         base.FrameUpdate();
 
-        if(enemy.currentTarget != null) enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
+        if(enemy.currentTarget != null)
+        {
+            if(enemy.printDebug) Debug.Log($"[{enemy.transform.name}] set destination to {enemy.currentTarget.name}");
+            enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
+        }
 
         if(enemy.isInStrikingDistance)
         {

@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Enemy Targets")]
     public GameObject[] enemyTargets;
-
+    public GameObject mainTarget;
     const int MaxAttempts = 200;
 
     BoxCollider _box;
@@ -84,6 +84,7 @@ public class EnemySpawner : MonoBehaviour
                 else
                 {
                     reference.GetComponent<Enemy>().currentTarget = enemyTargets[Random.Range(0, enemyTargets.Length)];
+                    reference.GetComponent<Enemy>().mainTarget = this.mainTarget.gameObject;
                     _spawnedCount++;
                 }
             }

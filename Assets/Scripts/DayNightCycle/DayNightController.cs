@@ -15,6 +15,11 @@ public class DayNightController : MonoBehaviour
     public float timeOfDay; // A value from 0 (midnight) to 1 (next midnight).
     public static bool isNight = false;
 
+    public void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         InvokeRepeating("ChangeDayState", dayDurationSeconds / 2, dayDurationSeconds / 2);
@@ -57,6 +62,6 @@ public class DayNightController : MonoBehaviour
     {
         isNight = !isNight;
         if(isNight) OnDayStateChange?.Invoke();
-        Debug.Log($"[{GetType().Name}] Changed day state in: " + (isNight ? "night" : "dat"));
+        Debug.Log($"[{GetType().Name}] Changed day state in: " + (isNight ? "night" : "day"));
     }
 }

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 {
+    [Header("Enemy State Machine")]
+    public string currentEnemyState;
 
     public EnemyStateMachine stateMachine {get; set;}
     public EnemyAttackState attackState {get; set;}
@@ -17,8 +19,10 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     [field: SerializeField] public float attackCoolDown { get; set; }
     [field: SerializeField] public float attackDamage { get; set; }
 
-    [Header("Triggers")]
+    [Header("Targets")]
     public GameObject currentTarget;
+    public GameObject mainTarget;
+    [Header("Triggers")]
     public bool isAggroed {get; set;}
     public BoxCollider aggroTrigger;
     
@@ -56,6 +60,14 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     void Update()
     {
+        if (currentTarget == null)
+        {
+            isAggroed = false;
+            isInStrikingDistance = false;
+        }
+
+        currentEnemyState = stateMachine.currentEnemyState.GetType().Name;
+
         stateMachine.currentEnemyState.FrameUpdate(); 
     }
 
