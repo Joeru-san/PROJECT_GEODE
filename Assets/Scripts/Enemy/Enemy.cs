@@ -63,14 +63,14 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     void Update()
     {
-        if (currentTarget == null)
+        if (currentTarget == null || !currentTarget.activeInHierarchy)
         {
             isAggroed = false;
             isInStrikingDistance = false;
+            currentTarget = null;
         }
 
         currentEnemyState = stateMachine.currentEnemyState.GetType().Name;
-
         stateMachine.currentEnemyState.FrameUpdate(); 
     }
 

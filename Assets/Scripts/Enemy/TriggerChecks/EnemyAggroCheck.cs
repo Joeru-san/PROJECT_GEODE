@@ -13,8 +13,11 @@ public class EnemyAggroCheck : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("DefenseTurret"))
         {
-            _enemy.currentTarget = other.gameObject;
-            _enemy.SetAggroStatus(true);
+            if (!_enemy.navMeshAgent.pathPending && (_enemy.currentTarget == null || !_enemy.currentTarget.activeInHierarchy))
+            {
+                _enemy.currentTarget = other.gameObject;
+                _enemy.SetAggroStatus(true);
+            }  
         }
     }
 
