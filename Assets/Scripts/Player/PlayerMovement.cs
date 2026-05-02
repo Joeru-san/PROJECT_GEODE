@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour, IDamageable
 {
@@ -15,26 +16,13 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     public static bool isDead = false;
 
-    #region IDamageable
+    #region IDamageable attributes
     [field: Header("IDamageable")]
     [field: SerializeField] public float MaxHealth { get; set; }
     [field: SerializeField] public float currentHealth { get; set; }
     [field: SerializeField] public float attackCoolDown { get; set; }
     [field: SerializeField] public float attackDamage { get; set; }
-
-    public void Die()
-    {
-        isDead = true;
-        StartCoroutine(Death(1f)); 
-    }
-    public void TakeDamage(float damageAmount)
-    {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0f)
-        {
-            Die();
-        }
-    }
+    [field: SerializeField] public float healRate { get; set; }
     #endregion
 
     [Header("Ground Check")]
@@ -128,4 +116,45 @@ public class PlayerMovement : MonoBehaviour, IDamageable
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+    #region IDamageable methods
+    public void Die()
+    {
+        isDead = true;
+        StartCoroutine(Death(1f)); 
+    }
+    
+    public void TakeDamage(float damageAmount)
+    {
+        DOTween.Kill(gameObject);
+        currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
+
+        if (currentHealth <= 0f)
+            Die();
+    }
+
+    public void RecoverHealth(float healthToRecover)
+    {
+        currentHealth = Mathf.Min(currentHealth + healthToRecover, MaxHealth);
+    }
+
+    public void RecoverHealthOverTime(float recoverTime)
+    {
+        float targetHealth = Mathf.Min(currentHealth + healRate * recoverTime, MaxHealth);
+
+        DOTween.To(() => currentHealth, x => currentHealth = x, targetHealth, recoverTime)
+            .SetEase(Ease.OutQuad)
+            .SetId(gameObject);
+    }
+
+    public void RecoverToMaxHealthOverTime()
+    {
+        float duration = (MaxHealth - currentHealth) / healRate;
+
+        DOTween.Kill(gameObject);
+        DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
+            .SetEase(Ease.OutQuad)
+            .SetId(gameObject);
+    }
+    #endregion
 }

@@ -246,201 +246,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &218176618
+--- !u!1 &218176618 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5009095245337179600, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+  m_PrefabInstance: {fileID: 1122299005073546764}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 218176622}
-  - component: {fileID: 218176621}
-  - component: {fileID: 218176620}
-  - component: {fileID: 218176619}
-  - component: {fileID: 218176623}
-  - component: {fileID: 218176624}
-  - component: {fileID: 218176625}
-  - component: {fileID: 218176626}
-  m_Layer: 0
-  m_Name: DefenseTurret
-  m_TagString: DefenseTurret
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!136 &218176619
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!23 &218176620
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &218176621
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &218176622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 1, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &218176623
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &218176624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
-  <currentHealth>k__BackingField: 0
-  <attackCoolDown>k__BackingField: 0.1
-  <attackDamage>k__BackingField: 1
-  printDebug: 0
---- !u!135 &218176625
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: -1, z: 0}
---- !u!114 &218176626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218176618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c7eb1ff95581d0db9b4224536ac03e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TurretEnemyDetect
 --- !u!1 &223632847
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,10 +319,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 3
   printDebug: 0
 --- !u!54 &223632851
 Rigidbody:
@@ -630,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 223632847}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 1, z: 5}
+  m_LocalPosition: {x: 18, y: 1, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -704,10 +516,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 3
   printDebug: 0
 --- !u!54 &353053207
 Rigidbody:
@@ -825,7 +639,7 @@ Transform:
   m_GameObject: {fileID: 353053203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 1, z: 10}
+  m_LocalPosition: {x: -5, y: 1, z: 18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -899,10 +713,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 3
   printDebug: 0
 --- !u!54 &389464021
 Rigidbody:
@@ -1020,7 +836,7 @@ Transform:
   m_GameObject: {fileID: 389464017}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 1, z: -10}
+  m_LocalPosition: {x: 5, y: 1, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1094,10 +910,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 10
   printDebug: 0
 --- !u!54 &449041423
 Rigidbody:
@@ -1215,7 +1033,7 @@ Transform:
   m_GameObject: {fileID: 449041419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 1, z: -5}
+  m_LocalPosition: {x: -18, y: 1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1289,10 +1107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 3
   printDebug: 0
 --- !u!54 &544539095
 Rigidbody:
@@ -1410,7 +1230,7 @@ Transform:
   m_GameObject: {fileID: 544539091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 1, z: -5}
+  m_LocalPosition: {x: 18, y: 1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1497,7 +1317,7 @@ Transform:
   m_GameObject: {fileID: 663264264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -40}
+  m_LocalPosition: {x: 0, y: 0.5, z: -46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1574,7 +1394,7 @@ Transform:
   m_GameObject: {fileID: 1056631592}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -40, y: 0.5, z: 0}
+  m_LocalPosition: {x: -46, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1594,7 +1414,7 @@ GameObject:
   - component: {fileID: 1260246064}
   - component: {fileID: 1260246068}
   m_Layer: 0
-  m_Name: mainTarget
+  m_Name: centralHub
   m_TagString: DefenseTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1853,10 +1673,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 3
   printDebug: 0
 --- !u!54 &1321373015
 Rigidbody:
@@ -1974,7 +1796,7 @@ Transform:
   m_GameObject: {fileID: 1321373011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 1, z: -10}
+  m_LocalPosition: {x: -5, y: 1, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2051,7 +1873,7 @@ Transform:
   m_GameObject: {fileID: 1366115018}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 40, y: 0.5, z: 0}
+  m_LocalPosition: {x: 46, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2570,10 +2392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 2
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
+  <healRate>k__BackingField: 0
+  inactiveTime: 3
   printDebug: 0
 --- !u!54 &1759440341
 Rigidbody:
@@ -2691,7 +2515,7 @@ Transform:
   m_GameObject: {fileID: 1759440337}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 1, z: 5}
+  m_LocalPosition: {x: -18, y: 1, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2768,7 +2592,7 @@ Transform:
   m_GameObject: {fileID: 2060749998}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 40}
+  m_LocalPosition: {x: 0, y: 0.5, z: 46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2779,6 +2603,67 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 4428777982844222513, guid: 29e8027177ab47fcaa5f0f1b57d7f127, type: 3}
   m_PrefabInstance: {fileID: 1436619961}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1122299005073546764
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848310247788078541, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: <MaxHealth>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5009095245337179600, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: m_Name
+      value: DefenseTurret
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2787,7 +2672,7 @@ SceneRoots:
   - {fileID: 1680555671}
   - {fileID: 1436619961}
   - {fileID: 2060750001}
-  - {fileID: 218176622}
+  - {fileID: 1122299005073546764}
   - {fileID: 353053211}
   - {fileID: 663264267}
   - {fileID: 1321373019}

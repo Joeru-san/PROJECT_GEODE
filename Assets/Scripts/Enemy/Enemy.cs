@@ -13,11 +13,14 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     public EnemyIdleState idleState {get; set;}
     public EnemyChaseState chaseState {get; set;}
 
+    #region IDamageable attributes
     [field: Header("IDamageable")]
-    [field: SerializeField] public float MaxHealth { get; set; }
-    [field: SerializeField] public float currentHealth { get; set; }
-    [field: SerializeField] public float attackCoolDown { get; set; }
-    [field: SerializeField] public float attackDamage { get; set; }
+    [field: SerializeField] public float MaxHealth {get; set;}
+    [field: SerializeField] public float currentHealth {get; set;}
+    [field: SerializeField] public float attackCoolDown {get; set;}
+    [field: SerializeField] public float attackDamage {get; set;}
+    [field: SerializeField] public float healRate {get; set;}
+    #endregion
 
     [Header("Targets")]
     public GameObject currentTarget;
@@ -76,6 +79,17 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
         stateMachine.currentEnemyState.PhysicsUpdate();
     }
 
+    public void SetAggroStatus(bool newAggroStatus)
+    {
+        isAggroed = newAggroStatus;   
+    }
+
+    public void SetStrikingDistanceBool(bool newStrikingDistanceBool)
+    {
+        isInStrikingDistance = newStrikingDistanceBool;
+    }
+
+    #region IDamageable methods
     public void Die()
     {
         if(ObjectPooler.inst.poolDictionary.ContainsKey(GetType().Name))
@@ -98,13 +112,19 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
         }
     }
 
-    public void SetAggroStatus(bool newAggroStatus)
+    public void RecoverHealth(float healthToRecover)
     {
-        isAggroed = newAggroStatus;   
+        
     }
 
-    public void SetStrikingDistanceBool(bool newStrikingDistanceBool)
+    public void RecoverHealthOverTime(float recoverTime)
     {
-        isInStrikingDistance = newStrikingDistanceBool;
+        
     }
+
+    public void RecoverToMaxHealthOverTime()
+    {
+        
+    }
+    #endregion
 }
