@@ -4,12 +4,28 @@ using UnityEngine;
 public class CentralHub : MonoBehaviour, IDamageable
 {
     #region IDamageable attributes
-    public float MaxHealth {get; set;}
-    public float currentHealth {get; set;}
-    public float attackCoolDown {get; set;}
-    public float attackDamage {get; set;}
-    public float healRate {get; set;}
+    [field: SerializeField] public float MaxHealth {get; set;}
+    [field: SerializeField] public float currentHealth {get; set;}
+    [field: SerializeField] public float attackCoolDown {get; set;}
+    [field: SerializeField] public float attackDamage {get; set;}
+    [field: SerializeField] public float healRate {get; set;}
     #endregion
+    
+    public float recoverDelay = 3f;
+
+    float _timeSinceLastDamage = 0f;
+    bool _isRecovering = false;
+
+    void Update()
+    {
+        _timeSinceLastDamage += Time.deltaTime;
+
+        if (_timeSinceLastDamage >= recoverDelay && currentHealth < MaxHealth && !_isRecovering)
+        {
+            _isRecovering = true;
+            RecoverToMaxHealthOverTime();
+        }
+    }
 
     #region IDamageable methods
     public void Die()
@@ -19,6 +35,9 @@ public class CentralHub : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damageAmount)
     {
+        _timeSinceLastDamage = 0f;
+        _isRecovering = false;
+
         DOTween.Kill("healSequence");
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
 

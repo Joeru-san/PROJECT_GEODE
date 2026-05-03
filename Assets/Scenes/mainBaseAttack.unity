@@ -319,13 +319,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 3
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &223632851
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -516,13 +517,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 3
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &353053207
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -713,13 +715,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 3
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &389464021
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -910,13 +913,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 10
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &449041423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1107,13 +1111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 3
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &544539095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1413,6 +1418,7 @@ GameObject:
   - component: {fileID: 1260246065}
   - component: {fileID: 1260246064}
   - component: {fileID: 1260246068}
+  - component: {fileID: 1260246069}
   m_Layer: 0
   m_Name: centralHub
   m_TagString: DefenseTurret
@@ -1540,6 +1546,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1260246069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260246063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ce4e140e3f4840db1cb46a96670601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CentralHub
+  <MaxHealth>k__BackingField: 30
+  <currentHealth>k__BackingField: 0
+  <attackCoolDown>k__BackingField: 0
+  <attackDamage>k__BackingField: 0
+  <healRate>k__BackingField: 0.1
+  recoverDelay: 3
 --- !u!1001 &1288683539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1673,13 +1697,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 3
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &1321373015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2392,13 +2417,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409db728f29e00f5294c1f6094e488b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefenseTurret
-  <MaxHealth>k__BackingField: 2
+  <MaxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
   <healRate>k__BackingField: 0
   inactiveTime: 3
   printDebug: 0
+  recoverDelay: 3
 --- !u!54 &1759440341
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2653,7 +2679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1848310247788078541, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
       propertyPath: <MaxHealth>k__BackingField
-      value: 2
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5009095245337179600, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
       propertyPath: m_Name

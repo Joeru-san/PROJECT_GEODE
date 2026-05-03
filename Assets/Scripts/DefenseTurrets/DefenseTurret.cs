@@ -34,6 +34,14 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
     void Update()
     {
+        _timeSinceLastDamage += Time.deltaTime;
+
+        if (_timeSinceLastDamage >= recoverDelay && currentHealth < MaxHealth && !_isRecovering)
+        {
+            _isRecovering = true;
+            RecoverToMaxHealthOverTime();
+        }
+
         // Clear current target if it's dead
         if (_currentTarget != null && _currentTarget.currentHealth <= 0)
         {
@@ -83,6 +91,11 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
         _isAttacking = false;
     }
+    
+    public float recoverDelay = 3f;
+
+    float _timeSinceLastDamage = 0f;
+    bool _isRecovering = false;
 
     #region IDamageable methods
     public void Die()
@@ -97,6 +110,9 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damageAmount)
     {
+        _timeSinceLastDamage = 0f;
+        _isRecovering = false;
+
         DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
 

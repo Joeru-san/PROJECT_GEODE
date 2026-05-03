@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     [field: SerializeField] public float healRate { get; set; }
     #endregion
 
+    public float recoverDelay = 3f;
+
+    float _timeSinceLastDamage = 0f;
+    bool _isRecovering = false;
+
     [Header("Ground Check")]
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius;
@@ -42,6 +47,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     void Update()
     {
+        _timeSinceLastDamage += Time.deltaTime;
+
+        if (_timeSinceLastDamage >= recoverDelay && currentHealth < MaxHealth && !_isRecovering)
+        {
+            _isRecovering = true;
+            RecoverToMaxHealthOverTime();
+        }
+        
         if(gameObject.transform.position.y < -20 && !isDead) 
         {
             isDead = true;
@@ -126,6 +139,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     
     public void TakeDamage(float damageAmount)
     {
+        _timeSinceLastDamage = 0f;
+        _isRecovering = false;
+        
         DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
 
