@@ -170,7 +170,10 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         DOTween.Kill(gameObject);
         DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
             .SetEase(Ease.OutQuad)
-            .SetId(gameObject);
+            .SetId(gameObject)
+            .OnComplete(() => {
+                _isRecovering = false;
+            });
     }
     #endregion
 }

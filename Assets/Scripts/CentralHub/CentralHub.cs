@@ -66,7 +66,10 @@ public class CentralHub : MonoBehaviour, IDamageable
         DOTween.Kill("healSequence");
         DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
             .SetEase(Ease.OutQuad)
-            .SetId("healSequence");
+            .SetId("healSequence")
+            .OnComplete(() => {
+                _isRecovering = false;
+            });
     }
     #endregion
 }

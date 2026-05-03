@@ -136,12 +136,17 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
     public void RecoverToMaxHealthOverTime()
     {
+        Debug.Log($"Starting health recover for {transform.name}");
         float duration = (MaxHealth - currentHealth) / healRate;
 
         DOTween.Kill(gameObject);
         DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
             .SetEase(Ease.OutQuad)
-            .SetId(gameObject);
+            .SetId(gameObject).
+            OnComplete(() => {
+                Debug.Log($"Finished health recover for {transform.name}");
+                _isRecovering = false;
+            });
     }
     #endregion
 }

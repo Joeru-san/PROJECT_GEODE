@@ -323,7 +323,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 3
   printDebug: 0
   recoverDelay: 3
@@ -521,7 +521,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 3
   printDebug: 0
   recoverDelay: 3
@@ -719,7 +719,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 3
   printDebug: 0
   recoverDelay: 3
@@ -917,7 +917,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 10
   printDebug: 0
   recoverDelay: 3
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 3
   printDebug: 0
   recoverDelay: 3
@@ -1701,7 +1701,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 3
   printDebug: 0
   recoverDelay: 3
@@ -2421,7 +2421,7 @@ MonoBehaviour:
   <currentHealth>k__BackingField: 0
   <attackCoolDown>k__BackingField: 0.1
   <attackDamage>k__BackingField: 1
-  <healRate>k__BackingField: 0
+  <healRate>k__BackingField: 1
   inactiveTime: 3
   printDebug: 0
   recoverDelay: 3
@@ -2676,6 +2676,10 @@ PrefabInstance:
     - target: {fileID: 1065469572063707013, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848310247788078541, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
+      propertyPath: <healRate>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848310247788078541, guid: 7da54d80e489dca03802fa4106ae48ff, type: 3}
       propertyPath: <MaxHealth>k__BackingField
