@@ -20,48 +20,59 @@ public class DayNightController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    [Header("Day/Night Thresholds")]
+    public float nightStartTime = 0.7f;
+    public float dayStartTime = 0.2f;
+
     void Start()
     {
-        InvokeRepeating("ChangeDayState", dayDurationSeconds / 2, dayDurationSeconds / 2);
+        isNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
     }
 
     void Update()
     {
         if (sun == null) return;
 
-        // Increment timeOfDay based on the duration.
-        // Time.deltaTime / dayDurationSeconds gives us the percentage of the day that has passed in this frame.
-        timeOfDay += Time.deltaTime / dayDurationSeconds;
-        timeOfDay %= 1; // Use modulo to wrap the value back to 0 when it reaches 1.
-
-        // Rotate the sun based on the time of day.
-        // timeOfDay * 360f converts our 0-1 value into a 0-360 degree rotation.
-        sun.transform.rotation = Quaternion.Euler(timeOfDay * 360f, 0, 0);
-
-        // Update the environment lighting based on the gradients.
+        UpdateTimeOfDay();
+        UpdateSunRotation();
         UpdateLighting(timeOfDay);
+        CheckDayNightState();
+    }
+
+    private void UpdateTimeOfDay()
+    {
+        timeOfDay += Time.deltaTime / dayDurationSeconds;
+        timeOfDay %= 1f;
+    }
+
+    private void UpdateSunRotation()
+    {
+        float sunRotationAngle = timeOfDay * 360f;
+        sun.transform.rotation = Quaternion.Euler(sunRotationAngle, 0f, 0f);
     }
 
     private void UpdateLighting(float currentTime)
     {
-        // Sample the gradients at the current time of day.
         RenderSettings.ambientLight = ambientColor.Evaluate(currentTime);
         RenderSettings.fogColor = fogColor.Evaluate(currentTime);
 
-        // Update the procedural skybox tint if the skybox material is assigned.
         if (RenderSettings.skybox != null && RenderSettings.skybox.HasProperty("_Tint"))
         {
             RenderSettings.skybox.SetColor("_Tint", skyboxTint.Evaluate(currentTime));
         }
 
-        // Tell Unity's GI to update with the new environmental lighting.
         DynamicGI.UpdateEnvironment();
     }
 
-    void ChangeDayState()
+    private void CheckDayNightState()
     {
-        isNight = !isNight;
-        if(isNight) OnDayStateChange?.Invoke();
-        Debug.Log($"[{GetType().Name}] Changed day state in: " + (isNight ? "night" : "day"));
+        bool shouldBeNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
+
+        if (isNight != shouldBeNight)
+        {
+            isNight = shouldBeNight;
+            if (isNight) OnDayStateChange?.Invoke();
+            Debug.Log($"[{GetType().Name}] Changed day state in: " + (isNight ? "night" : "day"));
+        }
     }
 }
