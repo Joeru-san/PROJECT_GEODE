@@ -11,8 +11,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     public static Action<PlayerInput> OnShowInventory;
 
     [Header("Player Speeds")]
-    public float walkSpeed = 5;
-    public float rotateSpeed = 5;
+    public float walkSpeed = 5f;
+    public float sprintSpeed = 10f;
+    [Range(0,1)] public float speedTweenDuration = 0.3f;
+    public bool _isSprinting = false;
+    private float _actualSpeed;
 
     public static bool isDead = false;
 
@@ -39,6 +42,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         _playerRB = gameObject.GetComponent<Rigidbody>();
         currentHealth = MaxHealth;
+        _actualSpeed = walkSpeed;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,13 +72,29 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         {
             Vector3 moveDirection = (transform.forward * _moveAmt.y + transform.right * _moveAmt.x).normalized;
             
-            _playerRB.MovePosition(_playerRB.position + moveDirection * walkSpeed * Time.fixedDeltaTime);
+            _playerRB.MovePosition(_playerRB.position + moveDirection * _actualSpeed * Time.fixedDeltaTime);
         }
     }
 
     void OnMove(InputValue value)
     {
         _moveAmt = value.Get<Vector2>();
+    }
+
+    void OnSprint(InputValue value)
+    {
+        _isSprinting = value.isPressed;
+        float targetSpeed = _isSprinting ? sprintSpeed : walkSpeed;
+        TweenSpeed(targetSpeed);
+    }
+
+    void TweenSpeed(float targetSpeed)
+    {
+        DOTween.Kill("PlayerSpeed");
+
+        DOTween.To(() => _actualSpeed, x => _actualSpeed = x, targetSpeed, speedTweenDuration)
+            .SetEase(Ease.InOutQuad)
+            .SetId("PlayerSpeed");
     }
 
     void OnJump()
