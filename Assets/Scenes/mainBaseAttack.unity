@@ -2344,10 +2344,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: basicPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7133317845507791800, guid: e4faa1c782afdc7a1950763300c4e970, type: 3}
-      propertyPath: speedTweenDuration
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
