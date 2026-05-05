@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius;
     [SerializeField] LayerMask groundMask;
+    
+    [SerializeField] Transform spawnPoint;
 
     void Awake()
     {
@@ -70,9 +72,22 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         if (!isDead && _moveAmt != Vector2.zero)
         {
-            Vector3 moveDirection = (transform.forward * _moveAmt.y + transform.right * _moveAmt.x).normalized;
-            
-            _playerRB.MovePosition(_playerRB.position + moveDirection * _actualSpeed * Time.fixedDeltaTime);
+            Vector3 moveDirection = (_moveAmt != Vector2.zero)
+                ? (transform.forward * _moveAmt.y + transform.right * _moveAmt.x).normalized
+                : Vector3.zero;
+
+            Vector3 currentVel = _playerRB.linearVelocity;
+            Vector3 targetVel = moveDirection * _actualSpeed;
+            targetVel.y = currentVel.y; // preserve gravity
+
+            // Lerp only the horizontal velocity for snappy but smooth control
+            Vector3 smoothedVel = new Vector3(
+                Mathf.Lerp(currentVel.x, targetVel.x, 0.3f),  // tweak 0.3f for feel
+                targetVel.y,
+                Mathf.Lerp(currentVel.z, targetVel.z, 0.3f)
+            );
+
+            _playerRB.linearVelocity = smoothedVel;
         }
     }
 
@@ -129,8 +144,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(animationDuration);
 
-        transform.position = checkpoint.GetActiveCheckPointPosition();
-        _playerRB.position = checkpoint.GetActiveCheckPointPosition();
+        transform.position = spawnPoint.transform.position;
+        _playerRB.position = spawnPoint.transform.position;
 
         yield return null;
 
