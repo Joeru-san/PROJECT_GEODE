@@ -44,8 +44,8 @@ public class CameraController : MonoBehaviour
             isFirstPerson = false;
         } else // Fallback case
         {
-            thirdPersonCamera.Priority += _activeCameraPriorityModifier; 
-            activeCamera = thirdPersonCamera;
+            firstPersonCamera.Priority += _activeCameraPriorityModifier; 
+            activeCamera = firstPersonCamera;
         }
     }
 

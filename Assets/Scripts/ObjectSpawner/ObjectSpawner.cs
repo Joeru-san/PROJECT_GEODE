@@ -12,6 +12,8 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject itemToSpawn;
     [SerializeField] float overlapCheckRadius = 0.5f; // tunable in Inspector
 
+    [SerializeField] Transform SpawnHeight;
+
     [Header("Delay Settings")]
     [SerializeField] float minSpawnDelay = 0.5f;
     [SerializeField] float maxSpawnDelay = 2f;
@@ -118,7 +120,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         Vector3 local = new Vector3(
             Random.Range(_localMin.x, _localMax.x),
-            1f, 
+            SpawnHeight != null ? SpawnHeight.transform.position.y : 1f,
             Random.Range(_localMin.z, _localMax.z)
         );
         return transform.TransformPoint(local);

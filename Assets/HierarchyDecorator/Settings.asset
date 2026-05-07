@@ -128,7 +128,7 @@ MonoBehaviour:
       name: Subheader
       font: {fileID: 0}
       fontSize: 10
-      fontAlignment: 3
+      fontAlignment: 4
       fontStyle: 1
       textFormatting: 0
       modes:
@@ -5340,14 +5340,14 @@ MonoBehaviour:
     allCustomComponents:
       name: All
       components:
-      - displayName: playerMovement
-        name: playerMovement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      - displayName: PlayerMovement
+        name: PlayerMovement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         content:
-          m_Text: playerMovement
+          m_Text: PlayerMovement
           m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
-          m_Tooltip: playerMovement
-          m_TextWithWhitespace: "playerMovement\u200B"
+          m_Tooltip: PlayerMovement
+          m_TextWithWhitespace: "PlayerMovement\u200B"
         shown: 0
         excluded: 0
         isBuiltIn: 0
@@ -5365,6 +5365,142 @@ MonoBehaviour:
         excluded: 0
         isBuiltIn: 0
         script: {fileID: 11500000, guid: df1623725b0ed9a2caa60e5058c96e49, type: 3}
+        hasToggle: 1
+      - displayName: PlayerAttack
+        name: PlayerAttack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: PlayerAttack
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: PlayerAttack
+          m_TextWithWhitespace: "PlayerAttack\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: 62543f34399696354ae75a2864b07f66, type: 3}
+        hasToggle: 1
+      - displayName: PlayerInteraction
+        name: PlayerInteraction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        content:
+          m_Text: PlayerInteraction
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: PlayerInteraction
+          m_TextWithWhitespace: "PlayerInteraction\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: cfac0c0c9c21e0dd7adf59ab8dccb7d3, type: 3}
+        hasToggle: 1
+      - displayName: Inventory
+        name: Inventory, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: Inventory
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: Inventory
+          m_TextWithWhitespace: "Inventory\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: b4db6149c89ce35a29b0b213396b86cc, type: 3}
+        hasToggle: 1
+      - displayName: AncientStructureManager
+        name: AncientStructureManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        content:
+          m_Text: AncientStructureManager
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: AncientStructureManager
+          m_TextWithWhitespace: "AncientStructureManager\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: ea6c0a495da7305a2977c21e7317a3f9, type: 3}
+        hasToggle: 1
+      - displayName: AncientDoor
+        name: AncientDoor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: AncientDoor
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: AncientDoor
+          m_TextWithWhitespace: "AncientDoor\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: 2c1de5e7adc8bbf0387cdef1ca8f4150, type: 3}
+        hasToggle: 1
+      - displayName: ObjectSpawner
+        name: ObjectSpawner, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: ObjectSpawner
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: ObjectSpawner
+          m_TextWithWhitespace: "ObjectSpawner\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: 30c9fac991cbb4a98ba34e08a0ca9741, type: 3}
+        hasToggle: 1
+      - displayName: StructureSpawner
+        name: StructureSpawner, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        content:
+          m_Text: StructureSpawner
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: StructureSpawner
+          m_TextWithWhitespace: "StructureSpawner\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: 66db7e40dd25079499b31ea09b84bd98, type: 3}
+        hasToggle: 1
+      - displayName: ObjectPooler
+        name: ObjectPooler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: ObjectPooler
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: ObjectPooler
+          m_TextWithWhitespace: "ObjectPooler\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: 34c2702ac7639b5429031e18e7df5372, type: 3}
+        hasToggle: 1
+      - displayName: InventoryUI
+        name: InventoryUI, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: InventoryUI
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: InventoryUI
+          m_TextWithWhitespace: "InventoryUI\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: b2497616f9aa43e5585fb7d22e8c6486, type: 3}
+        hasToggle: 1
+      - displayName: ShopUI
+        name: ShopUI, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        content:
+          m_Text: ShopUI
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: ShopUI
+          m_TextWithWhitespace: "ShopUI\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: a56e751437f47d8d58e22d109bb0f4a8, type: 3}
+        hasToggle: 1
+      - displayName: CameraController
+        name: CameraController, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        content:
+          m_Text: CameraController
+          m_Image: {fileID: -8204150473280056172, guid: 0000000000000000d000000000000000, type: 0}
+          m_Tooltip: CameraController
+          m_TextWithWhitespace: "CameraController\u200B"
+        shown: 0
+        excluded: 0
+        isBuiltIn: 0
+        script: {fileID: 11500000, guid: 6aefd1e4f68e0ec349f80a816cd558b2, type: 3}
         hasToggle: 1
     unityVersion: 6000.3.10f1
     unityCount: 386

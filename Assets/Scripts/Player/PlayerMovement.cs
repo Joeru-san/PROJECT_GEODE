@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     [Header("Player Speeds")]
     public float walkSpeed = 5f;
     public float sprintSpeed = 10f;
+    public float jumpForce = 10f;
     [Range(0,1)] public float speedTweenDuration = 0.3f;
     public bool _isSprinting = false;
     private float _actualSpeed;
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         if(IsGrounded())
         {
             _playerRB.linearVelocity = Vector3.zero;
-            _playerRB.AddForce(new Vector3(0f, 5f, 0f), ForceMode.Impulse);
+            _playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
         }
     }
 
