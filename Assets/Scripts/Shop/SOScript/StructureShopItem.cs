@@ -4,9 +4,5 @@ using UnityEngine;
 public class StructureShopItem : BasicShopItem
 {
     public GameObject structureToSpawn;
-    public void Awake()
-    {
-        typeOfItemRequired.itemType = ItemType.Item1;
-    }
 }
 

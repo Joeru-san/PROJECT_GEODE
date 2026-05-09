@@ -88,15 +88,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ChangeCamera",
-                    "type": "Button",
-                    "id": "07008ee6-9fd1-48bd-b281-2539bfe38d50",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Inventory",
                     "type": "Button",
                     "id": "a3b64396-cf28-4027-a4ad-f7f7efb0c082",
@@ -498,28 +489,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "45fecb75-3614-4173-a8cd-8c0315bc05c5",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "296175dd-7a12-4eae-ad98-9a716a046b73",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ChangeCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

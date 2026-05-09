@@ -7,6 +7,7 @@ public class TutorialGuy : MonoBehaviour
     public static bool isPlayerInCollider = false;
     public GameObject playerReference;
     public GameObject companionReference;
+    public bool isDebug;
 
     [SerializeField] float pushBackDistance = 1.5f;
     [SerializeField] float resumeDistance = 2f;
@@ -52,7 +53,7 @@ public class TutorialGuy : MonoBehaviour
             companionReference.transform.position
         );
 
-        Debug.Log($"[{GetType().Name}] dist to companion: {dist:F2} / resume at: {resumeDistance}");
+        if(isDebug) Debug.Log($"[{GetType().Name}] dist to companion: {dist:F2} / resume at: {resumeDistance}");
 
         if (dist <= resumeDistance)
         {
@@ -66,7 +67,7 @@ public class TutorialGuy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isPlayerInCollider = true;
-            Debug.Log($"[{GetType().Name}] player entered the trigger");
+            if(isDebug) Debug.Log($"[{GetType().Name}] player entered the trigger");
         }
     }
 
@@ -75,7 +76,7 @@ public class TutorialGuy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isPlayerInCollider = false;
-            Debug.Log($"[{GetType().Name}] player left the trigger");
+            if(isDebug) Debug.Log($"[{GetType().Name}] player left the trigger");
             PushPlayerBack();
             StopMovement();
         }
@@ -94,7 +95,7 @@ public class TutorialGuy : MonoBehaviour
         var rb = playerReference.GetComponent<Rigidbody>();
         if (rb != null) rb.linearVelocity = Vector3.zero;
 
-        Debug.Log($"[{GetType().Name}] player pushed back to {targetPos}");
+        if(isDebug) Debug.Log($"[{GetType().Name}] player pushed back to {targetPos}");
     }
 
     void StopMovement()
@@ -103,7 +104,7 @@ public class TutorialGuy : MonoBehaviour
 
         _navMeshAgent.isStopped = true;
         _isWaitingForPlayer = true;
-        Debug.Log($"[{GetType().Name}] companion stopped");
+        if(isDebug) Debug.Log($"[{GetType().Name}] companion stopped");
     }
 
     void ResumeMovement()
@@ -111,7 +112,7 @@ public class TutorialGuy : MonoBehaviour
         if (_navMeshAgent == null || !_navMeshAgent.isOnNavMesh) return;
 
         _navMeshAgent.isStopped = false;
-        Debug.Log($"[{GetType().Name}] companion resumed");
+        if(isDebug) Debug.Log($"[{GetType().Name}] companion resumed");
     }
 
     bool IsPlayerInsideCollider()
@@ -134,7 +135,7 @@ public class TutorialGuy : MonoBehaviour
             _navMeshAgent.isStopped = false;
             _isWaitingForPlayer = false;
             _navMeshAgent.SetDestination(hit.position);
-            Debug.Log($"[{GetType().Name}] moving companion to sampled position {hit.position}");
+            if(isDebug) Debug.Log($"[{GetType().Name}] moving companion to sampled position {hit.position}");
         }
         else
         {

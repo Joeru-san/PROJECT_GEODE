@@ -129,11 +129,6 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         }
     }
 
-    void OnChangeCamera()
-    {
-        CameraController.inst.ChangeCamera();
-    }
-
     void OnInventory()
     {
         OnShowInventory?.Invoke(GetComponent<PlayerInput>());

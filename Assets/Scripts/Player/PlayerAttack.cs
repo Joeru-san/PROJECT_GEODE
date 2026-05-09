@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if(!_isAttacking && (_isAiming || CameraController.inst.activeCamera == CameraController.inst.firstPersonCamera))
+        if(!_isAttacking && CameraController.inst.activeCamera == CameraController.inst.firstPersonCamera)
         {
             StartCoroutine(AttackCoroutine());
         }

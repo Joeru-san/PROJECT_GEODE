@@ -1,8 +1,12 @@
+using System;
+
 public class QuestBaseState
 {
     protected QuestManager quest;
     
     protected QuestStateMachine questStateMachine;
+
+    public static Action OnQuestCompleted;
 
     public QuestBaseState(QuestManager quest, QuestStateMachine questStateMachine)
     {
@@ -15,6 +19,7 @@ public class QuestBaseState
     public virtual void InitQuest()
     {
         isEnding = false;
+        OnQuestCompleted?.Invoke();
     }
 
     public virtual void QuestUpdate() { }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759db4c98835bfed3b0f9568a787855a, type: 3}
-  m_Name: NewGoToPointQuest
+  m_Name: Quest2
   m_EditorClassIdentifier: Assembly-CSharp::GoToPointObject
-  QuestName: Go To Main Base
-  QuestDescription: Follow the robot to the strange structure
-  actualQuestState: 2
-  pointToReach: {x: 443.91638, y: -0.00001, z: 263.2}
+  QuestName: Harvesting
+  QuestDescription: Follow the robot to the oil site
+  actualQuestState: 0
+  pointToReach: {x: 767.36, y: 0, z: 157.41}

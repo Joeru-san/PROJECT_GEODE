@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c657e59834b579d158dae78af0347681, type: 3}
-  m_Name: NewBuildStructureQuest
-  m_EditorClassIdentifier: Assembly-CSharp::BuildStructureObject
-  QuestName: BUILD SOMETING IN THE SHOP
-  QuestDescription: YEAH
+  m_Script: {fileID: 11500000, guid: 759db4c98835bfed3b0f9568a787855a, type: 3}
+  m_Name: Quest1
+  m_EditorClassIdentifier: Assembly-CSharp::GoToPointObject
+  QuestName: A New Place
+  QuestDescription: Follow the robot to the strange structure
   actualQuestState: 1
+  pointToReach: {x: 481.3, y: 0, z: 262.8}

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94e2e07dc085279ae8589b2e806317a5, type: 3}
-  m_Name: NewCollectItemQuest
+  m_Name: Quest3
   m_EditorClassIdentifier: Assembly-CSharp::CollectItemObject
-  QuestName: First Type of collect
-  QuestDescription: 
-  actualQuestState: 1
-  typeOfItemToCollect: 0
-  numberOfItemsToCollect: 10
+  QuestName: The black gold
+  QuestDescription: Take at least 25 of oil from the leaking oil tanks
+  actualQuestState: 0
+  typeOfItemToCollect: 1
+  numberOfItemsToCollect: 25
