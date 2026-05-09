@@ -50,7 +50,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
+
+    void Start()
+    {
+        if(spawnPoint == null)
+        {
+            spawnPoint = transform;
+        }
+    }
 
     void Update()
     {

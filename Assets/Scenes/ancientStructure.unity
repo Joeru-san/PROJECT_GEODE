@@ -7238,6 +7238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca04c35aa1f4299e83546c939be4990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColliderGizmos
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!65 &813766562
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16211,6 +16212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca04c35aa1f4299e83546c939be4990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColliderGizmos
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1001 &1655213865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19037,6 +19039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca04c35aa1f4299e83546c939be4990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColliderGizmos
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!65 &1893629523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20334,6 +20337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca04c35aa1f4299e83546c939be4990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColliderGizmos
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!65 &2047973353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21391,14 +21395,14 @@ SceneRoots:
   - {fileID: 1506280700}
   - {fileID: 2118055628}
   - {fileID: 1662328019}
-  - {fileID: 883928003}
-  - {fileID: 1770774405}
-  - {fileID: 1391531551}
-  - {fileID: 1828226813}
   - {fileID: 301439170}
   - {fileID: 9094946838446298114}
   - {fileID: 708106804}
   - {fileID: 527920354}
+  - {fileID: 883928003}
+  - {fileID: 1770774405}
+  - {fileID: 1391531551}
+  - {fileID: 1828226813}
   - {fileID: 878575482}
   - {fileID: 1464366295}
   - {fileID: 264720028}
