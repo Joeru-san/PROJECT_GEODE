@@ -11994,6 +11994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
   questArray:
   - {fileID: 11400000, guid: ab1af71a92474667eb94e234964a4a04, type: 2}
+  - {fileID: 11400000, guid: 575c1ca1fbc7c0c87a5f709581352687, type: 2}
   currentQuest: {fileID: 0}
   playerReference: {fileID: 1506280702}
 --- !u!4 &1228571000

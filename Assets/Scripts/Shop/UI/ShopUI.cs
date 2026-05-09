@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System;
 
 public class ShopUI : MonoBehaviour
 {
+    public static Action OnStructureBuild;
+
     public Transform itemDisplayPanel;
     public Transform shopPanel;
     public Image selectedItemImage;
@@ -84,6 +87,7 @@ public class ShopUI : MonoBehaviour
         
         if(_selectedItem is StructureShopItem structureShopItem)
         {
+            OnStructureBuild?.Invoke();
             _shopPlaceReference.GetComponent<StructureSpawner>().SpawnAndSnapToGround(structureShopItem);
         }
     }
