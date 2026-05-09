@@ -1,6 +1,6 @@
 public class QuestStateMachine
 {
-    public QuestBaseState currentQuestState {get; set;}
+    public QuestBaseState currentQuestState { get; set; }
 
     public void Initialize(QuestBaseState startingState)
     {
@@ -10,7 +10,7 @@ public class QuestStateMachine
 
     public void ChangeState(QuestBaseState newState)
     {
-        currentQuestState.EndQuest();
+        // Don't call EndQuest here — the state already called it
         currentQuestState = newState;
         currentQuestState.InitQuest();
     }

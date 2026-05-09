@@ -4,14 +4,23 @@ public class QuestBaseState
     
     protected QuestStateMachine questStateMachine;
 
-
     public QuestBaseState(QuestManager quest, QuestStateMachine questStateMachine)
     {
         this.quest = quest;
         this.questStateMachine = questStateMachine;
     }
 
-    public virtual void InitQuest() {}
-    public virtual void EndQuest() {}
-    public virtual void QuestUpdate() {}
+    protected bool isEnding = false;
+
+    public virtual void InitQuest()
+    {
+        isEnding = false;
+    }
+
+    public virtual void QuestUpdate() { }
+
+    public virtual void EndQuest()
+    {
+        isEnding = true;
+    }
 }

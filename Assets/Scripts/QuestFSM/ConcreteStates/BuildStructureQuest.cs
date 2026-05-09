@@ -8,7 +8,6 @@ public class BuildStructureQuest : QuestBaseState
     {
         base.InitQuest();
 
-
         QuestManager.inst.currentQuest.actualQuestState = QuestState.OnGoing;
         Debug.Log($"{QuestManager.inst.currentQuest.QuestName} quest of type {GetType().Name} initiated");
         ShopUI.OnStructureBuild += EndQuest;

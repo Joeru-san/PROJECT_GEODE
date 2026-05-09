@@ -14,11 +14,29 @@ public class CollectItemQuest : QuestBaseState
 
     public override void QuestUpdate()
     {
+        if (isEnding) return; // critical — stops re-entry
         base.QuestUpdate();
-        
-        CollectItemObject obj = QuestManager.inst.currentQuest as CollectItemObject;
 
-        if(PlayerInteraction.playerInventory.FindTotalItemAmount(obj.typeOfItemToCollect) >= obj.numberOfItemsToCollect)
+        if (QuestManager.inst.currentQuest == null)
+        {
+            Debug.LogError("currentQuest is null!");
+            return;
+        }
+
+        CollectItemObject obj = QuestManager.inst.currentQuest as CollectItemObject;
+        if (obj == null)
+        {
+            Debug.LogError("Current quest is not a CollectItemObject!");
+            return;
+        }
+
+        if (PlayerInteraction.playerInventory == null)
+        {
+            Debug.LogError("playerInventory is null!");
+            return;
+        }
+
+        if (PlayerInteraction.playerInventory.FindTotalItemAmount(obj.typeOfItemToCollect) >= obj.numberOfItemsToCollect)
         {
             EndQuest();
         }

@@ -1,22 +1,31 @@
+using System;
 using UnityEngine;
 
 public class GoToPointQuest : QuestBaseState
 {
 	public GoToPointQuest(QuestManager questManager, QuestStateMachine questStateMachine) : base(questManager, questStateMachine) {}
 
+    public static Action<Vector3> GoToNewPoint;
+
+    GoToPointObject obj;
+
     public override void InitQuest()
     {
         base.InitQuest();
 
-        QuestManager.inst.currentQuest.actualQuestState = QuestState.OnGoing;
+        obj = QuestManager.inst.currentQuest as GoToPointObject;
+
+        GoToNewPoint?.Invoke(obj.pointToReach);
+
+        obj.actualQuestState = QuestState.OnGoing;
         Debug.Log($"{QuestManager.inst.currentQuest.QuestName} quest of type {GetType().Name} initiated");
     }
 
     public override void QuestUpdate()
     {
+        if (isEnding) return; // critical — stops re-entry
         base.QuestUpdate();
-        GoToPointObject obj = QuestManager.inst.currentQuest as GoToPointObject;
-
+    
         float dist = Vector2.Distance(QuestManager.inst.playerReference.transform.position, obj.pointToReach);
 
         if (dist < 1.5f)
@@ -28,9 +37,9 @@ public class GoToPointQuest : QuestBaseState
     public override void EndQuest()
     {
         base.EndQuest();
-        QuestManager.inst.currentQuest.actualQuestState = QuestState.Complete;
+        obj.actualQuestState = QuestState.Complete;
         Debug.Log($"{QuestManager.inst.currentQuest.QuestName} quest of type {GetType().Name} ended");
 
-        QuestManager.inst.ChooseNextState(); // automatically starts next
+        QuestManager.inst.ChooseNextState();
     }
 }

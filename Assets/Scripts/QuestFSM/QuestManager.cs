@@ -4,9 +4,11 @@ using UnityEngine;
 // QuestManager.cs
 public class QuestManager : MonoBehaviour
 {
+    public string currentQuestName;
+
     public static QuestManager inst;
     public List<QuestBaseObject> questArray;
-    int _currentQuestIndex = 0;
+    public int _currentQuestIndex = 0;
     public QuestBaseObject currentQuest;
 
     public GameObject playerReference;
@@ -37,7 +39,9 @@ public class QuestManager : MonoBehaviour
 
     void Update()
     {
+        if (currentQuest == null) return;
         stateMachine.currentQuestState?.QuestUpdate();
+        currentQuestName = currentQuest.name;
     }
 
     // Call this to start any quest by passing its ScriptableObject
@@ -53,11 +57,11 @@ public class QuestManager : MonoBehaviour
         if (_currentQuestIndex < questArray.Count)
         {
             currentQuest = questArray[_currentQuestIndex];
-            stateMachine.ChangeState(questStateMap[currentQuest]);
+            stateMachine.ChangeState(questStateMap[currentQuest]); // just this, no null assignment before
         }
         else
         {
-            stateMachine.currentQuestState = null; // stops Update from ticking
+            stateMachine.currentQuestState = null;
             Debug.Log("All quests completed!");
         }
     }

@@ -98,7 +98,7 @@ public class Inventory : MonoBehaviour
         int totalAmount = 0;
         foreach(InventorySlot slot in inventorySlots)
         {
-            if(slot.item != null && slot.item.itemType == item)
+            if(slot != null && slot.item != null && slot.item.itemType == item)
             {
                 totalAmount += slot.amount;        
             }
@@ -106,7 +106,6 @@ public class Inventory : MonoBehaviour
 
         return totalAmount;
     }
-
     /// <summary>
     /// Remove an item from the inventory
     /// </summary>
