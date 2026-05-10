@@ -16,14 +16,14 @@ public class PlayerAttack : MonoBehaviour
     public Transform shootPosition;
     public LayerMask layerToHit;
 
-    LineRenderer lineRend;
+    LineRenderer _lineRend;
     
 
     void Awake()
     {
         _relatedPlayer = GetComponent<PlayerMovement>();
-        lineRend = GetComponent<LineRenderer>();
-        lineRend.enabled = false;
+        _lineRend = GetComponent<LineRenderer>();
+        _lineRend.enabled = false;
     }
 
     void OnAim(InputValue value)
@@ -44,14 +44,14 @@ public class PlayerAttack : MonoBehaviour
     {
         _isAttacking = true;
 
-        lineRend.SetPosition(0, shootPosition.position);
+        _lineRend.SetPosition(0, shootPosition.position);
         
         Vector3 rayOrigin = _mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 1f, 0f));
         RaycastHit outHit;
 
         if(Physics.Raycast(rayOrigin, _mainCamera.transform.forward, out outHit, gunRange, layerToHit))
         {
-            lineRend.SetPosition(1, outHit.point);
+            _lineRend.SetPosition(1, outHit.point);
             IDamageable damageable = outHit.transform.gameObject.GetComponentInChildren<IDamageable>();
             if(damageable != null)
             {
@@ -63,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
             }
         } else
         {
-            lineRend.SetPosition(1, rayOrigin + (_mainCamera.transform.forward * gunRange));
+            _lineRend.SetPosition(1, rayOrigin + (_mainCamera.transform.forward * gunRange));
             Debug.Log("No enemy hitted");
         }
         
@@ -76,8 +76,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator ShowLineRend()
     {
-        lineRend.enabled = true;
+        _lineRend.enabled = true;
         yield return new WaitForSeconds(rayDuration);
-        lineRend.enabled = false;
+        _lineRend.enabled = false;
     }
 }

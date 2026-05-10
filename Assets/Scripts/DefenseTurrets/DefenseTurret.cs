@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections;
 
 [RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(LineRenderer))]
 public class DefenseTurret : MonoBehaviour, IDamageable
 {
     #region IDamageable attributes
@@ -11,20 +12,24 @@ public class DefenseTurret : MonoBehaviour, IDamageable
     [field: SerializeField] public float currentHealth { get; set; }
     [field: SerializeField] public float attackCoolDown { get; set; }
     [field: SerializeField] public float attackDamage { get; set; }
-    [field: SerializeField] public float healRate {get; set;}
+    [field: SerializeField] public float healRate { get; set; }
     #endregion
-    
-    public float inactiveTime = 3f;
 
+    public float inactiveTime = 3f;
+    public float rayDuration = 0.5f;
+    public Transform shootPosition;
     public bool printDebug = false;
 
     TurretEnemyDetect _relatedCollider;
+    LineRenderer _lineRend;
     bool _isAttacking = false;
     IDamageable _currentTarget = null;
 
     void Awake()
     {
         _relatedCollider = GetComponent<TurretEnemyDetect>();
+        _lineRend = GetComponent<LineRenderer>();
+        _lineRend.enabled = false;
     }
 
     void Start()
@@ -42,13 +47,9 @@ public class DefenseTurret : MonoBehaviour, IDamageable
             RecoverToMaxHealthOverTime();
         }
 
-        // Clear current target if it's dead
         if (_currentTarget != null && _currentTarget.currentHealth <= 0)
-        {
             _currentTarget = null;
-        }
 
-        // Pick a new target from the queue if we don't have one
         if (_currentTarget == null)
         {
             while (_relatedCollider.enemiesInCollider.Count > 0)
@@ -59,39 +60,57 @@ public class DefenseTurret : MonoBehaviour, IDamageable
                     _currentTarget = candidate;
                     break;
                 }
-                // Discard dead or null entries
                 _relatedCollider.enemiesInCollider.Dequeue();
             }
         }
 
         if (_currentTarget != null && !_isAttacking)
-        {
             StartCoroutine(AttackCoroutine());
-        }
     }
 
     IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
 
+        Transform targetTransform = (_currentTarget as MonoBehaviour)?.transform;
+        if (targetTransform != null)
+        {
+            Vector3 flatTarget = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
+            transform.DODynamicLookAt(flatTarget, 0.2f);
+        }
+
         yield return new WaitForSeconds(attackCoolDown);
 
         if (_currentTarget != null && _currentTarget.currentHealth > 0)
         {
+            Transform t = (_currentTarget as MonoBehaviour)?.transform;
+            if (t != null)
+            {
+                _lineRend.SetPosition(0, shootPosition.position);
+                _lineRend.SetPosition(1, t.position);
+                StartCoroutine(ShowLineRend());
+            }
+
             #if UNITY_EDITOR
-            if(printDebug) Debug.Log($"[{GetType().Name}] DefenseTurret {name} hit {_currentTarget} for {attackDamage} damage");
+            if (printDebug) Debug.Log($"[{GetType().Name}] DefenseTurret {name} hit {_currentTarget} for {attackDamage} damage");
             #endif
             _currentTarget.TakeDamage(attackDamage);
         }
         else
         {
-            // Target died or left during cooldown — clear so Update picks the next one
             _currentTarget = null;
         }
 
         _isAttacking = false;
     }
-    
+
+    IEnumerator ShowLineRend()
+    {
+        _lineRend.enabled = true;
+        yield return new WaitForSeconds(rayDuration);
+        _lineRend.enabled = false;
+    }
+
     public float recoverDelay = 3f;
 
     float _timeSinceLastDamage = 0f;
@@ -142,8 +161,9 @@ public class DefenseTurret : MonoBehaviour, IDamageable
         DOTween.Kill(gameObject);
         DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
             .SetEase(Ease.OutQuad)
-            .SetId(gameObject).
-            OnComplete(() => {
+            .SetId(gameObject)
+            .OnComplete(() =>
+            {
                 Debug.Log($"Finished health recover for {transform.name}");
                 _isRecovering = false;
             });
