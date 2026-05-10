@@ -7,6 +7,9 @@ using System;
 
 public class AncientStructure : MonoBehaviour
 {
+
+    [SerializeField] Material activeMaterial;
+    [SerializeField] MeshRenderer ancientStructureMeshRenderer;
     public static Action<AncientStructure> OnStructureComplete; // Event that is fired when the structure is completed
 
     public ItemType itemTypeNeeded; // The ItemType needed by the structure to be activated
@@ -61,6 +64,7 @@ public class AncientStructure : MonoBehaviour
             GetComponent<Collider>().enabled = false;   // Disabling collider to avoid retrigger the function
             hintText.text = "AncientStructure complete"; // Inform the player that the structure is completed
             OnStructureComplete?.Invoke(this);
+            ancientStructureMeshRenderer.GetComponent<MeshRenderer>().material = activeMaterial;
         }
     }
 
