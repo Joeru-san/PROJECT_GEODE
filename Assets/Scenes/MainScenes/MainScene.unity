@@ -2643,7 +2643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   canPause: 1
-  pauseAction: {fileID: 7727032971491509709, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  pauseAction: {fileID: 7205724315178283060, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   onPause:
     m_PersistentCalls:
       m_Calls:

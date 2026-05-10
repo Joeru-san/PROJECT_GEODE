@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e2e07dc085279ae8589b2e806317a5, type: 3}
   m_Name: Quest6
   m_EditorClassIdentifier: Assembly-CSharp::CollectItemObject
-  QuestName: 
-  QuestDescription: 'The syntetized items are like the items forund in the spawner,
-    but they spawn with less amount.
+  QuestName: Let's check the quality
+  QuestDescription: 'The syntetized items are like the items found in world, but
+    they spawn with less amount.
 
 
     Take some until you arrive at 40'
-  actualQuestState: 2
+  actualQuestState: 0
   typeOfItemToCollect: 1
   numberOfItemsToCollect: 40

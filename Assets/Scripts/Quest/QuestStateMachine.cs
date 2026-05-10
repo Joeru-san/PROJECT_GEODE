@@ -10,7 +10,6 @@ public class QuestStateMachine
 
     public void ChangeState(QuestBaseState newState)
     {
-        // Don't call EndQuest here — the state already called it
         currentQuestState = newState;
         currentQuestState.InitQuest();
     }
