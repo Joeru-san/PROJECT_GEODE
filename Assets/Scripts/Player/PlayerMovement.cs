@@ -189,14 +189,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         _isRecovering = false;
         DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
-        RefreshHealthUI(); // ← add this
+        RefreshHealthUI();
         if (currentHealth <= 0f) Die();
     }
 
     public void RecoverHealth(float healthToRecover)
     {
         currentHealth = Mathf.Min(currentHealth + healthToRecover, MaxHealth);
-        RefreshHealthUI(); // ← add this
+        RefreshHealthUI();
     }
 
     public void RecoverHealthOverTime(float recoverTime)

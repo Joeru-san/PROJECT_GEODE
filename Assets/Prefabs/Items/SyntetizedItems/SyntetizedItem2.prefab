@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 134874048420759586, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.85727
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134874048420759586, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000016133981
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134874048420759586, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.688976
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134874048420759586, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,13 +48,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 299416825022290360, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.48
+      objectReference: {fileID: 0}
     - target: {fileID: 3674656990106990579, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
       propertyPath: scriptableObjectType
       value: 
       objectReference: {fileID: 11400000, guid: a9ea485474361d5628e7ca9d8f1c7214, type: 2}
     - target: {fileID: 8508581794829138598, guid: c68bf5c0223eab3e09cb16d655cb2dd1, type: 3}
       propertyPath: m_Name
-      value: WorldItem2 Variant
+      value: SyntetizedItem2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

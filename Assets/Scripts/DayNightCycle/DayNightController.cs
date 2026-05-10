@@ -27,6 +27,7 @@ public class DayNightController : MonoBehaviour
     void Start()
     {
         isNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
+        timeOfDay = dayStartTime + 0.2f;
     }
 
     void Update()

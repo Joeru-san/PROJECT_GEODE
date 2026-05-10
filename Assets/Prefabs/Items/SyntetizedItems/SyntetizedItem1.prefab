@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 134874048420759586, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.378538
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134874048420759586, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000059569163
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134874048420759586, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.921097
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134874048420759586, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,13 +48,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3558273215748197853, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558273215748197853, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558273215748197853, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558273215748197853, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558273215748197853, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3558273215748197853, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 3674656990106990579, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
       propertyPath: scriptableObjectType
       value: 
       objectReference: {fileID: 11400000, guid: b3228a82d5dde084bb340cd31df4321b, type: 2}
     - target: {fileID: 8508581794829138598, guid: 579cba11bfbfb77dda40fbb79846d80f, type: 3}
       propertyPath: m_Name
-      value: syntetizedItem1 Variant
+      value: SyntetizedItem1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

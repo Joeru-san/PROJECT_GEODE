@@ -17,8 +17,8 @@ MonoBehaviour:
   inventoryIcon: {fileID: 0}
   minSpawnAmount: 1
   maxSpawnAmount: 1
-  itemMesh: {fileID: 0}
-  itemMaterial: {fileID: 0}
+  itemMesh: {fileID: 7114148706264111387, guid: 2d489f1fe465614c5a7d2844d8ff2427, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 193869eac6f014a88beff8e038da0e42, type: 2}
   description: 
   isStackable: 1
   maxStackSize: 64

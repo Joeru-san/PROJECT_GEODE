@@ -2,7 +2,6 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 
-[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(LineRenderer))]
 public class DefenseTurret : MonoBehaviour, IDamageable
 {
@@ -25,9 +24,12 @@ public class DefenseTurret : MonoBehaviour, IDamageable
     bool _isAttacking = false;
     IDamageable _currentTarget = null;
 
+    [Header("UI")]
+    [SerializeField] HealthBar healthBar;
+
     void Awake()
     {
-        _relatedCollider = GetComponent<TurretEnemyDetect>();
+        _relatedCollider = GetComponentInChildren<TurretEnemyDetect>();
         _lineRend = GetComponent<LineRenderer>();
         _lineRend.enabled = false;
     }
@@ -135,6 +137,8 @@ public class DefenseTurret : MonoBehaviour, IDamageable
         DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
 
+        RefreshHealthUI();
+
         if (currentHealth <= 0f)
             Die();
     }
@@ -142,6 +146,7 @@ public class DefenseTurret : MonoBehaviour, IDamageable
     public void RecoverHealth(float healthToRecover)
     {
         currentHealth = Mathf.Min(currentHealth + healthToRecover, MaxHealth);
+        RefreshHealthUI();
     }
 
     public void RecoverHealthOverTime(float recoverTime)
@@ -159,7 +164,7 @@ public class DefenseTurret : MonoBehaviour, IDamageable
         float duration = (MaxHealth - currentHealth) / healRate;
 
         DOTween.Kill(gameObject);
-        DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
+        DOTween.To(() => currentHealth, x => { currentHealth = x; RefreshHealthUI(); }, MaxHealth, duration)
             .SetEase(Ease.OutQuad)
             .SetId(gameObject)
             .OnComplete(() =>
@@ -169,4 +174,9 @@ public class DefenseTurret : MonoBehaviour, IDamageable
             });
     }
     #endregion
+
+    void RefreshHealthUI()
+    {
+        healthBar?.SetHealth(currentHealth, MaxHealth);
+    }
 }

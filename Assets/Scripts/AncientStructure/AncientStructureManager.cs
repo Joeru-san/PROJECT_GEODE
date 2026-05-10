@@ -8,6 +8,19 @@ public class AncientStructureManager : MonoBehaviour
     public static Dictionary<AncientStructure, bool> ancientStructureReferences = new Dictionary<AncientStructure, bool>();
     public static int completedStructures = 0;  // Having a separate variable so we don't have to iterate the dictionary checking how many structures are completed
 
+    public static AncientStructureManager inst {get; private set;}
+
+    void Awake()
+    {
+        if (inst != null && inst != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        inst = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         AncientStructure.OnStructureComplete += RegisterStructureStatus;

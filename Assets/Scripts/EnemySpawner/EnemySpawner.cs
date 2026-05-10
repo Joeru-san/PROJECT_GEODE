@@ -9,8 +9,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int maxNumberOfEnemies = 32;
     public GameObject enemyToSpawn;
     [SerializeField] float overlapCheckRadius = 0.5f;
-    [SerializeField] [Range(1,6)] int numberOfWaves = 1;
-    int _actualWaveNumber = 1;
+    [Range(1,6)] public int numberOfWaves = 1;
+    public int actualWaveNumber = 1;
 
     [Header("Delay Settings")]
     [SerializeField] float minSpawnDelay = 0.5f;
@@ -95,16 +95,16 @@ public class EnemySpawner : MonoBehaviour
 
         yield return new WaitUntil(() => transform.childCount == 0);
 
-        if (_actualWaveNumber >= numberOfWaves)
+        if (actualWaveNumber >= numberOfWaves)
         {
             Debug.Log($"[EnemySpawner] {name} has completed all {numberOfWaves} wave(s). Stopping.");
             _isSpawning = false;
             yield break;
         }
 
-        _actualWaveNumber++;
+        actualWaveNumber++;
         _spawnedCount = 0;
-        Debug.Log($"[EnemySpawner] {name} is starting wave {_actualWaveNumber} of {numberOfWaves}.");
+        Debug.Log($"[EnemySpawner] {name} is starting wave {actualWaveNumber} of {numberOfWaves}.");
         StartCoroutine(SpawnLoop());
     }
 
@@ -120,7 +120,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        _actualWaveNumber = 1;
+        actualWaveNumber = 1;
         _spawnedCount = 0;
         StartCoroutine(SpawnLoop());
     }
