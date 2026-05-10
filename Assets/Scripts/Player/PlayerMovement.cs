@@ -41,6 +41,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     
     [SerializeField] Transform spawnPoint;
 
+    [Header("UI")]
+    [SerializeField] HealthBar healthBar;
+
     void Awake()
     {
         _playerRB = gameObject.GetComponent<Rigidbody>();
@@ -134,6 +137,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         OnShowInventory?.Invoke(GetComponent<PlayerInput>());
     }
 
+    void RefreshHealthUI()
+    {
+        healthBar?.SetHealth(currentHealth, MaxHealth);
+    }
+
     bool IsGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
@@ -179,17 +187,16 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         _timeSinceLastDamage = 0f;
         _isRecovering = false;
-        
         DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
-
-        if (currentHealth <= 0f)
-            Die();
+        RefreshHealthUI(); // ← add this
+        if (currentHealth <= 0f) Die();
     }
 
     public void RecoverHealth(float healthToRecover)
     {
         currentHealth = Mathf.Min(currentHealth + healthToRecover, MaxHealth);
+        RefreshHealthUI(); // ← add this
     }
 
     public void RecoverHealthOverTime(float recoverTime)
@@ -206,12 +213,10 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         float duration = (MaxHealth - currentHealth) / healRate;
 
         DOTween.Kill(gameObject);
-        DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
+        DOTween.To(() => currentHealth, x => { currentHealth = x; RefreshHealthUI(); }, MaxHealth, duration)
             .SetEase(Ease.OutQuad)
             .SetId(gameObject)
-            .OnComplete(() => {
-                _isRecovering = false;
-            });
+            .OnComplete(() => _isRecovering = false);
     }
     #endregion
 }
