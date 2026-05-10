@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using AdvancedProceduralSkybox;
 
 public class DayNightController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class DayNightController : MonoBehaviour
 
     [Header("Day/Night Thresholds")]
     public float nightStartTime = 0.7f;
-    public float dayStartTime  = 0.2f;
+    public float dayStartTime = 0.2f;
 
     [Header("Sun Lighting")]
     public Gradient ambientColor;
@@ -27,6 +28,14 @@ public class DayNightController : MonoBehaviour
     public AnimationCurve sunIntensity;
     public AnimationCurve moonIntensity;
 
+    [Header("Skybox Fog")]
+    public Color skyboxFogColor = Color.grey;
+    public float skyboxFogPower = 1f;
+    public float skyboxFogOffset = 0f;
+
+    [Header("Stars")]
+    public Transform starsPivot; // Empty GameObject for star rotation
+
     public static bool isNight = false;
 
     public void Awake()
@@ -36,7 +45,7 @@ public class DayNightController : MonoBehaviour
 
     void Start()
     {
-        isNight   = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
+        isNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
         timeOfDay = dayStartTime + 0.2f;
         RenderSettings.sun = sun;
     }
@@ -62,26 +71,19 @@ public class DayNightController : MonoBehaviour
         float sunAngle  =  timeOfDay * 360f;
         float moonAngle = (timeOfDay * 360f) + 180f;
 
-        sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
+        sun.transform.rotation  = Quaternion.Euler(sunAngle,  170f, 0f);
 
         if (moon != null)
             moon.transform.rotation = Quaternion.Euler(moonAngle, 170f, 0f);
+
+        if (starsPivot != null)
+            starsPivot.Rotate(Vector3.up, Time.deltaTime * 0.5f);
     }
 
     private void UpdateLighting(float t)
     {
         RenderSettings.ambientLight = ambientColor.Evaluate(t);
         RenderSettings.fogColor     = fogColor.Evaluate(t);
-
-        if (RenderSettings.skybox != null)
-        {
-            if (RenderSettings.skybox.HasProperty("_Tint"))
-                RenderSettings.skybox.SetColor("_Tint", skyboxTint.Evaluate(t));
-
-            if (moon != null && RenderSettings.skybox.HasProperty("_MoonRotation"))
-                RenderSettings.skybox.SetMatrix("_MoonRotation",
-                    moon.transform.worldToLocalMatrix);
-        }
 
         if (sunIntensity != null)
             sun.intensity = sunIntensity.Evaluate(t);
@@ -90,9 +92,32 @@ public class DayNightController : MonoBehaviour
         {
             if (moonIntensity != null)
                 moon.intensity = moonIntensity.Evaluate(t);
-
             if (moonLightColor != null)
                 moon.color = moonLightColor.Evaluate(t);
+        }
+
+        Material skybox = RenderSettings.skybox;
+        if (skybox != null)
+        {
+            // Sun direction
+            SkyboxProperty.SetSunDirection(skybox, sun.transform.forward);
+
+            // Moon matrix
+            if (moon != null)
+                SkyboxProperty.SetMoonMatrix(skybox, moon.transform);
+
+            // Stars matrix
+            if (starsPivot != null)
+                SkyboxProperty.SetStarMatrix(skybox, starsPivot);
+
+            // Fog
+            SkyboxProperty.SetFogColor(skybox, skyboxFogColor);
+            SkyboxProperty.SetFogPower(skybox, skyboxFogPower);
+            SkyboxProperty.SetFogOffset(skybox, skyboxFogOffset);
+
+            // Tint fallback for non-package skyboxes
+            if (skybox.HasProperty("_Tint"))
+                skybox.SetColor("_Tint", skyboxTint.Evaluate(t));
         }
 
         DynamicGI.UpdateEnvironment();

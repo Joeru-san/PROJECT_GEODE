@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.bxkangki.advanced-procedural-skybox": {
+      "version": "https://github.com/BxKangKi/Unity-URP-Advanced-Procedural-Skybox.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6ed1c60a4f3efcc646d89f75694233cead71309c"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.10",
       "depth": 0,
