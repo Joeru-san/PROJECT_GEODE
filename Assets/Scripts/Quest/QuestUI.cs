@@ -16,5 +16,11 @@ public class QuestUI : MonoBehaviour
     {
         questNameText.text = QuestManager.inst.currentQuest.name;
         questDescriptionText.text = QuestManager.inst.currentQuest.QuestDescription;
+
+        if(QuestManager.inst.stateMachine.currentQuestState == null)
+        {
+            questNameText.text = "Tutorial completed";
+            questDescriptionText.text = "Explore the map and escape from the Geode";
+        }
     }
 }

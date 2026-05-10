@@ -7,12 +7,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759db4c98835bfed3b0f9568a787855a, type: 3}
   m_Name: Quest2
   m_EditorClassIdentifier: Assembly-CSharp::GoToPointObject
   QuestName: Harvesting
   QuestDescription: Follow the robot to the oil site
-  actualQuestState: 0
-  pointToReach: {x: 767.36, y: 0, z: 157.41}
+  actualQuestState: 2
+  questPoint: {fileID: 509463222551812799, guid: 8a836638297bcfb5185569beab8a213b, type: 3}
+  trailRenderer: {fileID: 0}
+  pointToReach: {x: 799.8, y: 0, z: 163.5}

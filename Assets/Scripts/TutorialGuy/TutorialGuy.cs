@@ -17,9 +17,12 @@ public class TutorialGuy : MonoBehaviour
     NavMeshAgent _navMeshAgent;
     bool _isWaitingForPlayer = false;
 
+    public ParticleSystem questRay;
+
     void Awake()
     {
         GoToPointQuest.GoToNewPoint += MoveToNewPosition;
+        
     }
 
     void OnDestroy()
@@ -32,6 +35,8 @@ public class TutorialGuy : MonoBehaviour
         _sphereCollider = GetComponent<SphereCollider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         isPlayerInCollider = IsPlayerInsideCollider();
+        
+        questRay.Stop();
 
         if (isPlayerInCollider)
             _lastPositionInsideCollider = playerReference.transform.position;
@@ -59,6 +64,11 @@ public class TutorialGuy : MonoBehaviour
         {
             _isWaitingForPlayer = false;
             ResumeMovement();
+        }
+
+        if(_navMeshAgent.path.status == NavMeshPathStatus.PathComplete)
+        {
+            questRay.Stop();
         }
     }
 
@@ -135,6 +145,10 @@ public class TutorialGuy : MonoBehaviour
             _navMeshAgent.isStopped = false;
             _isWaitingForPlayer = false;
             _navMeshAgent.SetDestination(hit.position);
+
+            questRay.transform.position = hit.position;
+            questRay.Play();
+            
             if(isDebug) Debug.Log($"[{GetType().Name}] moving companion to sampled position {hit.position}");
         }
         else
