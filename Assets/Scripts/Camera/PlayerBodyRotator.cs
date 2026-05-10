@@ -9,18 +9,37 @@ public class PlayerBodyRotator : MonoBehaviour
     [SerializeField] CinemachineCamera firstPersonCamera;
     [SerializeField] CinemachineCamera thirdPersonCamera;
     CinemachinePanTilt fPCPantilt;
+    CinemachinePanTilt tPCPantilt;
+    CinemachineOrbitalFollow tPCOrbitalFollow;
     float cameraYRotation = 0f;
 
     void Start()
     {
         fPCPantilt = firstPersonCamera.GetComponent<CinemachinePanTilt>();
+        tPCPantilt = thirdPersonCamera.GetComponent<CinemachinePanTilt>();
+        tPCOrbitalFollow = thirdPersonCamera.GetComponent<CinemachineOrbitalFollow>();
     }
 
     void FixedUpdate()
     {
         if (!PlayerMovement.isDead)
         {
-            cameraYRotation = thirdPersonCamera.State.RawOrientation.eulerAngles.y;
+            // Instead of using the camera's final orientation (which includes the damping wobble),
+            // we read the raw mouse input rotation directly from the camera's component.
+            if (tPCPantilt != null)
+            {
+                cameraYRotation = tPCPantilt.PanAxis.Value;
+            }
+            else if (tPCOrbitalFollow != null)
+            {
+                cameraYRotation = tPCOrbitalFollow.HorizontalAxis.Value;
+            }
+            else
+            {
+                // Fallback just in case
+                cameraYRotation = thirdPersonCamera.State.RawOrientation.eulerAngles.y;
+            }
+
             fPCPantilt.PanAxis.Value = cameraYRotation; // Syncing the x axis of the PanTilt
             playerComponent.MoveRotation(Quaternion.Euler(0f, cameraYRotation, 0f)); // Rotating the player towards the direction the camera is facing
         }
