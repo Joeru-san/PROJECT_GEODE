@@ -4,15 +4,29 @@ using UnityEngine;
 public class DayNightController : MonoBehaviour
 {
     public static Action OnDayStateChange;
+
+    [Header("Light Sources")]
     public Light sun;
+    public Light moon;
+
+    [Header("Time Settings")]
     public float dayDurationSeconds = 240f;
+    public float timeOfDay;
 
-    [Header("Lighting Settings")]
-    public Gradient ambientColor;   // Controls the color of the ambient light throughout the day
-    public Gradient fogColor;   // Controls the color of the scene's fog throughout the day
-    public Gradient skyboxTint; // Controls the tint of the procedural skybox throughout the day
+    [Header("Day/Night Thresholds")]
+    public float nightStartTime = 0.7f;
+    public float dayStartTime  = 0.2f;
 
-    public float timeOfDay; // A value from 0 (midnight) to 1 (next midnight).
+    [Header("Sun Lighting")]
+    public Gradient ambientColor;
+    public Gradient fogColor;
+    public Gradient skyboxTint;
+
+    [Header("Moon Lighting")]
+    public Gradient moonLightColor;
+    public AnimationCurve sunIntensity;
+    public AnimationCurve moonIntensity;
+
     public static bool isNight = false;
 
     public void Awake()
@@ -20,14 +34,11 @@ public class DayNightController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    [Header("Day/Night Thresholds")]
-    public float nightStartTime = 0.7f;
-    public float dayStartTime = 0.2f;
-
     void Start()
     {
-        isNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
+        isNight   = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
         timeOfDay = dayStartTime + 0.2f;
+        RenderSettings.sun = sun;
     }
 
     void Update()
@@ -35,7 +46,7 @@ public class DayNightController : MonoBehaviour
         if (sun == null) return;
 
         UpdateTimeOfDay();
-        UpdateSunRotation();
+        UpdateLightRotations();
         UpdateLighting(timeOfDay);
         CheckDayNightState();
     }
@@ -46,20 +57,42 @@ public class DayNightController : MonoBehaviour
         timeOfDay %= 1f;
     }
 
-    private void UpdateSunRotation()
+    private void UpdateLightRotations()
     {
-        float sunRotationAngle = timeOfDay * 360f;
-        sun.transform.rotation = Quaternion.Euler(sunRotationAngle, 0f, 0f);
+        float sunAngle  =  timeOfDay * 360f;
+        float moonAngle = (timeOfDay * 360f) + 180f;
+
+        sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
+
+        if (moon != null)
+            moon.transform.rotation = Quaternion.Euler(moonAngle, 170f, 0f);
     }
 
-    private void UpdateLighting(float currentTime)
+    private void UpdateLighting(float t)
     {
-        RenderSettings.ambientLight = ambientColor.Evaluate(currentTime);
-        RenderSettings.fogColor = fogColor.Evaluate(currentTime);
+        RenderSettings.ambientLight = ambientColor.Evaluate(t);
+        RenderSettings.fogColor     = fogColor.Evaluate(t);
 
-        if (RenderSettings.skybox != null && RenderSettings.skybox.HasProperty("_Tint"))
+        if (RenderSettings.skybox != null)
         {
-            RenderSettings.skybox.SetColor("_Tint", skyboxTint.Evaluate(currentTime));
+            if (RenderSettings.skybox.HasProperty("_Tint"))
+                RenderSettings.skybox.SetColor("_Tint", skyboxTint.Evaluate(t));
+
+            if (moon != null && RenderSettings.skybox.HasProperty("_MoonRotation"))
+                RenderSettings.skybox.SetMatrix("_MoonRotation",
+                    moon.transform.worldToLocalMatrix);
+        }
+
+        if (sunIntensity != null)
+            sun.intensity = sunIntensity.Evaluate(t);
+
+        if (moon != null)
+        {
+            if (moonIntensity != null)
+                moon.intensity = moonIntensity.Evaluate(t);
+
+            if (moonLightColor != null)
+                moon.color = moonLightColor.Evaluate(t);
         }
 
         DynamicGI.UpdateEnvironment();
@@ -69,11 +102,12 @@ public class DayNightController : MonoBehaviour
     {
         bool shouldBeNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
 
-        if (isNight != shouldBeNight)
-        {
-            isNight = shouldBeNight;
-            if (isNight) OnDayStateChange?.Invoke();
-            Debug.Log($"[{GetType().Name}] Changed day state in: " + (isNight ? "night" : "day"));
-        }
+        if (isNight == shouldBeNight) return;
+
+        isNight = shouldBeNight;
+        RenderSettings.sun = isNight ? moon : sun;
+        OnDayStateChange?.Invoke();
+
+        Debug.Log($"[{GetType().Name}] Day state → {(isNight ? "Night" : "Day")}");
     }
 }

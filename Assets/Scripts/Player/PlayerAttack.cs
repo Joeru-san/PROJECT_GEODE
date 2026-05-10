@@ -29,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
     void OnAim(InputValue value)
     {
         _isAiming = value.isPressed;
-        CameraController.inst.ChangeCamera();
+        // CameraController.inst.ChangeCamera();
     }
 
     void OnAttack()
