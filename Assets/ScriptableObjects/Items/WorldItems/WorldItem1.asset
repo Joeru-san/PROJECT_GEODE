@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::item1
   name: WorldItem1
   itemType: 0
-  inventoryIcon: {fileID: 21300000, guid: b5cf5ce951fe31cc79209831daca4788, type: 3}
-  minSpawnAmount: 3
-  maxSpawnAmount: 10
+  inventoryIcon: {fileID: 21300000, guid: 865fcc462e98cd520969bcd9463b5b1e, type: 3}
+  minSpawnAmount: 2
+  maxSpawnAmount: 5
   itemMesh: {fileID: 0}
   itemMaterial: {fileID: 0}
   description: WorldItem2Description

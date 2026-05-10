@@ -25,6 +25,12 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     [Header("Targets")]
     public GameObject currentTarget;
     public GameObject mainTarget;
+
+    [Header("Loot")]
+    [Tooltip("Tags of items in the ObjectPooler that this enemy can drop.")]
+    public List<string> possibleDrops = new List<string>();
+    [Range(0f, 100f)] public float dropChance = 50f;
+
     [Header("Triggers")]
     public bool isAggroed {get; set;}
     public BoxCollider aggroTrigger;
@@ -92,6 +98,8 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     #region IDamageable methods
     public void Die()
     {
+        DropLoot();
+
         if(ObjectPooler.inst.poolDictionary.ContainsKey(GetType().Name))
         {
             ObjectPooler.inst.ReAddToPool(GetType().Name, this.gameObject);
@@ -100,6 +108,15 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
             Destroy(this.gameObject);
         }
         Debug.Log($"{name} is destroyed");
+    }
+
+    private void DropLoot()
+    {
+        if (possibleDrops.Count > 0 && UnityEngine.Random.Range(0f, 100f) <= dropChance)
+        {
+            string randomItemTag = possibleDrops[UnityEngine.Random.Range(0, possibleDrops.Count)];
+            ObjectPooler.inst.SpawnFromPool(randomItemTag, transform.position, Quaternion.identity);
+        }
     }
 
     public void TakeDamage(float damageAmount)

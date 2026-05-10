@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 1
   inventoryIcon: {fileID: 21300000, guid: 65618fd36e043872e84ad0eb71d95906, type: 3}
   minSpawnAmount: 3
-  maxSpawnAmount: 10
+  maxSpawnAmount: 6
   itemMesh: {fileID: 4068373912626513877, guid: adb5ed7224993dd3bac74f3237e98833, type: 3}
   itemMaterial: {fileID: 2100000, guid: ff67a5c1fef5d471ca3f059a7bfcd6cf, type: 2}
   description: WorldItem2Description

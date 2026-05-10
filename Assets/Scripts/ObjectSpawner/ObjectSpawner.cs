@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Linq;
 
 [RequireComponent(typeof(BoxCollider))]
 public class ObjectSpawner : MonoBehaviour
@@ -18,6 +18,8 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] float minSpawnDelay = 0.5f;
     [SerializeField] float maxSpawnDelay = 2f;
     [SerializeField] float spawnCycleDelay = 10f;
+
+    [SerializeField] ParticleSystem[] isSpawningIndicator;
 
     const int MaxAttempts = 200;
 
@@ -70,6 +72,8 @@ public class ObjectSpawner : MonoBehaviour
         // Wait one frame to ensure initialization is fully finished
         yield return null; 
 
+        isSpawningIndicator.ToList().ForEach(ps => ps.Play());
+        
         while (_spawnedCount < _targetCount)
         {
             if (TryGetFreePosition(out Vector3 position))
@@ -81,6 +85,8 @@ public class ObjectSpawner : MonoBehaviour
             float delay = Random.Range(minSpawnDelay, maxSpawnDelay);
             yield return new WaitForSeconds(delay);
         }
+
+        isSpawningIndicator.ToList().ForEach(ps => ps.Stop());
         yield return new WaitForSeconds(spawnCycleDelay);
         yield return new WaitUntil(() => transform.childCount == 0);
         _spawnedCount = 0;

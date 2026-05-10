@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SyntetizedItem
   name: SyntetizedItem3
   itemType: 2
-  inventoryIcon: {fileID: 0}
+  inventoryIcon: {fileID: 21300000, guid: f8d71d2eeab638328940f32e8a5ad5ea, type: 3}
   minSpawnAmount: 1
   maxSpawnAmount: 1
   itemMesh: {fileID: 7114148706264111387, guid: 2d489f1fe465614c5a7d2844d8ff2427, type: 3}
