@@ -181,6 +181,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         isDead = true;
         StartCoroutine(Death(1f)); 
+        PauseManager.inst.canPause = false;
     }
     
     public void TakeDamage(float damageAmount)

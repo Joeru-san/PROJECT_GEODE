@@ -7,17 +7,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759db4c98835bfed3b0f9568a787855a, type: 3}
-  m_Name: Quest1
+  m_Name: Quest7
   m_EditorClassIdentifier: Assembly-CSharp::GoToPointObject
-  QuestName: A New Place
-  QuestDescription: 'Follow the robot to the strange structure.
+  QuestName: A way out
+  QuestDescription: 'Visit the ancient structure and load the remaing objects in
+    your inventory by standing on the interaction  platform.
 
-    Move with WASD
-    or with the Left Analog.
 
-    Press Shift or L3 to sprint.'
-  actualQuestState: 1
-  pointToReach: {x: 481.3, y: 0, z: 262.8}
+    Press E or button
+    North to load the objects.
+
+
+    The ancient structures are the only way to escape
+    the Geode.'
+  actualQuestState: 0
+  pointToReach: {x: 538.9, y: 0, z: 176}

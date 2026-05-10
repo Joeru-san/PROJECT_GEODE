@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -16,8 +17,14 @@ public class AncientDoor : MonoBehaviour
     {
         if(numberOfStructuresNeeded == AncientStructureManager.completedStructures)
         {
-            Debug.Log($"{gameObject.name} ACTIVATED");
-            doorMesh.transform.DOMove(doorMesh.transform.position + Vector3.up * 5f, 1f);
+            DayNightController.inst.dayDurationSeconds = 1f;
+            StartCoroutine(DelaySceneLoad(10f));
         }
+    }
+    IEnumerator DelaySceneLoad(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        PauseManager.inst.LoadScene("MainScene");
     }
 }

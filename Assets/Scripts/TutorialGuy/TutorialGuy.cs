@@ -12,17 +12,25 @@ public class TutorialGuy : MonoBehaviour
     [SerializeField] float pushBackDistance = 1.5f;
     [SerializeField] float resumeDistance = 2f;
 
-    SphereCollider _sphereCollider;
+    public SphereCollider sphereCollider;
     Vector3 _lastPositionInsideCollider;
     NavMeshAgent _navMeshAgent;
     bool _isWaitingForPlayer = false;
 
     public ParticleSystem questRay;
 
+    public static TutorialGuy inst;
+
     void Awake()
     {
         GoToPointQuest.GoToNewPoint += MoveToNewPosition;
-        
+        if (inst != null && inst != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        inst = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void OnDestroy()
@@ -32,7 +40,7 @@ public class TutorialGuy : MonoBehaviour
 
     void Start()
     {
-        _sphereCollider = GetComponent<SphereCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         isPlayerInCollider = IsPlayerInsideCollider();
         
@@ -46,11 +54,16 @@ public class TutorialGuy : MonoBehaviour
     {
         if (playerReference == null) return;
 
-        // Track last safe position
         if (isPlayerInCollider)
             _lastPositionInsideCollider = playerReference.transform.position;
 
-        // Resume check — only runs while waiting
+        if (!_navMeshAgent.pathPending
+            && _navMeshAgent.path.status == NavMeshPathStatus.PathComplete
+            && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+        {
+            questRay.Stop();
+        }
+
         if (!_isWaitingForPlayer) return;
 
         float dist = Vector3.Distance(
@@ -58,17 +71,10 @@ public class TutorialGuy : MonoBehaviour
             companionReference.transform.position
         );
 
-        if(isDebug) Debug.Log($"[{GetType().Name}] dist to companion: {dist:F2} / resume at: {resumeDistance}");
-
         if (dist <= resumeDistance)
         {
             _isWaitingForPlayer = false;
             ResumeMovement();
-        }
-
-        if(_navMeshAgent.path.status == NavMeshPathStatus.PathComplete)
-        {
-            questRay.Stop();
         }
     }
 
@@ -129,8 +135,8 @@ public class TutorialGuy : MonoBehaviour
     {
         if (playerReference == null) return false;
 
-        Vector3 center = transform.TransformPoint(_sphereCollider.center);
-        float radius = _sphereCollider.radius * transform.lossyScale.x;
+        Vector3 center = transform.TransformPoint(sphereCollider.center);
+        float radius = sphereCollider.radius * transform.lossyScale.x;
 
         return Vector3.Distance(playerReference.transform.position, center) <= radius;
     }

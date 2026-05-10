@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public string currentQuestName;
+
+    public static Action OnTutorialEnded;
 
     public static QuestManager inst;
     public List<QuestBaseObject> questArray;
@@ -14,6 +17,8 @@ public class QuestManager : MonoBehaviour
     public GameObject playerReference;
 
     public QuestStateMachine stateMachine { get; set; }
+
+    [SerializeField] DayNightController dayNightController;
 
     // Maps each ScriptableObject to its live state instance
     private Dictionary<QuestBaseObject, QuestBaseState> questStateMap;
@@ -30,6 +35,8 @@ public class QuestManager : MonoBehaviour
         questStateMap = new Dictionary<QuestBaseObject, QuestBaseState>();
         foreach (var questObject in questArray)
             questStateMap[questObject] = questObject.CreateState(this, stateMachine);
+        
+        dayNightController.gameObject.SetActive(false);
     }
 
     void Start()
@@ -57,12 +64,15 @@ public class QuestManager : MonoBehaviour
         if (_currentQuestIndex < questArray.Count)
         {
             currentQuest = questArray[_currentQuestIndex];
-            stateMachine.ChangeState(questStateMap[currentQuest]); // just this, no null assignment before
+            stateMachine.ChangeState(questStateMap[currentQuest]);
         }
         else
         {
             stateMachine.currentQuestState = null;
             Debug.Log("All quests completed!");
+            dayNightController.gameObject.SetActive(true);
+            TutorialGuy.inst.sphereCollider.enabled = false;   
+            OnTutorialEnded?.Invoke();
         }
     }
 

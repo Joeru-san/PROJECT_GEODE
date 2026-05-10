@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: Quest5
   m_EditorClassIdentifier: Assembly-CSharp::BuildStructureObject
   QuestName: Do it yourself
-  QuestDescription: Build your first "Syntetizer"
-  actualQuestState: 1
+  QuestDescription: 'Build your first "Syntetizer".
+
+
+    Go toward the Screen of
+    the structure spawner and press E or Button north to interact and open the shop.
+
+
+    Click
+    the image of the item you want to buy.'
+  actualQuestState: 0

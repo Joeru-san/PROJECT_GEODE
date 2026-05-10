@@ -13,7 +13,7 @@ public class DefenseTurretZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && DayNightController.isNight)
+        if(other.gameObject.CompareTag("Player"))
         {
             _isPlayerInTrigger = true;
             SetActiveStatusHealthBars(true);

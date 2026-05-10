@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759db4c98835bfed3b0f9568a787855a, type: 3}
+  m_Name: Quest8
+  m_EditorClassIdentifier: Assembly-CSharp::GoToPointObject
+  QuestName: Now the real fun begins
+  QuestDescription: 'The night is coming and the enemies approach from all the directions.
+
+
+    Attack
+    with the Left Mouse Button or with button west
+
+
+    The turrets will help you
+    defend, but they aren''t invincible. If a turret fails they will aim for the
+    Main Base and if it breaks, it will be game over.
+
+
+    Survive the night and
+    escape from the Geode '
+  actualQuestState: 2
+  pointToReach: {x: 516.4, y: 0, z: 299.9}

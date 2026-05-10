@@ -35,5 +35,6 @@ public class AncientStructureManager : MonoBehaviour
         ancientStructureReferences[structureReference] = true;
         completedStructures++;
         Debug.Log(completedStructures);
+        TutorialGuy.inst.enabled = false;
     }
 }

@@ -33,23 +33,30 @@ public class DayNightController : MonoBehaviour
     public float skyboxFogPower = 1f;
     public float skyboxFogOffset = 0f;
 
+    public static DayNightController inst;
+
     [Header("Stars")]
     public Transform starsPivot; // Empty GameObject for star rotation
 
     public static bool isNight = false;
 
-    public void Awake()
+    void Awake()
     {
+        if (inst != null && inst != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        inst = this;
         DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
         isNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
-        timeOfDay = dayStartTime + 0.2f;
-        RenderSettings.sun = sun;
+        RenderSettings.sun = isNight ? moon : sun; // make sure sun source matches starting time
     }
-
+    
     void Update()
     {
         if (sun == null) return;
@@ -68,10 +75,14 @@ public class DayNightController : MonoBehaviour
 
     private void UpdateLightRotations()
     {
-        float sunAngle  =  timeOfDay * 360f;
-        float moonAngle = (timeOfDay * 360f) + 180f;
+        float dayLength = nightStartTime - dayStartTime; // 0.5
+        float dayProgress = (timeOfDay - dayStartTime) / dayLength; // 0→1 during day
 
-        sun.transform.rotation  = Quaternion.Euler(sunAngle,  170f, 0f);
+        // Sun: -90° at sunrise, 90° at noon, 270° at sunset (below horizon at night)
+        float sunAngle  = dayProgress * 180f - 90f;
+        float moonAngle = sunAngle + 180f;
+
+        sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
         if (moon != null)
             moon.transform.rotation = Quaternion.Euler(moonAngle, 170f, 0f);
