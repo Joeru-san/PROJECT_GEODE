@@ -49,6 +49,14 @@ public class DayNightController : MonoBehaviour
         }
         inst = this;
         DontDestroyOnLoad(gameObject);
+
+        QuestManager.OnQuestEnded += ResetDay;
+    }
+
+    public void ResetDay()
+    {
+        dayDurationSeconds = 240;
+        timeOfDay = 0.4f;
     }
 
     void Start()
@@ -67,13 +75,13 @@ public class DayNightController : MonoBehaviour
         CheckDayNightState();
     }
 
-    private void UpdateTimeOfDay()
+    void UpdateTimeOfDay()
     {
         timeOfDay += Time.deltaTime / dayDurationSeconds;
         timeOfDay %= 1f;
     }
 
-    private void UpdateLightRotations()
+    void UpdateLightRotations()
     {
         float dayLength = nightStartTime - dayStartTime; // 0.5
         float dayProgress = (timeOfDay - dayStartTime) / dayLength; // 0→1 during day
@@ -91,7 +99,7 @@ public class DayNightController : MonoBehaviour
             starsPivot.Rotate(Vector3.up, Time.deltaTime * 0.5f);
     }
 
-    private void UpdateLighting(float t)
+    void UpdateLighting(float t)
     {
         RenderSettings.ambientLight = ambientColor.Evaluate(t);
         RenderSettings.fogColor     = fogColor.Evaluate(t);
@@ -134,7 +142,7 @@ public class DayNightController : MonoBehaviour
         DynamicGI.UpdateEnvironment();
     }
 
-    private void CheckDayNightState()
+    void CheckDayNightState()
     {
         bool shouldBeNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
 

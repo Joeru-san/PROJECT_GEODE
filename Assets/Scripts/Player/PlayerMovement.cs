@@ -136,12 +136,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         OnShowInventory?.Invoke(GetComponent<PlayerInput>());
     }
-
-    void OnPause()
-    {
-        PauseManager.inst.PauseGame();
-    }
-
+    
     void RefreshHealthUI()
     {
         healthBar?.SetHealth(currentHealth, MaxHealth);

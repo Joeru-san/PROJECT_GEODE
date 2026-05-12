@@ -12,7 +12,7 @@ public class TutorialGuy : MonoBehaviour
     [SerializeField] float pushBackDistance = 1.5f;
     [SerializeField] float resumeDistance = 2f;
 
-    public SphereCollider sphereCollider;
+    SphereCollider _sphereCollider;
     Vector3 _lastPositionInsideCollider;
     NavMeshAgent _navMeshAgent;
     bool _isWaitingForPlayer = false;
@@ -31,6 +31,8 @@ public class TutorialGuy : MonoBehaviour
         }
         inst = this;
         DontDestroyOnLoad(gameObject);
+
+        QuestManager.OnQuestEnded += FinishTutorial;
     }
 
     void OnDestroy()
@@ -40,7 +42,7 @@ public class TutorialGuy : MonoBehaviour
 
     void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        _sphereCollider = GetComponent<SphereCollider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         isPlayerInCollider = IsPlayerInsideCollider();
         
@@ -135,8 +137,8 @@ public class TutorialGuy : MonoBehaviour
     {
         if (playerReference == null) return false;
 
-        Vector3 center = transform.TransformPoint(sphereCollider.center);
-        float radius = sphereCollider.radius * transform.lossyScale.x;
+        Vector3 center = transform.TransformPoint(_sphereCollider.center);
+        float radius = _sphereCollider.radius * transform.lossyScale.x;
 
         return Vector3.Distance(playerReference.transform.position, center) <= radius;
     }
@@ -161,5 +163,11 @@ public class TutorialGuy : MonoBehaviour
         {
             Debug.LogWarning($"[{GetType().Name}] could not find valid NavMesh position near {newPosition}");
         }
+    }
+
+    void FinishTutorial()
+    {
+        _sphereCollider.enabled = false;
+        transform.LookAt(playerReference.transform);
     }
 }

@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     public string currentQuestName;
 
-    public static Action OnTutorialEnded;
+    public static Action OnQuestEnded;
 
     public static QuestManager inst;
     public List<QuestBaseObject> questArray;
@@ -70,9 +70,7 @@ public class QuestManager : MonoBehaviour
         {
             stateMachine.currentQuestState = null;
             Debug.Log("All quests completed!");
-            dayNightController.gameObject.SetActive(true);
-            TutorialGuy.inst.sphereCollider.enabled = false;   
-            OnTutorialEnded?.Invoke();
+            OnQuestEnded?.Invoke();
         }
     }
 
