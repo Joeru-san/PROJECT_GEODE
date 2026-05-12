@@ -12,19 +12,37 @@ public class DayNightController : MonoBehaviour
 
     [Header("Time Settings")]
     public float dayDurationSeconds = 240f;
-    public float timeOfDay;
+
+    [Range(0f, 1f)]
+    public float timeOfDay = 0f;
+
+    /*
+        Timeline:
+
+        0.00 = Sunrise
+        0.25 = Midday
+        0.50 = Sunset
+        0.75 = Midnight
+        1.00 = Sunrise again
+    */
 
     [Header("Day/Night Thresholds")]
-    public float nightStartTime = 0.7f;
-    public float dayStartTime = 0.2f;
 
-    [Header("Sun Lighting")]
+    [Range(0f, 1f)]
+    public float dayStartTime = 0f;
+
+    [Range(0f, 1f)]
+    public float nightStartTime = 0.5f;
+
+    [Header("Environment Lighting")]
     public Gradient ambientColor;
     public Gradient fogColor;
     public Gradient skyboxTint;
 
     [Header("Moon Lighting")]
     public Gradient moonLightColor;
+
+    [Header("Light Intensity")]
     public AnimationCurve sunIntensity;
     public AnimationCurve moonIntensity;
 
@@ -33,10 +51,10 @@ public class DayNightController : MonoBehaviour
     public float skyboxFogPower = 1f;
     public float skyboxFogOffset = 0f;
 
-    public static DayNightController inst;
-
     [Header("Stars")]
-    public Transform starsPivot; // Empty GameObject for star rotation
+    public Transform starsPivot;
+
+    public static DayNightController inst;
 
     public static bool isNight = false;
 
@@ -47,27 +65,26 @@ public class DayNightController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         inst = this;
         DontDestroyOnLoad(gameObject);
 
         QuestManager.OnAllQuestEnded += ResetDay;
     }
 
-    public void ResetDay()
-    {
-        dayDurationSeconds = 240;
-        timeOfDay = 0.4f;
-    }
-
     void Start()
     {
-        isNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
-        RenderSettings.sun = isNight ? moon : sun; // make sure sun source matches starting time
+        isNight = timeOfDay >= nightStartTime;
+        RenderSettings.sun = isNight ? moon : sun;
+
+        UpdateLightRotations();
+        UpdateLighting(timeOfDay);
     }
-    
+
     void Update()
     {
-        if (sun == null) return;
+        if (sun == null)
+            return;
 
         UpdateTimeOfDay();
         UpdateLightRotations();
@@ -83,60 +100,105 @@ public class DayNightController : MonoBehaviour
 
     void UpdateLightRotations()
     {
-        float dayLength = nightStartTime - dayStartTime; // 0.5
-        float dayProgress = (timeOfDay - dayStartTime) / dayLength; // 0→1 during day
+        float t = (timeOfDay + 0.5f) % 1f;
 
-        // Sun: -90° at sunrise, 90° at noon, 270° at sunset (below horizon at night)
-        float sunAngle  = dayProgress * 180f - 90f;
-        float moonAngle = sunAngle + 180f;
+        float sunAngle = t * 360f;
 
-        sun.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
+        // FIXED MOON
+        float moonAngle = sunAngle - 180f;
+
+        sun.transform.rotation = Quaternion.Euler(
+            sunAngle,
+            170f,
+            0f
+        );
 
         if (moon != null)
-            moon.transform.rotation = Quaternion.Euler(moonAngle, 170f, 0f);
+        {
+            moon.transform.rotation = Quaternion.Euler(
+                moonAngle,
+                170f,
+                0f
+            );
+        }
 
         if (starsPivot != null)
-            starsPivot.Rotate(Vector3.up, Time.deltaTime * 0.5f);
+        {
+            starsPivot.rotation = Quaternion.Euler(
+                0f,
+                sunAngle,
+                0f
+            );
+        }
     }
 
     void UpdateLighting(float t)
     {
+        // Ambient & fog
         RenderSettings.ambientLight = ambientColor.Evaluate(t);
-        RenderSettings.fogColor     = fogColor.Evaluate(t);
+        RenderSettings.fogColor = fogColor.Evaluate(t);
 
+        // Sun intensity
         if (sunIntensity != null)
+        {
             sun.intensity = sunIntensity.Evaluate(t);
+        }
 
+        // Moon intensity & color
         if (moon != null)
         {
             if (moonIntensity != null)
+            {
                 moon.intensity = moonIntensity.Evaluate(t);
+            }
+
             if (moonLightColor != null)
+            {
                 moon.color = moonLightColor.Evaluate(t);
+            }
         }
 
+        // Skybox
         Material skybox = RenderSettings.skybox;
+
         if (skybox != null)
         {
             // Sun direction
-            SkyboxProperty.SetSunDirection(skybox, sun.transform.forward);
+            SkyboxProperty.SetSunDirection(
+                skybox,
+                sun.transform.forward
+            );
 
             // Moon matrix
             if (moon != null)
-                SkyboxProperty.SetMoonMatrix(skybox, moon.transform);
+            {
+                SkyboxProperty.SetMoonMatrix(
+                    skybox,
+                    moon.transform
+                );
+            }
 
             // Stars matrix
             if (starsPivot != null)
+            {
                 SkyboxProperty.SetStarMatrix(skybox, starsPivot);
+            }
 
             // Fog
             SkyboxProperty.SetFogColor(skybox, skyboxFogColor);
+
             SkyboxProperty.SetFogPower(skybox, skyboxFogPower);
+
             SkyboxProperty.SetFogOffset(skybox, skyboxFogOffset);
 
-            // Tint fallback for non-package skyboxes
+            // Tint
             if (skybox.HasProperty("_Tint"))
-                skybox.SetColor("_Tint", skyboxTint.Evaluate(t));
+            {
+                skybox.SetColor(
+                    "_Tint",
+                    skyboxTint.Evaluate(t)
+                );
+            }
         }
 
         DynamicGI.UpdateEnvironment();
@@ -144,14 +206,29 @@ public class DayNightController : MonoBehaviour
 
     void CheckDayNightState()
     {
-        bool shouldBeNight = timeOfDay >= nightStartTime || timeOfDay < dayStartTime;
+        bool shouldBeNight = timeOfDay >= nightStartTime;
 
-        if (isNight == shouldBeNight) return;
+        if (isNight == shouldBeNight)
+            return;
 
         isNight = shouldBeNight;
+
         RenderSettings.sun = isNight ? moon : sun;
+
         OnDayStateChange?.Invoke();
 
-        Debug.Log($"[{GetType().Name}] Day state → {(isNight ? "Night" : "Day")}");
+        Debug.Log(
+            $"[{GetType().Name}] Day state → " +
+            $"{(isNight ? "Night" : "Day")}"
+        );
+    }
+
+    public void ResetDay()
+    {
+        dayDurationSeconds = 240f;
+        timeOfDay = dayStartTime;
+
+        UpdateLightRotations();
+        UpdateLighting(timeOfDay);
     }
 }
