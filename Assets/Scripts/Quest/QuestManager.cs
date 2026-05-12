@@ -18,8 +18,6 @@ public class QuestManager : MonoBehaviour
 
     public QuestStateMachine stateMachine { get; set; }
 
-    [SerializeField] DayNightController dayNightController;
-
     // Use a List instead of a Dictionary to allow duplicate quests
     private List<QuestBaseState> questStates;
 
@@ -37,8 +35,6 @@ public class QuestManager : MonoBehaviour
         {
             questStates.Add(questObject.CreateState(this, stateMachine));
         }
-        
-        dayNightController.gameObject.SetActive(false);
     }
 
     void Start()

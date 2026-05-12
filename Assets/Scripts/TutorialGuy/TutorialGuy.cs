@@ -15,6 +15,7 @@ public class TutorialGuy : MonoBehaviour
     SphereCollider _sphereCollider;
     Vector3 _lastPositionInsideCollider;
     NavMeshAgent _navMeshAgent;
+    Vector3 _actualPointToReach;
     bool _isWaitingForPlayer = false;
 
     public ParticleSystem questRay;
@@ -23,7 +24,6 @@ public class TutorialGuy : MonoBehaviour
 
     void Awake()
     {
-        GoToPointQuest.GoToNewPoint += MoveToNewPosition;
         if (inst != null && inst != this)
         {
             Destroy(gameObject);
@@ -32,6 +32,7 @@ public class TutorialGuy : MonoBehaviour
         inst = this;
         DontDestroyOnLoad(gameObject);
 
+        GoToPointQuest.GoToNewPoint += MoveToNewPosition;
         QuestManager.OnAllQuestEnded += FinishTutorial;
     }
 
@@ -153,6 +154,7 @@ public class TutorialGuy : MonoBehaviour
             _navMeshAgent.isStopped = false;
             _isWaitingForPlayer = false;
             _navMeshAgent.SetDestination(hit.position);
+            _actualPointToReach = hit.position;
 
             questRay.transform.position = hit.position;
             questRay.Play();
@@ -169,5 +171,10 @@ public class TutorialGuy : MonoBehaviour
     {
         _sphereCollider.enabled = false;
         transform.LookAt(playerReference.transform);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(_actualPointToReach, 4f);
     }
 }

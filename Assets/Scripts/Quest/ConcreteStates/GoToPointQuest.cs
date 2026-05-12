@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GoToPointQuest : QuestBaseState
@@ -26,7 +27,7 @@ public class GoToPointQuest : QuestBaseState
         if (isEnding) return;
         base.QuestUpdate();
     
-        Collider[] hits = Physics.OverlapSphere(obj.pointToReach, 3f);
+        Collider[] hits = Physics.OverlapSphere(obj.pointToReach, 4f);
         foreach (Collider hit in hits)
         {
             if (hit.gameObject.CompareTag("Player"))
