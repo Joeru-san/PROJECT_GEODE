@@ -10230,10 +10230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CompanionCheckPlayerInCollider
   playerReference: {fileID: 1506280702}
   companionReference: {fileID: 913221909}
-  isDebug: 1
+  isDebug: 0
   pushBackDistance: 0.5
   resumeDistance: 6
-  sphereCollider: {fileID: 0}
   questRay: {fileID: 503958474}
 --- !u!23 &913221912
 MeshRenderer:
@@ -14331,7 +14330,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab1af71a92474667eb94e234964a4a04, type: 2}
   - {fileID: 11400000, guid: a64c29815e95e5789a9fabaf0c4fdd52, type: 2}
   - {fileID: 11400000, guid: 575c1ca1fbc7c0c87a5f709581352687, type: 2}
-  - {fileID: 11400000, guid: 8ed3ee2fd491bbdc18f1266ac5bdbd03, type: 2}
   - {fileID: 11400000, guid: 54827d4a0903a922db3aaa2ca22dfa53, type: 2}
   - {fileID: 11400000, guid: e0d14ea7c154d4f8fa591794400c8da0, type: 2}
   _currentQuestIndex: 0
@@ -16258,7 +16256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1358656174
 Transform:
   m_ObjectHideFlags: 0
@@ -16288,7 +16286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DayNightController
   sun: {fileID: 1565546743}
   moon: {fileID: 440348926}
-  dayDurationSeconds: 240
+  dayDurationSeconds: 10000
   timeOfDay: 0.4
   nightStartTime: 0.7
   dayStartTime: 0.2

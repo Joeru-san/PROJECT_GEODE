@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AncientStructure
   activeMaterial: {fileID: 2100000, guid: 364893b601c92f886bb76e5e66804fa5, type: 2}
-  ancientStructureMesh: {fileID: 5639292799232060275}
+  ancientStructureMeshRenderer: {fileID: 5639292799232060275}
   itemTypeNeeded: 0
   numberOfItemsToLoad: 10
   amountText: {fileID: 5791706856749825890}

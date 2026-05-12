@@ -32,7 +32,7 @@ public class TutorialGuy : MonoBehaviour
         inst = this;
         DontDestroyOnLoad(gameObject);
 
-        QuestManager.OnQuestEnded += FinishTutorial;
+        QuestManager.OnAllQuestEnded += FinishTutorial;
     }
 
     void OnDestroy()

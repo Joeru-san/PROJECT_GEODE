@@ -23,14 +23,17 @@ public class GoToPointQuest : QuestBaseState
 
     public override void QuestUpdate()
     {
-        if (isEnding) return; // critical — stops re-entry
+        if (isEnding) return;
         base.QuestUpdate();
     
-        float dist = Vector2.Distance(QuestManager.inst.playerReference.transform.position, obj.pointToReach);
-
-        if (dist < 1.5f)
+        Collider[] hits = Physics.OverlapSphere(obj.pointToReach, 3f);
+        foreach (Collider hit in hits)
         {
-            EndQuest();
+            if (hit.gameObject.CompareTag("Player"))
+            {
+                EndQuest();
+                break;
+            }
         }
     }
 

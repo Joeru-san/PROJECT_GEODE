@@ -9,7 +9,7 @@ public class QuestUI : MonoBehaviour
     void Awake()
     {
         QuestBaseState.OnQuestCompleted += ChangeQuestTexts;
-        QuestManager.OnQuestEnded += BasicQuestText;
+        QuestManager.OnAllQuestEnded += BasicQuestText;
     }
 
     void ChangeQuestTexts()

@@ -50,7 +50,7 @@ public class DayNightController : MonoBehaviour
         inst = this;
         DontDestroyOnLoad(gameObject);
 
-        QuestManager.OnQuestEnded += ResetDay;
+        QuestManager.OnAllQuestEnded += ResetDay;
     }
 
     public void ResetDay()

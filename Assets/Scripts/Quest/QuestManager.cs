@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     public string currentQuestName;
 
-    public static Action OnQuestEnded;
+    public static Action OnAllQuestEnded;
 
     public static QuestManager inst;
     public List<QuestBaseObject> questArray;
@@ -20,8 +20,8 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] DayNightController dayNightController;
 
-    // Maps each ScriptableObject to its live state instance
-    private Dictionary<QuestBaseObject, QuestBaseState> questStateMap;
+    // Use a List instead of a Dictionary to allow duplicate quests
+    private List<QuestBaseState> questStates;
 
     void Awake()
     {
@@ -31,17 +31,19 @@ public class QuestManager : MonoBehaviour
 
         stateMachine = new QuestStateMachine();
 
-        // Build the map: every quest object gets its matching state
-        questStateMap = new Dictionary<QuestBaseObject, QuestBaseState>();
+        // Build the list: every quest object gets its matching state at the same index
+        questStates = new List<QuestBaseState>();
         foreach (var questObject in questArray)
-            questStateMap[questObject] = questObject.CreateState(this, stateMachine);
+        {
+            questStates.Add(questObject.CreateState(this, stateMachine));
+        }
         
         dayNightController.gameObject.SetActive(false);
     }
 
     void Start()
     {
-        StartQuest(questArray[_currentQuestIndex]);
+        StartQuest(_currentQuestIndex);
     }
 
     void Update()
@@ -51,11 +53,12 @@ public class QuestManager : MonoBehaviour
         currentQuestName = currentQuest.name;
     }
 
-    // Call this to start any quest by passing its ScriptableObject
-    public void StartQuest(QuestBaseObject questObject)
+    // Pass the index instead of the ScriptableObject
+    public void StartQuest(int index)
     {
-        currentQuest = questObject;
-        stateMachine.Initialize(questStateMap[questObject]);
+        _currentQuestIndex = index;
+        currentQuest = questArray[_currentQuestIndex];
+        stateMachine.Initialize(questStates[_currentQuestIndex]);
     }
 
     public void ChooseNextState()
@@ -64,13 +67,13 @@ public class QuestManager : MonoBehaviour
         if (_currentQuestIndex < questArray.Count)
         {
             currentQuest = questArray[_currentQuestIndex];
-            stateMachine.ChangeState(questStateMap[currentQuest]);
+            stateMachine.ChangeState(questStates[_currentQuestIndex]);
         }
         else
         {
             stateMachine.currentQuestState = null;
             Debug.Log("All quests completed!");
-            OnQuestEnded?.Invoke();
+            OnAllQuestEnded?.Invoke();
         }
     }
 
@@ -78,6 +81,6 @@ public class QuestManager : MonoBehaviour
     {
         _currentQuestIndex = index;
         currentQuest = questArray[_currentQuestIndex];
-        stateMachine.ChangeState(questStateMap[currentQuest]);
+        stateMachine.ChangeState(questStates[_currentQuestIndex]);
     }
 }
