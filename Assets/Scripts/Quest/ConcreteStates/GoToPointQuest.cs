@@ -7,6 +7,7 @@ public class GoToPointQuest : QuestBaseState
 	public GoToPointQuest(QuestManager questManager, QuestStateMachine questStateMachine) : base(questManager, questStateMachine) {}
 
     public static Action<Vector3> GoToNewPoint;
+    public static float distance = 6f;
 
     GoToPointObject obj;
 
@@ -27,7 +28,7 @@ public class GoToPointQuest : QuestBaseState
         if (isEnding) return;
         base.QuestUpdate();
     
-        Collider[] hits = Physics.OverlapSphere(obj.pointToReach, 4f);
+        Collider[] hits = Physics.OverlapSphere(obj.pointToReach, distance);
         foreach (Collider hit in hits)
         {
             if (hit.gameObject.CompareTag("Player"))

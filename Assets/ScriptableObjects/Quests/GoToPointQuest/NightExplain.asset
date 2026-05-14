@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759db4c98835bfed3b0f9568a787855a, type: 3}
-  m_Name: Quest8
+  m_Name: NightExplain
   m_EditorClassIdentifier: Assembly-CSharp::GoToPointObject
   QuestName: Now the real fun begins
   QuestDescription: 'The night is coming and the enemies approach from all the directions.

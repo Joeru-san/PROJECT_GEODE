@@ -179,6 +179,6 @@ public class TutorialGuy : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(_actualPointToReach, 4f);
+        Gizmos.DrawWireSphere(_actualPointToReach, GoToPointQuest.distance);
     }
 }

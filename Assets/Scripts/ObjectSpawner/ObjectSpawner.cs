@@ -11,6 +11,7 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] LayerMask objectLayer;
     public GameObject itemToSpawn;
     [SerializeField] float overlapCheckRadius = 0.5f; // tunable in Inspector
+    [HideInInspector] public bool isSpawning = false;
 
     [SerializeField] Transform SpawnHeight;
 
@@ -73,6 +74,7 @@ public class ObjectSpawner : MonoBehaviour
         yield return null; 
 
         isSpawningIndicator.ToList().ForEach(ps => ps.Play());
+        isSpawning = true;
         
         while (_spawnedCount < _targetCount)
         {
@@ -87,6 +89,8 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         isSpawningIndicator.ToList().ForEach(ps => ps.Stop());
+        isSpawning = false;
+
         yield return new WaitForSeconds(spawnCycleDelay);
         yield return new WaitUntil(() => transform.childCount == 0);
         _spawnedCount = 0;
