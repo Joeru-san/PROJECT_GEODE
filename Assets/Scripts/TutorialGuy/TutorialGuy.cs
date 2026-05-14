@@ -7,6 +7,7 @@ public class TutorialGuy : MonoBehaviour
     public static bool isPlayerInCollider = false;
     public GameObject playerReference;
     public GameObject companionReference;
+    public Animator animator;
     public bool isDebug;
 
     [SerializeField] float pushBackDistance = 1.5f;
@@ -64,6 +65,7 @@ public class TutorialGuy : MonoBehaviour
             && _navMeshAgent.path.status == NavMeshPathStatus.PathComplete
             && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
         {
+            animator.SetBool("isWalking", false);
             questRay.Stop();
         }
 
@@ -101,6 +103,49 @@ public class TutorialGuy : MonoBehaviour
         }
     }
 
+    void StopMovement()
+    {
+        if (_navMeshAgent == null || !_navMeshAgent.isOnNavMesh) return;
+
+        _navMeshAgent.isStopped = true;
+        _isWaitingForPlayer = true;
+        animator.SetBool("isWalking", false);
+        if(isDebug) Debug.Log($"[{GetType().Name}] companion stopped");
+    }
+
+    void ResumeMovement()
+    {
+        if (_navMeshAgent == null || !_navMeshAgent.isOnNavMesh) return;
+
+        _navMeshAgent.isStopped = false;
+        animator.SetBool("isWalking", true);
+        if(isDebug) Debug.Log($"[{GetType().Name}] companion resumed");
+    }
+
+    void MoveToNewPosition(Vector3 newPosition)
+    {
+        if (_navMeshAgent == null) return;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(newPosition, out hit, 2f, NavMesh.AllAreas))
+        {
+            _navMeshAgent.isStopped = false;
+            _isWaitingForPlayer = false;
+            _navMeshAgent.SetDestination(hit.position);
+            _actualPointToReach = hit.position;
+            animator.SetBool("isWalking", true);
+
+            questRay.transform.position = hit.position;
+            questRay.Play();
+            
+            if(isDebug) Debug.Log($"[{GetType().Name}] moving companion to sampled position {hit.position}");
+        }
+        else
+        {
+            Debug.LogWarning($"[{GetType().Name}] could not find valid NavMesh position near {newPosition}");
+        }
+    }
+
     void PushPlayerBack()
     {
         if (playerReference == null) return;
@@ -116,24 +161,6 @@ public class TutorialGuy : MonoBehaviour
 
         if(isDebug) Debug.Log($"[{GetType().Name}] player pushed back to {targetPos}");
     }
-
-    void StopMovement()
-    {
-        if (_navMeshAgent == null || !_navMeshAgent.isOnNavMesh) return;
-
-        _navMeshAgent.isStopped = true;
-        _isWaitingForPlayer = true;
-        if(isDebug) Debug.Log($"[{GetType().Name}] companion stopped");
-    }
-
-    void ResumeMovement()
-    {
-        if (_navMeshAgent == null || !_navMeshAgent.isOnNavMesh) return;
-
-        _navMeshAgent.isStopped = false;
-        if(isDebug) Debug.Log($"[{GetType().Name}] companion resumed");
-    }
-
     bool IsPlayerInsideCollider()
     {
         if (playerReference == null) return false;
@@ -142,29 +169,6 @@ public class TutorialGuy : MonoBehaviour
         float radius = _sphereCollider.radius * transform.lossyScale.x;
 
         return Vector3.Distance(playerReference.transform.position, center) <= radius;
-    }
-
-    void MoveToNewPosition(Vector3 newPosition)
-    {
-        if (_navMeshAgent == null) return;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(newPosition, out hit, 2f, NavMesh.AllAreas))
-        {
-            _navMeshAgent.isStopped = false;
-            _isWaitingForPlayer = false;
-            _navMeshAgent.SetDestination(hit.position);
-            _actualPointToReach = hit.position;
-
-            questRay.transform.position = hit.position;
-            questRay.Play();
-            
-            if(isDebug) Debug.Log($"[{GetType().Name}] moving companion to sampled position {hit.position}");
-        }
-        else
-        {
-            Debug.LogWarning($"[{GetType().Name}] could not find valid NavMesh position near {newPosition}");
-        }
     }
 
     void FinishTutorial()

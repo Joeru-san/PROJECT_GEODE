@@ -226,7 +226,6 @@ public class DayNightController : MonoBehaviour
     public void ResetDay()
     {
         dayDurationSeconds = 240f;
-        timeOfDay = dayStartTime;
 
         UpdateLightRotations();
         UpdateLighting(timeOfDay);
