@@ -144,23 +144,23 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-        string GetBoundButtonName(PlayerInput playerInput)
+    string GetBoundButtonName(PlayerInput playerInput)
+    {
+        string scheme = playerInput.currentControlScheme;
+
+        // Find the binding that matches the current control scheme
+        foreach (var binding in exitAction.action.bindings)
         {
-            string scheme = playerInput.currentControlScheme;
-
-            // Find the binding that matches the current control scheme
-            foreach (var binding in exitAction.action.bindings)
+            if (binding.groups.Contains(scheme))
             {
-                if (binding.groups.Contains(scheme))
-                {
-                    // Returns something like "Escape", "buttonStart", etc.
-                    return InputControlPath.ToHumanReadableString(
-                        binding.effectivePath,
-                        InputControlPath.HumanReadableStringOptions.OmitDevice
-                    );
-                }
+                // Returns something like "Escape", "buttonStart", etc.
+                return InputControlPath.ToHumanReadableString(
+                    binding.effectivePath,
+                    InputControlPath.HumanReadableStringOptions.OmitDevice
+                );
             }
-
-            return "unknown";
         }
+
+        return "unknown";
+    }
 }

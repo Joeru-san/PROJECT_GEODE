@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdb3f066e66e8c7488bf85d8b3f5339, type: 3}
+  m_Name: Spikol Oil
+  m_EditorClassIdentifier: Assembly-CSharp::item1
+  name: Spikol Oil
+  itemType: 1
+  inventoryIcon: {fileID: 21300000, guid: 65618fd36e043872e84ad0eb71d95906, type: 3}
+  minSpawnAmount: 3
+  maxSpawnAmount: 6
+  itemMesh: {fileID: 4068373912626513877, guid: adb5ed7224993dd3bac74f3237e98833, type: 3}
+  itemMaterial: {fileID: 2100000, guid: ff67a5c1fef5d471ca3f059a7bfcd6cf, type: 2}
+  description: The name is referred to an Island in this Geode, where this Oil was
+    first discovered.
+  isStackable: 1
+  maxStackSize: 16

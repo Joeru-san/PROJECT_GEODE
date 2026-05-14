@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfdb3f066e66e8c7488bf85d8b3f5339, type: 3}
-  m_Name: WorldItem3
+  m_Name: Juamary
   m_EditorClassIdentifier: Assembly-CSharp::WorldItem
-  name: WorldItem3
+  name: Juamary
   itemType: 2
   inventoryIcon: {fileID: 21300000, guid: f8d71d2eeab638328940f32e8a5ad5ea, type: 3}
   minSpawnAmount: 3
   maxSpawnAmount: 7
   itemMesh: {fileID: 7114148706264111387, guid: 2d489f1fe465614c5a7d2844d8ff2427, type: 3}
   itemMaterial: {fileID: 2100000, guid: 193869eac6f014a88beff8e038da0e42, type: 2}
-  description: WorldItem3Description
+  description: A plant that, if ingested, shows strange lights, similar to its fruits
   isStackable: 1
   maxStackSize: 64
