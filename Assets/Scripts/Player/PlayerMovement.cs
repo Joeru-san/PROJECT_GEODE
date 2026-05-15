@@ -8,7 +8,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 {
     private Rigidbody _playerRB;
     private Vector2 _moveAmt;
+
     public static Action<PlayerInput> OnShowInventory;
+    public static Action<PlayerInput> OnControlSchemeChange;
 
     [Header("Player Speeds")]
     public float walkSpeed = 5f;
@@ -19,6 +21,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     private float _actualSpeed;
 
     public static bool isDead = false;
+
+    public PlayerInput playerInput;
 
     #region IDamageable attributes
     [field: Header("IDamageable")]
@@ -47,11 +51,26 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     void Awake()
     {
         _playerRB = gameObject.GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
         currentHealth = MaxHealth;
         _actualSpeed = walkSpeed;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerInput.controlsChangedEvent.AddListener(OnControlsChanged);
+    }
+
+    void OnControlsChanged(PlayerInput input)
+    {
+        OnControlSchemeChange?.Invoke(input);
+        if(input.currentControlScheme == "Gamepad")
+        {
+            CameraController.inst.ChangeGainAllCameras(100f);
+        }else
+        {
+            CameraController.inst.ChangeGainAllCameras(1f);
+        }
     }
 
     void Start()
@@ -134,7 +153,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     void OnInventory()
     {
-        OnShowInventory?.Invoke(GetComponent<PlayerInput>());
+        OnShowInventory?.Invoke(playerInput);
     }
     
     void RefreshHealthUI()

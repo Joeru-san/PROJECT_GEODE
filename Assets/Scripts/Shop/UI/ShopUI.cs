@@ -123,7 +123,7 @@ public class ShopUI : MonoBehaviour
     {
         if(shopPlaceReference != null) this._shopPlaceReference = shopPlaceReference;
         
-        if(shopPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it
+        if(shopPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everythingC related to it
         {
             shopPanel.gameObject.SetActive(false);  // Hide the inventoryPanel
             Cursor.lockState = CursorLockMode.Locked;   // Lock the cursor
@@ -132,7 +132,6 @@ public class ShopUI : MonoBehaviour
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;   // Enable the axis controller for the active camera
             buyButtonText.text = "Select an item to buy";
             selectedItemImage.sprite = null;
-            hintText.text = $"Press [{GetBoundButtonName(playerInput)}] to exit";
             
         }else
         {
@@ -142,25 +141,5 @@ public class ShopUI : MonoBehaviour
             playerInput.SwitchCurrentActionMap("UI");   // Load the UI Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = false;  // isable the axis controller so the player can't move the camera while moving the mouse
         }
-    }
-
-    string GetBoundButtonName(PlayerInput playerInput)
-    {
-        string scheme = playerInput.currentControlScheme;
-
-        // Find the binding that matches the current control scheme
-        foreach (var binding in exitAction.action.bindings)
-        {
-            if (binding.groups.Contains(scheme))
-            {
-                // Returns something like "Escape", "buttonStart", etc.
-                return InputControlPath.ToHumanReadableString(
-                    binding.effectivePath,
-                    InputControlPath.HumanReadableStringOptions.OmitDevice
-                );
-            }
-        }
-
-        return "unknown";
     }
 }

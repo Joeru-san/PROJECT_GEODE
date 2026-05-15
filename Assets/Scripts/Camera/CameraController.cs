@@ -60,4 +60,31 @@ public class CameraController : MonoBehaviour
         newCameraMode.Priority += _activeCameraPriorityModifier;
         activeCamera = newCameraMode;
     }
+
+    public void ChangeGainAllCameras(float newGain)
+    {
+        CinemachineVirtualCameraBase[] allCameras = { firstPersonCamera, thirdPersonCamera };
+        
+        foreach (var camera in allCameras)
+        {
+            if (camera == null) continue;
+            var axisController = camera.GetComponent<CinemachineInputAxisController>();
+            if (axisController == null) continue;
+
+            for (int i = 0; i < axisController.Controllers.Count; i++)
+            {
+                var controller = axisController.Controllers[i];
+                if (controller.Name == "Look Orbit X" || controller.Name == "Look X (Pan)")
+                {
+                    controller.Input.Gain = newGain;
+                    axisController.Controllers[i] = controller;
+                }
+                else if (controller.Name == "Look Orbit Y" || controller.Name == "Look Y (Tilt)")
+                {
+                    controller.Input.Gain = -newGain;
+                    axisController.Controllers[i] = controller;
+                }
+            }
+        }
+    }
 }
