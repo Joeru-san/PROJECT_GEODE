@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System;
+using UnityEngine.EventSystems;
 
 public class ShopUI : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class ShopUI : MonoBehaviour
     public TextMeshProUGUI buyButtonText;
     public TextMeshProUGUI feedbackText;
     public GameObject slotPrefab;
+
+    public static bool isShopPanelOpen = false;
     
     public TextMeshProUGUI hintText;
 
@@ -132,6 +135,8 @@ public class ShopUI : MonoBehaviour
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;   // Enable the axis controller for the active camera
             buyButtonText.text = "Select an item to buy";
             selectedItemImage.sprite = null;
+            isShopPanelOpen = false;
+            EventSystem.current.SetSelectedGameObject(null);
             
         }else
         {
@@ -140,6 +145,8 @@ public class ShopUI : MonoBehaviour
             Cursor.visible = true; // Show the cursor
             playerInput.SwitchCurrentActionMap("UI");   // Load the UI Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = false;  // isable the axis controller so the player can't move the camera while moving the mouse
+            isShopPanelOpen = true;
+            EventSystem.current.SetSelectedGameObject(_uiSlots[0].gameObject);
         }
     }
 }

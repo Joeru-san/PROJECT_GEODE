@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     void OnJump()
     {
-        if(IsGrounded())
+        if(IsGrounded() && !PauseManager.inst.IsPaused)
         {
             _playerRB.linearVelocity = Vector3.zero;
             _playerRB.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
@@ -153,7 +153,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     void OnInventory()
     {
-        OnShowInventory?.Invoke(playerInput);
+        if(!PauseManager.inst.IsPaused && !ShopUI.isShopPanelOpen)
+            OnShowInventory?.Invoke(playerInput);
     }
     
     void RefreshHealthUI()

@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
@@ -69,6 +70,7 @@ public class InventoryUI : MonoBehaviour
             Cursor.visible = false; // Hide the cursor
             playerInput.SwitchCurrentActionMap("Player");   // Load the Player Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;   // Enable the axis controller for the active camera
+            EventSystem.current.SetSelectedGameObject(null);
         }else
         {
             slotPanel.gameObject.SetActive(true);   // Show the inventoryPanel
@@ -76,6 +78,7 @@ public class InventoryUI : MonoBehaviour
             Cursor.visible = true; // Show the cursor
             playerInput.SwitchCurrentActionMap("UI");   // Load the UI Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = false;  // isable the axis controller so the player can't move the camera while moving the mouse
+            EventSystem.current.SetSelectedGameObject(_uiSlots[0].gameObject);
         }
     }
 }
