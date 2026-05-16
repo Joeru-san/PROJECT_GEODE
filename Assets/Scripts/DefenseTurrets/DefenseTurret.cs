@@ -23,6 +23,7 @@ public class DefenseTurret : MonoBehaviour, IDamageable
     LineRenderer _lineRend;
     bool _isAttacking = false;
     IDamageable _currentTarget = null;
+    HitFlash _selfHitFlash;
 
     [Header("UI")]
     [SerializeField] HealthBar healthBar;
@@ -41,6 +42,7 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
     void Update()
     {
+        _selfHitFlash = GetComponent<HitFlash>();
         _timeSinceLastDamage += Time.deltaTime;
 
         if (_timeSinceLastDamage >= recoverDelay && currentHealth < MaxHealth && !_isRecovering)
@@ -126,12 +128,14 @@ public class DefenseTurret : MonoBehaviour, IDamageable
         {
             gameObject.SetActive(true);
             currentHealth = MaxHealth;
+            _selfHitFlash.ResetColors();
         });
     }
 
     public void TakeDamage(float damageAmount)
     {
         _timeSinceLastDamage = 0f;
+        _selfHitFlash?.Flash();
         _isRecovering = false;
 
         DOTween.Kill(gameObject);

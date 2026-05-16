@@ -16,6 +16,18 @@ public class CentralHub : MonoBehaviour, IDamageable
     float _timeSinceLastDamage = 0f;
     bool _isRecovering = false;
 
+    HitFlash _selfHitFlash;
+
+    void Awake()
+    {
+        _selfHitFlash = GetComponent<HitFlash>();
+    }
+
+    void Start()
+    {
+        currentHealth = MaxHealth;
+    }
+
     void Update()
     {
         _timeSinceLastDamage += Time.deltaTime;
@@ -37,6 +49,8 @@ public class CentralHub : MonoBehaviour, IDamageable
     {
         _timeSinceLastDamage = 0f;
         _isRecovering = false;
+        _selfHitFlash.Flash();
+
 
         DOTween.Kill("healSequence");
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);

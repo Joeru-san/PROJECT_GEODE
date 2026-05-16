@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
 
     public bool printDebug = false;
 
+    HitFlash _selfHitFlash;
+
     public Dictionary<string, Vector3> triggerSizes = new Dictionary<string, Vector3>() 
     {
         {"basicSize", new Vector3(10f, 1f, 10f)},
@@ -59,6 +61,7 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
         chaseState = new EnemyChaseState(this, stateMachine);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+        _selfHitFlash = GetComponentInChildren<HitFlash>();
     }
 
     void OnEnable()
@@ -122,6 +125,7 @@ public class Enemy : MonoBehaviour, IDamageable, ITriggerCheckeable
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
+        _selfHitFlash?.Flash();
 
         if(currentHealth <= 0f)
         {

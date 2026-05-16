@@ -7,8 +7,10 @@ public class CameraController : MonoBehaviour
 
     [HideInInspector] public CinemachineVirtualCameraBase activeCamera; 
     public Camera MainCamera;
+
     public CinemachineVirtualCameraBase firstPersonCamera;
     public CinemachineVirtualCameraBase thirdPersonCamera;
+    CinemachineImpulseSource _impulseSource;
 
     public static CameraController inst {get; private set;}
     public static bool isFirstPerson = false; 
@@ -22,6 +24,8 @@ public class CameraController : MonoBehaviour
         }
         inst = this;
         DontDestroyOnLoad(gameObject);
+
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void Start()
@@ -86,5 +90,15 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ShakeDamage(float damageAmount, float maxDamage)
+    {
+        if (_impulseSource == null) return;
+
+        float t = Mathf.Clamp01(damageAmount / maxDamage);
+        float force = Mathf.Lerp(0.1f, 0.4f, t);
+
+        _impulseSource.GenerateImpulse(force);
     }
 }

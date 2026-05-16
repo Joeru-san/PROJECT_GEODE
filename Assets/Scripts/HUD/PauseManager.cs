@@ -2,20 +2,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager inst { get; private set; }
+    [SerializeField] Transform firstSelectedButton;
 
     [Header("Settings")]
-    [Tooltip("Can the game be paused right now? Set to false during death, cutscenes, etc.")]
     public bool canPause = true;
 
     [Header("Input")]
     public InputActionReference pauseAction;
 
     [Header("Events")]
-    [Tooltip("Triggered when the game is paused. Hook up your UI Panel and Audio changes here!")]
+    
     public UnityEvent onPause;
     
     [Tooltip("Triggered when the game is resumed.")]
@@ -56,6 +57,7 @@ public class PauseManager : MonoBehaviour
         if (canPause)
         {
             TogglePause();
+            EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
         }
     }
 

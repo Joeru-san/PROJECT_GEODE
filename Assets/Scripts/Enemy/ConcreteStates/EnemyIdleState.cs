@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class EnemyIdleState : EnemyBaseState
 {
@@ -48,6 +49,7 @@ public class EnemyIdleState : EnemyBaseState
                 else
                 {
                     enemy.aggroTrigger.size = enemy.triggerSizes["basicSize"];
+                    DOVirtual.DelayedCall(0.2f, () => enemy.aggroTrigger.enabled = false).OnComplete(() => enemy.aggroTrigger.enabled = true);
                 }
                 _timer = _wanderTimer;
             }

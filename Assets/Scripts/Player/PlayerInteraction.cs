@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float thirdPersonInteractionDistance;
     [SerializeField] float firstPersonInteractionDistance;
     [SerializeField] LayerMask layerToHit;
+    [SerializeField] Transform interactIcon;
 
     private Item _currentTargetedItem;
 
@@ -26,6 +27,8 @@ public class PlayerInteraction : MonoBehaviour
         if (Physics.Raycast(raycastFromCamera, out outHit, interactionDistance, layerToHit))
         {
             Debug.DrawRay(raycastFromCamera.origin, raycastFromCamera.direction * outHit.distance, Color.green);
+
+            interactIcon.gameObject.SetActive(true);
 
             Item hitItem = outHit.transform.GetComponent<Item>(); // Get the reference of the item component
 
@@ -77,6 +80,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             _currentTargetedItem.HideTooltip();
             _currentTargetedItem = null;
+            interactIcon.gameObject.SetActive(false);
         }
     }
 }

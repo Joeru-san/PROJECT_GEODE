@@ -20,8 +20,6 @@ public class ShopUI : MonoBehaviour
     public GameObject slotPrefab;
 
     public static bool isShopPanelOpen = false;
-    
-    public TextMeshProUGUI hintText;
 
     public InputActionReference exitAction;
 

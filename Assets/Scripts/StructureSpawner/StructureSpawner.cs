@@ -70,6 +70,7 @@ public class StructureSpawner : MonoBehaviour
         playerInputReference = null;
         Destroy(playerInputReference);
         gameObject.GetComponent<Collider>().enabled = false; // Disabling to avoid complications
+        interactIcon.gameObject.SetActive(false);
         enabled = false;
     }
 

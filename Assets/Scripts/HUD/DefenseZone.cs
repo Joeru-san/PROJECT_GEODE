@@ -38,7 +38,13 @@ public class DefenseTurretZone : MonoBehaviour
             for(int i = 0; i < defenseZoneHealthBars.Count; i++)
             {
                 defenseZoneHealthBars[i]?.SetHealth(turrets[i].currentHealth, turrets[i].MaxHealth);
-                waveText.text = $"Wave \n {relatedEnemySpawner.actualWaveNumber} / {relatedEnemySpawner.numberOfWaves}";
+                if(DayNightController.isNight)
+                {
+                    waveText.text = $"Wave \n {relatedEnemySpawner.actualWaveNumber} / {relatedEnemySpawner.numberOfWaves}";
+                }else
+                {
+                    waveText.text = "";
+                }
             }
         }
     }

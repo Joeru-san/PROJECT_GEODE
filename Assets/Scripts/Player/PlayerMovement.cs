@@ -57,24 +57,23 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        playerInput.controlsChangedEvent.AddListener(OnControlsChanged);
     }
 
     void OnControlsChanged(PlayerInput input)
     {
-        OnControlSchemeChange?.Invoke(input);
-        if(input.currentControlScheme == "Gamepad")
-        {
+        OnControlSchemeChange?.Invoke(playerInput);
+        
+        if (CameraController.inst == null) return; // Not ready yet, skip
+
+        if (input.currentControlScheme == "Gamepad")
             CameraController.inst.ChangeGainAllCameras(100f);
-        }else
-        {
+        else
             CameraController.inst.ChangeGainAllCameras(1f);
-        }
     }
 
     void Start()
     {
+        playerInput.controlsChangedEvent.AddListener(OnControlsChanged);
         if(spawnPoint == null)
         {
             spawnPoint = transform;
@@ -211,6 +210,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
         DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
         RefreshHealthUI();
+        CameraController.inst.ShakeDamage(damageAmount, currentHealth);
         if (currentHealth <= 0f) Die();
     }
 

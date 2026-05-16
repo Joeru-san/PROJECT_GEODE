@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 488810027811214513}
   - component: {fileID: 5248415258771621355}
   - component: {fileID: 8840191476756318733}
+  - component: {fileID: 2000668246669210646}
   - component: {fileID: 4781774196675555407}
   - component: {fileID: 7599381243615257829}
   m_Layer: 0
@@ -170,12 +171,26 @@ MonoBehaviour:
   <attackCoolDown>k__BackingField: 0.3
   <attackDamage>k__BackingField: 2
   <healRate>k__BackingField: 2
-  inactiveTime: 2
+  inactiveTime: 5
   rayDuration: 0.3
   shootPosition: {fileID: 1563858398411006155}
   printDebug: 0
   healthBar: {fileID: 0}
   recoverDelay: 2
+--- !u!114 &2000668246669210646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503727533300292868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbf1b968dca170738a330f2d7ad6ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitFlash
+  flashDuration: 0.2
+  flashColor: {r: 0.6320754, g: 0.09980138, b: 0, a: 0.80784315}
 --- !u!120 &4781774196675555407
 LineRenderer:
   serializedVersion: 3
