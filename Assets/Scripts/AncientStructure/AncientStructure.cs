@@ -10,6 +10,7 @@ public class AncientStructure : MonoBehaviour
 
     [SerializeField] Material activeMaterial;
     [SerializeField] MeshRenderer ancientStructureMeshRenderer;
+    [SerializeField] Transform interactIcon;
     public static Action<AncientStructure> OnStructureComplete; // Event that is fired when the structure is completed
 
     public ItemType itemTypeNeeded; // The ItemType needed by the structure to be activated
@@ -26,6 +27,22 @@ public class AncientStructure : MonoBehaviour
     {
         amountText.text = _numberOfItemsLoaded + " / " + numberOfItemsToLoad; // Set the amount text to display the basic informations
         AncientStructureManager.ancientStructureReferences.Add(this, false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            interactIcon.gameObject.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            interactIcon.gameObject.SetActive(false);
+        }
     }
 
     void OnTriggerStay(Collider other)

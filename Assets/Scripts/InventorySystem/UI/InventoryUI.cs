@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class InventoryUI : MonoBehaviour
 {
     public Inventory inventory; // The Inventory component of the player
+    public Transform inventoryPanel;
     public GameObject slotPrefab; // The prefab of the slots
     public Transform slotPanel; // The Panel to put the slots into
 
@@ -63,9 +64,9 @@ public class InventoryUI : MonoBehaviour
     /// <param name="playerInput"> We have PlayerInput as an argument so we can switch the ActionMap </param>
     void ShowInventory(PlayerInput playerInput) 
     {
-        if(slotPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it
+        if(inventoryPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everything related to it
         {
-            slotPanel.gameObject.SetActive(false);  // Hide the inventoryPanel
+            inventoryPanel.gameObject.SetActive(false);  // Hide the inventoryPanel
             Cursor.lockState = CursorLockMode.Locked;   // Lock the cursor
             Cursor.visible = false; // Hide the cursor
             playerInput.SwitchCurrentActionMap("Player");   // Load the Player Action Map
@@ -73,7 +74,7 @@ public class InventoryUI : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
         }else
         {
-            slotPanel.gameObject.SetActive(true);   // Show the inventoryPanel
+            inventoryPanel.gameObject.SetActive(true);   // Show the inventoryPanel
             Cursor.lockState = CursorLockMode.None; // Unlock the cursor
             Cursor.visible = true; // Show the cursor
             playerInput.SwitchCurrentActionMap("UI");   // Load the UI Action Map

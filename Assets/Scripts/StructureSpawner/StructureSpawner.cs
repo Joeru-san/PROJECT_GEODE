@@ -8,6 +8,7 @@ public class StructureSpawner : MonoBehaviour
     public static Action<PlayerInput, GameObject> OnShowShop;
     [SerializeField] Transform spawnPoint;
     [SerializeField] float heightRaycastDistance = 100f;
+    [SerializeField] Transform interactIcon;
 
     PlayerInput playerInputReference;
     bool _inShop = false;
@@ -18,6 +19,7 @@ public class StructureSpawner : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _inShop = true;
+            interactIcon.gameObject.SetActive(true);
             playerInputReference = other.transform.parent.GetComponent<PlayerInput>();
         }
     }
@@ -37,6 +39,7 @@ public class StructureSpawner : MonoBehaviour
         {
             _inShop = false;
             playerInputReference = null;
+            interactIcon.gameObject.SetActive(false);
             Destroy(playerInputReference);
         }
     }
