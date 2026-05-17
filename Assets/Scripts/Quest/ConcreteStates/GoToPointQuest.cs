@@ -7,7 +7,7 @@ public class GoToPointQuest : QuestBaseState
 	public GoToPointQuest(QuestManager questManager, QuestStateMachine questStateMachine) : base(questManager, questStateMachine) {}
 
     public static Action<Vector3> GoToNewPoint;
-    public static float distance = 6f;
+    public static float distance = 8f;
 
     GoToPointObject obj;
 

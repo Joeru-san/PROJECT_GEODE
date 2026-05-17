@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbbc50106742f21289e81541845019c, type: 3}
-  m_Name: Syntetizer3
+  m_Name: OilSynterizer
   m_EditorClassIdentifier: Assembly-CSharp::StructureShopItem
-  shopItemName: Syntetizer3
-  shopIcon: {fileID: 21300000, guid: bb58852b35335963eafb1837f83a24f4, type: 3}
+  shopItemName: Oil Synterizer
+  shopIcon: {fileID: 21300000, guid: ed34c8f97aa7e91adbb9d734f6e85f63, type: 3}
   shopItemCost: 60
-  typeOfItemRequired: {fileID: 11400000, guid: aed94251077c5cbc9afd914a6206edc0, type: 2}
+  typeOfItemRequired: {fileID: 11400000, guid: 8743d5f1991fe220896e511344f3a71b, type: 2}
   shopItemDescription: 
-  structureToSpawn: {fileID: 1921837796138076844, guid: d95b87f028f765fe994155691302a408, type: 3}
+  structureToSpawn: {fileID: 1921837796138076844, guid: 4e31368197cdc825897cb76fbef95b31, type: 3}

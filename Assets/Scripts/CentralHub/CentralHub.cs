@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CentralHub : MonoBehaviour, IDamageable
 {
@@ -20,6 +21,7 @@ public class CentralHub : MonoBehaviour, IDamageable
 
     [Header("UI")]
     [SerializeField] HealthBar healthBar;
+    [SerializeField] GameObject gameOverPanel;
 
     void Awake()
     {
@@ -45,7 +47,7 @@ public class CentralHub : MonoBehaviour, IDamageable
     #region IDamageable methods
     public void Die()
     {
-        Debug.Log("HAI PERSO");
+        gameOverPanel.SetActive(true);
     }
 
     public void TakeDamage(float damageAmount)

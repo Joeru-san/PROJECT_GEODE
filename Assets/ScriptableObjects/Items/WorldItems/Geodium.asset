@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Geodium
   itemType: 0
   inventoryIcon: {fileID: 21300000, guid: 865fcc462e98cd520969bcd9463b5b1e, type: 3}
-  minSpawnAmount: 2
-  maxSpawnAmount: 5
+  minSpawnAmount: 3
+  maxSpawnAmount: 8
   itemMesh: {fileID: 0}
   itemMaterial: {fileID: 0}
   description: One of the most common and useful minearls in this Geode
