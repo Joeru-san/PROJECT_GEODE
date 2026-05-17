@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     public static bool isDead = false;
 
-    public PlayerInput playerInput;
+    public static PlayerInput playerInput;
 
     #region IDamageable attributes
     [field: Header("IDamageable")]
@@ -159,7 +159,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     void OnMap()
     {
-        OnShowMap?.Invoke(playerInput);
+        if(!PauseManager.inst.IsPaused && !ShopUI.isShopPanelOpen && !InventoryUI.isPanelOpen)
+            OnShowMap?.Invoke(playerInput);
     }
     
     void RefreshHealthUI()

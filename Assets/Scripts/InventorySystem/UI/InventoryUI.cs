@@ -10,6 +10,8 @@ public class InventoryUI : MonoBehaviour
     public GameObject slotPrefab; // The prefab of the slots
     public Transform slotPanel; // The Panel to put the slots into
 
+    public static bool isPanelOpen = false;
+
     InventorySlotUI[] _uiSlots;
 
     void Start()
@@ -72,6 +74,7 @@ public class InventoryUI : MonoBehaviour
             playerInput.SwitchCurrentActionMap("Player");   // Load the Player Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;   // Enable the axis controller for the active camera
             EventSystem.current.SetSelectedGameObject(null);
+            isPanelOpen = false;
         }else
         {
             inventoryPanel.gameObject.SetActive(true);   // Show the inventoryPanel
@@ -80,6 +83,7 @@ public class InventoryUI : MonoBehaviour
             playerInput.SwitchCurrentActionMap("UI");   // Load the UI Action Map
             CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = false;  // isable the axis controller so the player can't move the camera while moving the mouse
             EventSystem.current.SetSelectedGameObject(_uiSlots[0].gameObject);
+            isPanelOpen = true;
         }
     }
 }

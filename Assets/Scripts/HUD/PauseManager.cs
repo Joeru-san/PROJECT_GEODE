@@ -57,7 +57,10 @@ public class PauseManager : MonoBehaviour
         if (canPause)
         {
             TogglePause();
-            EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
+            if(PlayerMovement.playerInput.currentControlScheme == "Gamepad") EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
+        }else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
