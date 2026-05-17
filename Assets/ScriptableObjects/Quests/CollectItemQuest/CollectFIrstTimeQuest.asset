@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: CollectFIrstTimeQuest
   m_EditorClassIdentifier: Assembly-CSharp::CollectItemObject
   QuestName: The black gold
-  QuestDescription: "Take at least 40\n of oil from the leaking oil tanks.\n\nEvery
+  QuestDescription: "Take at least 60\n of oil from the leaking oil tanks.\n\nEvery
     spawn zone has visual signal to tell you if the objects are spawing. Look in
     every direction!\n\nThe spawners will stop when a spawn cycle is completed. \nTo
-    make the spawner resume the spawn cycle, collect all the items previously spawned\n\nAim
-    at the object and press E or Button North to collect.\nPress Tab or Select to
-    check your inventory. "
-  actualQuestState: 2
+    make the spawner resume the spawn cycle, collect all the items previously spawned\n"
+  actualQuestState: 0
   typeOfItemToCollect: 1
-  numberOfItemsToCollect: 40
+  numberOfItemsToCollect: 60

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StructureShopItem
   shopItemName: Syntetizer2
   shopIcon: {fileID: 21300000, guid: cd9aa9bca49b38994bb7e863cbd029ca, type: 3}
-  shopItemCost: 10
+  shopItemCost: 60
   typeOfItemRequired: {fileID: 11400000, guid: 0788f124e5352f97c8acc329a99efa5f, type: 2}
   shopItemDescription: 
   structureToSpawn: {fileID: 1921837796138076844, guid: 083419eb5c8dc0c3da2f45729238b7be, type: 3}

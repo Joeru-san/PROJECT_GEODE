@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class ShopUI : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class ShopUI : MonoBehaviour
     {
         StructureSpawner.OnShowShop += ShowPanel;
         InitializeUI();
+
+        selectedItemImage.DOFade(0f, 0.1f);
+        itemRequiredImage.DOFade(0f, 0.1f);
     }
 
     void OnEnable()
@@ -45,9 +49,6 @@ public class ShopUI : MonoBehaviour
         ShopSlotUI.shopSlotClicked.RemoveListener(UpdateUI);
     }
 
-    /// <summary>
-    /// Create all the slots in the shop based on the size of the listOfShopItems
-    /// </summary>
     void InitializeUI()
     {
         int numberOfItems = listOfShopItems.Length;
@@ -63,22 +64,18 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Change the sprites and the cost based on the clicked item
-    /// </summary>
-    /// <param name="clickedItem"></param>
     public void UpdateUI(BasicShopItem clickedItem)
     {
         _selectedItem = clickedItem;
+
+        if (selectedItemImage.color.a == 0f) selectedItemImage.DOFade(1f, 0.1f);
+        if (itemRequiredImage.color.a == 0f)  itemRequiredImage.DOFade(1f, 0.1f);
+
         selectedItemImage.sprite = clickedItem.shopIcon;
         itemRequiredImage.sprite = clickedItem.typeOfItemRequired.inventoryIcon;
         buyButtonText.text = " x" + clickedItem.shopItemCost.ToString();
     }
 
-    /// <summary>
-    /// Buy an item from the shop
-    /// If it's a structure spawn it
-    /// </summary>
     public void BuyItem()
     {
         if(_selectedItem.shopItemCost > PlayerInteraction.playerInventory.FindTotalItemAmount(_selectedItem.typeOfItemRequired.itemType))
@@ -97,11 +94,6 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Change the Feedback text of the shop
-    /// </summary>
-    /// <param name="text"></param>
-    /// <returns></returns>
     IEnumerator FeedbackTextChange(string text)
     {
         if(text == null) yield return null;
@@ -114,35 +106,36 @@ public class ShopUI : MonoBehaviour
         feedbackText.gameObject.SetActive(false);
     }
 
+    void WipePanel()
+    {
+        selectedItemImage.DOFade(0f, 0.1f);
+        itemRequiredImage.DOFade(0f, 0.1f);
+        buyButtonText.text = "Select an item to buy";
+        _selectedItem = null;
+    }
 
-    /// <summary>
-    /// When the inventory key is pressed we call this method, we treat this as a toggle
-    /// </summary>
-    /// <param name="playerInput"> We have PlayerInput as an argument so we can switch the ActionMap </param>
-    /// <param name="shopPlaceReference"> Reference to the shop position, in case the player wants to spawn a structure </param>
     void ShowPanel(PlayerInput playerInput, GameObject shopPlaceReference = null)
     {
         if(shopPlaceReference != null) this._shopPlaceReference = shopPlaceReference;
         
-        if(shopPanel.gameObject.activeSelf) // If the panel is active, we deactivate it, disabling everythingC related to it
+        if(shopPanel.gameObject.activeSelf)
         {
-            shopPanel.gameObject.SetActive(false);  // Hide the inventoryPanel
-            Cursor.lockState = CursorLockMode.Locked;   // Lock the cursor
-            Cursor.visible = false; // Hide the cursor
-            playerInput.SwitchCurrentActionMap("Player");   // Load the Player Action Map
-            CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;   // Enable the axis controller for the active camera
-            buyButtonText.text = "Select an item to buy";
-            selectedItemImage.sprite = null;
+            shopPanel.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            playerInput.SwitchCurrentActionMap("Player");
+            CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = true;
+            WipePanel();
             isShopPanelOpen = false;
             EventSystem.current.SetSelectedGameObject(null);
-            
-        }else
+        }
+        else
         {
-            shopPanel.gameObject.SetActive(true);   // Show the inventoryPanel
-            Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-            Cursor.visible = true; // Show the cursor
-            playerInput.SwitchCurrentActionMap("UI");   // Load the UI Action Map
-            CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = false;  // isable the axis controller so the player can't move the camera while moving the mouse
+            shopPanel.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            playerInput.SwitchCurrentActionMap("UI");
+            CameraController.inst.activeCamera.GetComponent<CinemachineInputAxisController>().enabled = false;
             isShopPanelOpen = true;
             EventSystem.current.SetSelectedGameObject(_uiSlots[0].gameObject);
         }

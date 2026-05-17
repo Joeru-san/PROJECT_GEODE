@@ -114,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public void RestartWaves()
     {
-        if (_isSpawning)
+        if (_isSpawning && !DayNightController.isNight)
         {
             Debug.Log($"[EnemySpawner] {name} is still spawning — ignoring OnDayStateChange.");
             return;
