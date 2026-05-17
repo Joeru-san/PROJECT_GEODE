@@ -18,6 +18,9 @@ public class CentralHub : MonoBehaviour, IDamageable
 
     HitFlash _selfHitFlash;
 
+    [Header("UI")]
+    [SerializeField] HealthBar healthBar;
+
     void Awake()
     {
         _selfHitFlash = GetComponent<HitFlash>();
@@ -51,8 +54,10 @@ public class CentralHub : MonoBehaviour, IDamageable
         _isRecovering = false;
         _selfHitFlash.Flash();
 
+        RefreshHealthUI();
 
-        DOTween.Kill("healSequence");
+
+        DOTween.Kill(gameObject);
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0f);
 
         if (currentHealth <= 0f)
@@ -62,6 +67,8 @@ public class CentralHub : MonoBehaviour, IDamageable
     public void RecoverHealth(float healthToRecover)
     {
         currentHealth = Mathf.Min(currentHealth + healthToRecover, MaxHealth);
+        RefreshHealthUI();
+
     }
 
     public void RecoverHealthOverTime(float recoverTime)
@@ -70,20 +77,27 @@ public class CentralHub : MonoBehaviour, IDamageable
 
         DOTween.To(() => currentHealth, x => currentHealth = x, targetHealth, recoverTime)
             .SetEase(Ease.OutQuad)
-            .SetId("healSequence");
+            .SetId(gameObject);
     }
 
     public void RecoverToMaxHealthOverTime()
     {
         float duration = (MaxHealth - currentHealth) / healRate;
 
-        DOTween.Kill("healSequence");
-        DOTween.To(() => currentHealth, x => currentHealth = x, MaxHealth, duration)
-            .SetEase(Ease.OutQuad)
-            .SetId("healSequence")
-            .OnComplete(() => {
-                _isRecovering = false;
-            });
+        DOTween.Kill(gameObject);
+        DOTween.To(() => currentHealth, x => { currentHealth = x; RefreshHealthUI(); }, MaxHealth, duration)
+        .SetEase(Ease.OutQuad)
+        .SetId(gameObject)
+        .OnComplete(() =>
+        {
+            Debug.Log($"Finished health recover for {transform.name}");
+            _isRecovering = false;
+        });
     }
     #endregion
+
+    void RefreshHealthUI()
+    {
+        healthBar?.SetHealth(currentHealth, MaxHealth);
+    }
 }

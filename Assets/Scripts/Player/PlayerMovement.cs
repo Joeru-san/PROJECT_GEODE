@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
     public static Action<PlayerInput> OnShowInventory;
     public static Action<PlayerInput> OnControlSchemeChange;
+    public static Action<PlayerInput> OnShowMap;
 
     [Header("Player Speeds")]
     public float walkSpeed = 5f;
@@ -154,6 +155,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable
     {
         if(!PauseManager.inst.IsPaused && !ShopUI.isShopPanelOpen)
             OnShowInventory?.Invoke(playerInput);
+    }
+
+    void OnMap()
+    {
+        OnShowMap?.Invoke(playerInput);
     }
     
     void RefreshHealthUI()

@@ -21,7 +21,7 @@ public class DefenseTurret : MonoBehaviour, IDamageable
 
     TurretEnemyDetect _relatedCollider;
     LineRenderer _lineRend;
-    bool _isAttacking = false;
+    public bool isAttacking = false;
     IDamageable _currentTarget = null;
     HitFlash _selfHitFlash;
 
@@ -68,13 +68,13 @@ public class DefenseTurret : MonoBehaviour, IDamageable
             }
         }
 
-        if (_currentTarget != null && !_isAttacking)
+        if (_currentTarget != null && !isAttacking)
             StartCoroutine(AttackCoroutine());
     }
 
     IEnumerator AttackCoroutine()
     {
-        _isAttacking = true;
+        isAttacking = true;
 
         Transform targetTransform = (_currentTarget as MonoBehaviour)?.transform;
         if (targetTransform != null)
@@ -105,7 +105,7 @@ public class DefenseTurret : MonoBehaviour, IDamageable
             _currentTarget = null;
         }
 
-        _isAttacking = false;
+        isAttacking = false;
     }
 
     IEnumerator ShowLineRend()
