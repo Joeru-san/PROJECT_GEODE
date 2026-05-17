@@ -14,9 +14,9 @@ public class DayNightClockRadial : MonoBehaviour
     [SerializeField] Sprite moonSprite;
 
     [Header("Colors")]
-    [SerializeField] Color dayColor = new Color(0.53f, 0.81f, 1f);
-    [SerializeField] Color nightColor = new Color(0.07f, 0.07f, 0.24f);
-    [SerializeField] Color sunriseColor = new Color(1f, 0.6f, 0.2f);
+    [SerializeField] Color dayColor;
+    [SerializeField] Color nightColor;
+    [SerializeField] Color sunriseColor;
 
     void Update()
     {
